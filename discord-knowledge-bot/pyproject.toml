@@ -1,0 +1,34 @@
+[project]
+name = "hackathon"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Nathan Perkins",email = "nathanjp91@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "langchain-text-splitters (>=0.3.5,<0.4.0)",
+    "langchain-community (>=0.3.16,<0.4.0)",
+    "langgraph (>=0.2.68,<0.3.0)",
+    "langchain-core (>=0.3.33,<0.4.0)",
+    "beautifulsoup4 (>=4.12.3,<5.0.0)",
+    "langchain-openai (==0.2.12)",
+    "chromadb (>=0.6.3,<0.7.0)",
+    "langchain-chroma (>=0.2.1,<0.3.0)",
+    "py-cord>=2.6.1",
+    "portia-sdk-python>=0.0.1a38",
+    "langchain (>=0.3.18,<0.4.0)",
+    "markdownify (>=0.14.1,<0.15.0)",
+    "langchain-weaviate (>=0.0.4,<0.0.5)",
+    "tiktoken (>=0.9.0,<0.10.0)",
+    "pycord (>=0.1.1,<0.2.0)",
+    "ruff (>=0.9.6,<0.10.0)",
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
