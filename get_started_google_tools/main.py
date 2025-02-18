@@ -28,7 +28,7 @@ Tasks:
 print("\nA plan will now be generated. Please wait...")
 
 # Instantiate a Portia runner. Load it with the default config and with Portia cloud tools above
-my_config = Config.from_default(storage_class=StorageClass.CLOUD)
+my_config = Config.from_default()
 runner = Runner(config=my_config, tools=PortiaToolRegistry(my_config))
 
 # Generate the plan from the user query and print it
