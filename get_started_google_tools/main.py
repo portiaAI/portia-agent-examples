@@ -20,7 +20,7 @@ constraints = []
 task = lambda: f'''
 Please help me accomplish the following tasks, ensuring you take into account the following constraints: {"".join(constraints)}
 Tasks:
-- Get my ({user_email}) availability from Google Calendar on the 16th of February between 10:00 and 17:00 for a 30 minute meeting
+- Get my ({user_email}) availability from Google Calendar tomorrow between 10:00 and 17:00 for a 30 minute meeting
 - Schedule a meeting with {receipient_email} at a time that works for me with the title "Portia AI Demo" and a description of the meeting as "Test demo".
 - Send an email to {receipient_email} with the details of the meeting you scheduled.
 '''
