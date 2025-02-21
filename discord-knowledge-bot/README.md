@@ -23,8 +23,8 @@ of the server and channel you want your bot to be active in. Note that you'll ne
 1. Clone the repository and select this folder.
 2. Copy the `.env.example` file to `.env` and add your API keys to it.
 3. Install dependencies `poetry install`
-4. Load the docs into your Weaviate instance with `poetry run python loader.py`
-5. Run the bot with `poetry run python discord_server.py`
+4. Load the docs into your Weaviate instance with `poetry run python -m bot.loader`
+5. Run the bot with `poetry run python -m bot.discord_server`
 6. You can then enter `/ask <question>` in the your discord channel to ask the bot a question.
 
 ## Usage
