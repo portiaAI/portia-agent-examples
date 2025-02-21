@@ -1,0 +1,38 @@
+import os
+
+import discord
+from dotenv import load_dotenv
+
+from bot.ask import get_answer
+
+load_dotenv(override=True)
+bot = discord.Bot()
+
+
+@bot.event
+async def on_ready():
+    print(f"{bot.user} is ready and online!")
+
+
+@bot.slash_command(name="hello", description="Say hello to the bot")
+async def hello(ctx: discord.ApplicationContext):
+    await ctx.respond(
+        "Hey there! Let me know if you need any help with the Portia SDK."
+    )
+
+
+@bot.slash_command(
+    name="ask",
+    description="Ask a question to the knowledge bot.",
+    guild_ids=[os.getenv("DISCORD_SERVER_ID")],
+)
+async def ask(ctx: discord.ApplicationContext, question: str):
+    await ctx.defer()
+    if str(ctx.channel_id) != os.getenv("DISCORD_CHANNEL_ID"):
+        await ctx.respond("Sorry, this command can't be used in this channel.")
+        return
+    response = get_answer(question)
+    await ctx.respond(response)
+
+
+bot.run(os.getenv("DISCORD_BOT_TOKEN"))  # run the bot with the token
