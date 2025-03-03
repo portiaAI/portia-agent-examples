@@ -1,9 +1,5 @@
 from dotenv import load_dotenv
-from portia import (
-    Config,
-    Portia,
-    PortiaToolRegistry,
-)
+from portia import Config, Portia, PortiaToolRegistry
 from portia.cli import CLIExecutionHooks
 
 load_dotenv()
@@ -34,8 +30,12 @@ print("\nA plan will now be generated. Please wait...")
 
 # Instantiate a Portia runner. Load it with the default config and with Portia cloud tools above.
 # Use the CLIExecutionHooks to allow the user to handle any clarifications at the CLI.
-my_config = Config.from_default(execution_hooks=CLIExecutionHooks())
-portia = Portia(config=my_config, tools=PortiaToolRegistry(my_config))
+my_config = Config.from_default()
+portia = Portia(
+    config=my_config,
+    tools=PortiaToolRegistry(my_config),
+    execution_hooks=CLIExecutionHooks(),
+)
 
 # Generate the plan from the user query and print it
 plan = portia.plan(task())
