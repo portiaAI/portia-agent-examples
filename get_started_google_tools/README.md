@@ -30,5 +30,5 @@ The `main.py` file is the entry point for the example and has the following key 
 - Setup: The configuration and tools are setup.
 - Generate the plan: The plan is generated from the user query.
 - Iterate on the plan: The user is prompted to review the plan and provide additional guidance if needed.
-- Execute the workflow: The workflow is executed and the user is prompted to authenticate with Google for calendar and GMail.
+- Execute the plan: The plan is executed and the user is prompted to authenticate with Google for calendar and GMail.
 - Handle clarifications: [Clarifications](https://docs.portialabs.ai/understand-clarifications) are a core abstraction within the Portia SDK and allow for a structured conversation with the user. The code in the example shows how you can handle different types of abstraction that are returned by the SDK.
