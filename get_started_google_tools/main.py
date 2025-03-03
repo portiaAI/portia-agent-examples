@@ -32,7 +32,7 @@ portia = Portia(config=my_config, tools=PortiaToolRegistry(my_config))
 
 # Generate the plan from the user query and print it
 plan = portia.plan(task())
-print("\nHere is the plan steps:")
+print("\nHere are the steps in the generated plan:")
 [print(step.model_dump_json(indent=2)) for step in plan.steps]
 
 # Iterate on the plan with the user until they are happy with it
@@ -45,11 +45,11 @@ while not ready_to_proceed:
         user_input = input("Any additional guidance for the planner?:\n")
         constraints.append(user_input)
         plan = portia.plan(task())
-        print("\nHere is the updated plan steps:")
+        print("\nHere are the updated steps in the plan:")
         [print(step.model_dump_json(indent=2)) for step in plan.steps]
 
-# Execute the plan run
-print("\nThe plan run will now be executed. Please wait...")
+# Execute the plan
+print("\nThe plan will now be executed. Please wait...")
 plan_run = portia.run_plan(plan)
 
 while plan_run.state == PlanRunState.NEED_CLARIFICATION:
