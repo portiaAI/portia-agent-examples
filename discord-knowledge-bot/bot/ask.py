@@ -1,9 +1,14 @@
 """Simple Ask RAG Interface."""
 
-from portia.config import Config, LLMModel, LogLevel
-from portia.runner import Runner
-from portia.tool_registry import InMemoryToolRegistry, PortiaToolRegistry
-from portia.workflow import WorkflowState
+from portia import (
+    Config,
+    InMemoryToolRegistry,
+    LLMModel,
+    LogLevel,
+    PlanRunState,
+    Portia,
+    PortiaToolRegistry,
+)
 
 from bot.weaviate import RAGQueryDBTool, close_weaviate
 
@@ -17,19 +22,18 @@ registry = PortiaToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
         ),
     ],
 )
-runner = Runner(config, tools=registry)
+portia = Portia(config, tools=registry)
 
 
 def get_answer(question: str) -> str:
     full_question = f"Please use the Portia SDK knowledge docs and any information from Github issues to answer the following question: {question}. "
-    workflow = runner.execute_query(full_question)
-    if (
-        workflow.state == WorkflowState.NEED_CLARIFICATION
-        or workflow.state == WorkflowState.FAILED
-    ):
+    run = portia.run(full_question)
+    if run.state == PlanRunState.NEED_CLARIFICATION or run.state == PlanRunState.FAILED:
         return "Sorry, I wasn't able to find an answer"
-    if workflow.outputs.final_output:
-        return f"""Question: {question}\nAnswer: {str(workflow.outputs.final_output.value)}"""
+    if run.outputs.final_output:
+        return (
+            f"""Question: {question}\nAnswer: {str(run.outputs.final_output.value)}"""
+        )
     return "Sorry,  I wasn't able to find an answer"
 
 

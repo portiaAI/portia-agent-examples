@@ -2213,14 +2213,14 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.0.1a51"
+version = "0.1.3a0"
 description = "Portia Labs Python SDK for building agentic workflows."
 optional = false
-python-versions = "<4.0,>=3.10"
+python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "portia_sdk_python-0.0.1a51-py3-none-any.whl", hash = "sha256:02ff5dc58f7c4d8a949263d8ebee029cb8e66da2f368cfa8e94a8f13116d66ba"},
-    {file = "portia_sdk_python-0.0.1a51.tar.gz", hash = "sha256:f8895a5a3a01e81424d1e7e21090e8784432fb2f4288afa0b0901b1370f5fbf7"},
+    {file = "portia_sdk_python-0.1.3a0-py3-none-any.whl", hash = "sha256:cbe3af92d440ff513a2ce2fbcb5dd8b092b59693c458c7845a4ef90f472a8407"},
+    {file = "portia_sdk_python-0.1.3a0.tar.gz", hash = "sha256:5f6a029009123ce65e8f3228fff831476012336832ffb505e216779e45dce491"},
 ]
 
 [package.dependencies]
@@ -3514,4 +3514,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "b1706a4c91093ee98449c71572dbe3846a99ed000e166da82b581c060784f7b2"
+content-hash = "0a3d1c234cd42e004da84534f2d66fc2c109227252ee8d24d25dd4aacd9b1ef9"
