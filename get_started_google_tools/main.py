@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
-from portia.runner import Runner
 from portia.config import StorageClass, Config
-from portia.workflow import WorkflowState
+from portia.plan_run import PlanRunState
 from portia.clarification import MultipleChoiceClarification, InputClarification, ActionClarification
 from portia.tool_registry import PortiaToolRegistry
-
+from portia import Portia
 load_dotenv()
 
 outline = """
@@ -29,10 +28,10 @@ print("\nA plan will now be generated. Please wait...")
 
 # Instantiate a Portia runner. Load it with the default config and with Portia cloud tools above
 my_config = Config.from_default()
-runner = Runner(config=my_config, tools=PortiaToolRegistry(my_config))
+portia = Portia(config=my_config, tools=PortiaToolRegistry(my_config))
 
 # Generate the plan from the user query and print it
-plan = runner.generate_plan(task())
+plan = portia.plan(task())
 print("\nHere is the plan steps:")
 [print(step.model_dump_json(indent=2)) for step in plan.steps]
 
@@ -45,19 +44,18 @@ while not ready_to_proceed:
     else:
         user_input = input("Any additional guidance for the planner?:\n")
         constraints.append(user_input)
-        plan = runner.generate_plan(task())
+        plan = portia.plan(task())
         print("\nHere is the updated plan steps:")
         [print(step.model_dump_json(indent=2)) for step in plan.steps]
 
-# Execute the workflow
-print("\nThe workflow will now be executed. Please wait...")
-workflow = runner.create_workflow(plan)
-workflow = runner.execute_workflow(workflow)
+# Execute the plan run
+print("\nThe plan run will now be executed. Please wait...")
+plan_run = portia.run_plan(plan)
 
-while workflow.state == WorkflowState.NEED_CLARIFICATION:
+while plan_run.state == PlanRunState.NEED_CLARIFICATION:
     # If clarifications are needed, resolve them before resuming the workflow
     print("\nPlease resolve the following clarifications to continue")
-    for clarification in workflow.get_outstanding_clarifications():
+    for clarification in plan_run.get_outstanding_clarifications():
         # Usual handling of Input and Multiple Choice clarifications
         if isinstance(clarification, (InputClarification, MultipleChoiceClarification)):
             print(f"{clarification.user_guidance}")
@@ -65,16 +63,16 @@ while workflow.state == WorkflowState.NEED_CLARIFICATION:
                                (str(clarification.options)
                                 if isinstance(clarification, MultipleChoiceClarification)
                                 else ""))
-            workflow = runner.resolve_clarification(clarification, user_input, workflow)
+            plan_run = portia.resolve_clarification(clarification, user_input, plan_run)
         
         # Handling of Action clarifications
         if isinstance(clarification, ActionClarification):
             print(f"{clarification.user_guidance} -- Please click on the link below to proceed.")
             print(clarification.action_url)
-            workflow = runner.wait_for_ready(workflow)
+            plan_run = portia.wait_for_ready(plan_run)
 
     # Once clarifications are resolved, resume the workflow
-    workflow = runner.execute_workflow(workflow)
+    plan_run = portia.resume(plan_run)
 
 # Serialise into JSON and print the output
-print(f"{workflow.model_dump_json(indent=2)}")
+print(f"{plan_run.model_dump_json(indent=2)}")

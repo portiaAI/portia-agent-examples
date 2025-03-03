@@ -6,8 +6,8 @@ authors = ["Portia AI <hello@portialabs.ai>"]
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
-portia-sdk-python = "^0.0.1a51"
+python = "^3.11"
+portia-sdk-python = "^0.1.2a0"
 python-dotenv = "^1.0.1"
 
 [build-system]
