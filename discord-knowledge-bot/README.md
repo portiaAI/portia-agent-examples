@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This example demonstrates how to use Portia AI to build a Discord bot that uses public documentation and Github issues to answer user questions. It utilises the [Github Tools](https://docs.portialabs.ai/github-tools) provided by Portia Cloud to retrieve Github issues alongside a locally-implemented RAG tool that uses [Weaviate](https://weaviate.io/) to load and retrieve information from the Portia SDK documentation. You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
+This example demonstrates how to use Portia AI to build a Discord bot that uses public documentation and Github issues to answer user questions. It utilises the [Github Tools](https://docs.portialabs.ai/github-tools) provided by Portia Cloud to retrieve Github issues alongside a locally-implemented RAG tool to load and retrieve information from the Portia SDK documentation. For the vector database for our RAG tool, we use [Weaviate](https://weaviate.io/), which is an awesome AI-native vector database - see their quickstart guide [here](https://weaviate.io/developers/weaviate/quickstart). You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
 
 ## Prerequisites
 
