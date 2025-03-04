@@ -1,0 +1,31 @@
+name: Daily AI Research Agent Run
+
+on:
+  schedule:
+    - cron: '0 17 * * *'  # Runs at 5:00 PM UTC every day
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run AI Research Agent
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        PORTIA_API_KEY: ${{ secrets.PORTIA_API_KEY }}
+      run: poetry run python agent.py

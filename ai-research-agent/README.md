@@ -24,4 +24,4 @@ At Portia, we have an email inbox that is signed up to multiple AI newsletters. 
 
 ## Running the example
 
-The first time you run the agent, you will be prompted to authenticate with Google. Once this has been done once, Portia cloud will handle future authentications for you and so the plan should run without any clarifications.
+The first time you run the agent, you will be prompted to authenticate with Google. Once this has been done once, Portia cloud will handle future authentications for you and so the plan should run without any clarifications. You can then set this up to run daily as a cron job. There are many way to do this - at Portia, we use a scheduled Github Action. For this, you'll need to add your PORTIA_API_KEY and OPENAI_API_KEY to the Github secrets by following the steps [here](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) and then setup the workflow using the code in `.github/workflows/run.yml`.
