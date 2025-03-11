@@ -24,6 +24,11 @@ jobs:
     - name: Install dependencies
       run: poetry install
 
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
     - name: Run AI Research Agent
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
