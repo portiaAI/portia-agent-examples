@@ -108,7 +108,7 @@ with execution_context(
     # An alternative would be to just call portia.run() which will do both.
     plan = portia.plan(
         "Read all emails from today that contain 'AI' and summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
-        "Then post the summary with links to the #app-testing channel."
+        "Then post the summary with links to the #ai-news channel."
         "Then, create a short podcast script based on the emails, driven by the summary but with further details coming from the emails."
     )
     print("\nHere are the steps in the generated plan:")
