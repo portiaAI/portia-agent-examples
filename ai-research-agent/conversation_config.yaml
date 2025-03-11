@@ -1,0 +1,30 @@
+conversation_style:
+  - "engaging"
+  - "fast-paced"
+  - "enthusiastic"
+roles_person1: "main summarizer"
+roles_person2: "questioner/clarifier"
+dialogue_structure:
+  - "Introduction"
+  - "Main Content Summary"
+  - "Conclusion"
+podcast_name: "Portia Daily AI News Roundup"
+output_language: "English"
+engagement_techniques:
+  - "rhetorical questions"
+  - "anecdotes"
+  - "analogies"
+  - "humor"
+creativity: 1
+user_instructions: "Connect the news with AI agents if possible"
+
+text_to_speech:
+  output_directories:
+    transcripts: "./data/transcripts"
+    audio: "./data/audio"
+  openai:
+    default_voices:
+      question: "echo"
+      answer: "shimmer"
+    model: "tts-1-hd"
+  audio_format: "mp3"

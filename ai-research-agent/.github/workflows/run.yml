@@ -29,3 +29,14 @@ jobs:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         PORTIA_API_KEY: ${{ secrets.PORTIA_API_KEY }}
       run: poetry run python agent.py
+
+    - name: Send podcast link
+      uses: slackapi/slack-github-action@v2.0.0
+      with:
+        method: files.uploadV2
+        token: ${{ secrets.SLACK_BOT_TOKEN }}
+        payload: |
+          channel_id: C08D31BNFGV
+          initial_comment: "And here's a podcast of the above..."
+          file: "./portia-agent-examples/ai-research-agent/data/audio/podcast_latest.mp3"
+          filename: "podcast_latest.mp3"
