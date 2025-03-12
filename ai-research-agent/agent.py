@@ -113,9 +113,11 @@ with execution_context(
     )
     print("\nHere are the steps in the generated plan:")
     [print(step.model_dump_json(indent=2)) for step in plan.steps]
-    user_input = input("Are you happy with the plan? (y/n):\n")
-    if user_input != "y":
-        sys.exit(1)
+
+    if os.getenv("CI") != "true":
+        user_input = input("Are you happy with the plan? (y/n):\n")
+        if user_input != "y":
+            sys.exit(1)
 
     run = portia.run_plan(plan)
 

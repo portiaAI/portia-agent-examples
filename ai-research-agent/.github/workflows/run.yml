@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.13'
+        python-version: '3.12'
 
     - name: Install Poetry
       run: |
@@ -23,6 +23,11 @@ jobs:
 
     - name: Install dependencies
       run: poetry install
+
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
 
     - name: Run AI Research Agent
       env:
@@ -35,6 +40,7 @@ jobs:
       with:
         method: files.uploadV2
         token: ${{ secrets.SLACK_BOT_TOKEN }}
+        errors: true
         payload: |
           channel_id: C08D31BNFGV
           initial_comment: "And here's a podcast of the above..."
