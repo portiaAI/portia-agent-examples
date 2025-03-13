@@ -13,11 +13,14 @@ This agent:
 ## Setup
 
 1. Clone this repository
-2. Install dependencies:
+2. Install dependencies using Poetry:
    ```bash
    cd github-pr-agent
-   pip install -e .
+   poetry install
    ```
+   
+   If you don't have Poetry installed, you can install it following the instructions at [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation)
+
 3. Create a `.env` file based on `.env.example` and fill in your API keys:
    ```
    PORTIA_API_KEY="your-portia-api-key"
@@ -25,14 +28,18 @@ This agent:
    GITHUB_TOKEN="your-github-personal-access-token"
    ```
    
-   Note: Your GitHub token needs to have the `repo` scope to read PRs and post comments.
+   To get these API keys:
+   - **PORTIA_API_KEY**: Sign up at [app.portialabs.ai](https://app.portialabs.ai) and create an API key
+   - **OPENAI_API_KEY**: Sign up at [platform.openai.com](https://platform.openai.com) and create an API key
+   - **GITHUB_TOKEN**: Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens) and create a token with the `repo` scope to read PRs and post comments
 
 ## Usage
 
-Run the agent:
+Run the agent using Poetry:
 
 ```bash
-python agent.py
+cd github-pr-agent
+poetry run python agent.py
 ```
 
 The agent will:
