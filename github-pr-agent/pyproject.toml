@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "github_pr_agent"
+version = "0.1.0"
+description = "A Portia agent that analyzes GitHub PRs and provides feedback"
+authors = ["Portia AI <hello@portialabs.ai>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+portia-sdk-python = "^0.1.1"
+python-dotenv = "^1.0.1"
+PyGithub = "^2.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
