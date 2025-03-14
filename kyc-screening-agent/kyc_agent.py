@@ -117,9 +117,9 @@ def main():
             print("\nKYC screening completed successfully.")
             print("\nFinal KYC Assessment Report:")
             print("============================")
-            # The final output is in the last step's output
-            if run.step_runs and run.step_runs[-1].output:
-                print(run.step_runs[-1].output)
+            # The final output is in the run outputs
+            if run.outputs.final_output:
+                print(run.outputs.final_output)
             else:
                 print("No final assessment available.")
 

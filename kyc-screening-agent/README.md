@@ -65,7 +65,3 @@ In a real-world scenario, you would replace the dummy Risk Assessment Tool with 
 - Verify identity documents
 - Perform additional background checks
 - Integrate with your existing KYC systems
-
-## License
-
-This example is provided under the same license as the main Portia Agent Examples repository.
