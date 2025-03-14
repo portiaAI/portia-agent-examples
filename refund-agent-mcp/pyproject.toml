@@ -1,0 +1,20 @@
+[project]
+name = "refund-agent-mcp"
+version = "0.1.0"
+description = "Refund Agent leveraging the Portia SDK MCP integration with Stripe"
+authors = [
+    {name = "Portia AI",email = "hello@portialabs.ai"}
+]
+readme = "README.md"
+
+requires-python = ">=3.11,<4.0"
+
+dependencies = [
+    "portia-sdk-python @ git+https://github.com/portiaAI/portia-sdk-python.git@main",
+    "dotenv (>=0.9.9,<0.10.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
