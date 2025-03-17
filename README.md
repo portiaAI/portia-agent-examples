@@ -1,2 +1,2 @@
 # portia-agent-examples
-Examples from Portia Labs on using the SDK and cloud tool library to build multi agent systems
+Examples from Portia AI on using the SDK and cloud tool library to build multi agent systems
