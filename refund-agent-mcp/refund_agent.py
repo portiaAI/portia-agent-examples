@@ -183,7 +183,7 @@ Stripe instructions:
 
 The refund policy can be found in the file: ./refund_policy.txt
 
-The refund request emailis as follows:
+The refund request email is as follows:
 
 {customer_email}
 """

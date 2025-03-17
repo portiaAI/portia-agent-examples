@@ -14,7 +14,7 @@ Before running this agent, you'll need the following:
 
 - Python 3.11 (or greater): You can download it from [python.org](https://www.python.org/downloads/) or install it using [pyenv](https://github.com/pyenv/pyenv)
 - Poetry: We use poetry to manage dependencies. You can install it from [here](https://python-poetry.org/docs/#installation).
-- NPM: The Stripe MCP server requires `npx` to run. If you run into errors on start-up, check that you can run `npx` commands in your command line. 
+- NPM: The Stripe MCP server requires `npx`. `npx` is part of `npm`, instructions to install `npm` can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). If you run into errors on start-up, check that you can run `npx` commands in your command line. 
 - A Portia AI API key: You can get one from [app.portialabs.ai](https://app.portialabs.ai) > API Keys.
 - An OpenAI API key: You can get one from [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 - A Stripe API key: We used a test-mode key which can be setup at [dashboard.stripe.com/test/apikeys](https://dashboard.stripe.com/test/apikeys)
@@ -41,7 +41,7 @@ You can play around with the refund email by setting the `--request` arg, e.g. `
 
 ### MCP integration
 
-MCP tools are integrated as an extension Portia [ToolRegistry](https://docs.portialabs.ai/SDK/portia/tool_registry#toolregistry-objects)
+MCP tools are integrated as an extension to the Portia [ToolRegistry](https://docs.portialabs.ai/SDK/portia/tool_registry#toolregistry-objects) class.
 
 ```python
 McpToolRegistry.from_stdio_connection(
@@ -60,6 +60,6 @@ This spins up the MCP server using the [MCP python SDK](https://github.com/model
 
 ### Refunds and Approval Clarifications
 
-We want the Agent to read the refund request, compare it with the company's refund policy (see `./refund_policy.txt`) and make a decision autonomously: this handled in the `RefundReviewerTool` class.
+We want the Agent to read the refund request, compare it with the company's refund policy (see `./refund_policy.txt`) and make a decision autonomously: this is handled in the `RefundReviewerTool` class.
 
-If the Agent thinks a refund should be issued, we want to confirm with a human before actually issuing a refund, as this involves money leaving the company's account. To achieve this, we can pause execution and wait from a [Clarification](https://docs.portialabs.ai/understand-clarifications) to get a humand to review the request and the Agent's analysis. This is part of the `RefundHumanApprovalTool` class in `refund_agent.py`. If the human passes `ACCEPTED` the refund should be issued, if `REJECTED` the flow will exit!
+Because refunds involve sending out money, if the Agent thinks a refund _should_ be issued, we want to get a human to review the request along with the Agent's rationale. To achieve this, we can pause execution and wait from a [Clarification](https://docs.portialabs.ai/understand-clarifications) to get a humand to review the request and the Agent's analysis. This is part of the `RefundHumanApprovalTool` class in `refund_agent.py`. If the human passes `ACCEPTED` the refund should be issued, if `REJECTED` the flow will exit!
