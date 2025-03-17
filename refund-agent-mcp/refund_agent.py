@@ -43,7 +43,8 @@ class RefundHumanApprovalInput(BaseModel):
 
 class RefundHumanApprovalTool(Tool[str]):
     """
-    A tool to request human approval before proceeding to issue a refund.
+    A tool to present a human with the Agent's rationale, and request human approval before proceeding with the refund.
+
     Given a summary of the reasoning for the approval decision, the human will approve or reject the request.
     This tool does not actually issue the refund.
     """
@@ -103,7 +104,12 @@ class RefundReviewerTool(Tool[str]):
     """
     A tool to review a refund request from a customer against the refund policy
 
-    This tool calls an LLM to decide if it gets approved or rejected.
+    This tool calls an LLM to assess the refund request against the refund policy and 
+    either:
+    
+    - Make a recommendation to approve it.
+    - Reject the request and exit with an error message containing the reason for the rejection.
+    
     NB. This tool does not actually process the refund.
     """
 
