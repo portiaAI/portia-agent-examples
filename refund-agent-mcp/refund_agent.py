@@ -43,7 +43,7 @@ class RefundHumanApprovalInput(BaseModel):
 
 class RefundHumanApprovalTool(Tool[str]):
     """
-    A tool to present a human with the Agent's rationale, and request human approval before proceeding with the refund.
+    A tool to request human approval before proceeding with a refund, given a rationale from the Agent.
 
     Given a summary of the reasoning for the approval decision, the human will approve or reject the request.
     This tool does not actually issue the refund.
