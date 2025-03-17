@@ -9,6 +9,7 @@ package-mode = false
 python = "^3.11"
 portia-sdk-python = "^0.1.1"
 python-dotenv = "^1.0.1"
+firecrawl-py = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core"]
