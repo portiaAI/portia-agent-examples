@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This example demostrates how to use Portia AI to build an agent that can receive emails about a topic, summarise them to slack and then create a short (2-3 mins) podcast from them. It utilises the [Gmail tools](https://docs.portialabs.ai/gmail-tools) and [Slack tools](https://docs.portialabs.ai/portia-tools/slack/) provided by Portia Cloud to read emails about 'AI' and post the summary to slack, as well as creating a new local [Podcastfy](https://github.com/souzatharsis/podcastfy/tree/main) for podcast creation.
+This example demonstrates how to use Portia AI to build an agent that can receive emails about a topic, summarise them to slack and then create a short (2-3 mins) podcast from them. It utilises the [Gmail tools](https://docs.portialabs.ai/gmail-tools) and [Slack tools](https://docs.portialabs.ai/portia-tools/slack/) provided by Portia Cloud to read emails about 'AI' and post the summary to slack, as well as creating a new local [Podcastfy](https://github.com/souzatharsis/podcastfy/tree/main) for podcast creation.
 
 At Portia, we have an email inbox that is signed up to multiple AI newsletters. We then use this agent to summarise the emails and post the summary along with the podcast to our #ai-news slack channel once per day.
 
