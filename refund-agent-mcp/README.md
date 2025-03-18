@@ -6,6 +6,8 @@ This example demonstrates how to integrate tools from a Model Context Protocol (
 
 Alongside MCP integration, this workflow also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
 
+Note: Soon we will be adding ability to express conditionals in the Portia Plans, which will make this use-case much more natural. The tasks of request human approval and processing refunds should be _conditional_ on the Agent's approval, otherwise skipped.
+
 You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
 
 ## Prerequisites
