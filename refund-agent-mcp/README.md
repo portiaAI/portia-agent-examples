@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This example demonstrates how to integrate tools from a Model Context Protocol (MCP) server into the Portia SDK. Here we create an Agent that can handle customer service refund requests using Stripe integration via their [MCP server](https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol).
+This example demonstrates how to integrate tools from a Model Context Protocol (MCP) server into the Portia SDK. Here we create an Agent that can handle customer service refund requests using a Stripe integration via their [MCP server](https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol).
 
-Alongside MCP integration, this workflow also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
+Alongside MCP integrations, this example also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
 
-Note: Soon we will be adding ability to express conditionals in the Portia Plans, which will make this use-case much more natural. The tasks of request human approval and processing refunds should be _conditional_ on the Agent's approval, otherwise skipped.
+Note: Soon we will be adding the ability to express conditionals in Portia Plans, which will make this use-case much more natural. The tasks of requesting human approval and processing refunds should be _conditional_ on the Agent's approval, otherwise skipped. For now they are implemented in a separate tool call whose objective to request human approval, and if the human rejects the refund that tool will terminate the plan run before we get to the refund issuing tool.
 
 You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
 
