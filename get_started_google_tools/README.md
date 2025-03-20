@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This example demonstrates how to use Portia AI with Google Calendar and GMail tools to schedule a meeting and send an email. It demonstrates a number of key features of the [Portia SDK](https://github.com/portia-ai/portia-sdk-python) including explicit planning, clarification and authentication. You can read more about the SDK and these concepts in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
+This example demonstrates how to use Portia AI with Google Calendar and GMail tools to schedule a meeting and send an email. It demonstrates a number of key features of the [Portia SDK](https://github.com/portia-ai/portia-sdk-python) including explicit planning, clarification and authentication. You can read more about the SDK and these concepts in the [Portia SDK documentation](https://docs.portialabs.ai/SDK/portia).
 
 ## Prerequisites
 

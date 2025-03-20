@@ -8,7 +8,7 @@ Alongside MCP integrations, this example also demonstrates how [Clarifications](
 
 Note: Soon we will be adding the ability to express conditionals in Portia Plans, which will make this use-case much more natural. The tasks of requesting human approval and processing refunds should be _conditional_ on the Agent's approval, otherwise skipped. For now they are implemented in a separate tool call whose objective is to request human approval. If the human rejects the refund, that tool will terminate the plan run before we get to the refund issuing step.
 
-You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/docs/portia-sdk-python).
+You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/SDK/portia).
 
 ## Prerequisites
 
