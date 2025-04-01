@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11,<4.0"
 
 dependencies = [
-    "portia-sdk-python @ git+https://github.com/portiaAI/portia-sdk-python.git@main",
+    "portia-sdk-python (>=0.1.10,<0.2.0)",
     "dotenv (>=0.9.9,<0.10.0)"
 ]
 
