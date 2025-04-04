@@ -51,7 +51,7 @@ McpToolRegistry.from_stdio_connection(
         "-y",
         "@stripe/mcp",
         "--tools=all",
-        f"--api-key={os.environ['STRIPE_API_KEY']}",
+        f"--api-key={os.environ['STRIPE_TEST_gAPI_KEY']}",
     ],
 )
 ```

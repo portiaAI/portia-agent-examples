@@ -1,3 +1,11 @@
+"""
+Script to set up a Stripe test environment for the refund agent example.
+
+This script creates a state where we have a customer that has paid for a product.
+
+Args:
+    --email: The email address of the customer to create.
+"""
 import json
 import os
 import stripe
@@ -8,7 +16,7 @@ import argparse
 load_dotenv()
 
 # Initialize Stripe with the API key
-stripe.api_key = os.getenv("STRIPE_API_KEY")
+stripe.api_key = os.getenv("STRIPE_TEST_API_KEY")
 
 
 def setup_stripe_test_environment(customer_email):

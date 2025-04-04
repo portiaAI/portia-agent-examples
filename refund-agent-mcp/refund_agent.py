@@ -160,7 +160,7 @@ def main(customer_email: str):
                 "-y",
                 "@stripe/mcp",
                 "--tools=all",
-                f"--api-key={os.environ['STRIPE_API_KEY']}",
+                f"--api-key={os.environ['STRIPE_TEST_API_KEY']}",
             ],
         )
         + DefaultToolRegistry(
