@@ -15,11 +15,21 @@ from portia.config import (
     DEFAULT_MODEL_KEY,
     EXECUTION_MODEL_KEY,
     LLM_TOOL_MODEL_KEY,
+    INTROSPECTION_MODEL_KEY,
+    SUMMARISER_MODEL_KEY,
 )
 from langchain_ollama import ChatOllama
 from pydantic import SecretStr
 import instructor
 
+MODEL_KEYS = [
+    PLANNING_MODEL_KEY,
+    DEFAULT_MODEL_KEY,
+    EXECUTION_MODEL_KEY,
+    LLM_TOOL_MODEL_KEY,
+    INTROSPECTION_MODEL_KEY,
+    SUMMARISER_MODEL_KEY,
+]
 
 class OllamaModel(LangChainGenerativeModel):
     def __init__(self, model_name: str):
@@ -47,10 +57,7 @@ def main():
     config = Config.from_default(
         default_log_level="DEBUG",
         custom_models={
-            PLANNING_MODEL_KEY: OllamaModel(model_name="qwen2.5:14b"),
-            DEFAULT_MODEL_KEY: OllamaModel(model_name="qwen2.5:14b"),
-            EXECUTION_MODEL_KEY: OllamaModel(model_name="qwen2.5:14b"),
-            LLM_TOOL_MODEL_KEY: OllamaModel(model_name="qwen2.5:14b"),
+            **{key: OllamaModel(model_name="qwen2.5:14b") for key in MODEL_KEYS},
         },
         openai_api_key=SecretStr("123"),
     )
