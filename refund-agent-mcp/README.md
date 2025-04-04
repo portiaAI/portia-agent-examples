@@ -6,8 +6,6 @@ This example demonstrates how to integrate tools from a Model Context Protocol (
 
 Alongside MCP integrations, this example also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
 
-Note: Soon we will be adding the ability to express conditionals in Portia Plans, which will make this use-case much more natural. The tasks of requesting human approval and processing refunds should be _conditional_ on the Agent's approval, otherwise skipped. For now they are implemented in a separate tool call whose objective is to request human approval. If the human rejects the refund, that tool will terminate the plan run before we get to the refund issuing step.
-
 You can read more about the tools provided by Portia Cloud in the [Portia Cloud documentation](https://docs.portialabs.ai/), or about the SDK in the [Portia SDK documentation](https://docs.portialabs.ai/SDK/portia).
 
 ## Prerequisites
@@ -27,7 +25,7 @@ Before running this agent, you'll need the following:
 1. Clone the repository and select this folder.
 2. Copy the `.env.example` file to `.env` and add your API keys to it.
 3. Install dependencies `poetry install`
-4. Setup the Stripe payment to refund
+4. Setup the Stripe payment to refund. You can use `poetry run python stripe_setup.py --email <test email>`, or follow these steps:
     i. Create a Customer with an email address you have access to.
     ii. Create a Product (this can be anything).
     iii. Create a Payment. We did this by issuing an invoice to the Customer from step (i), and then paying the invoice with a Stripe [test card](https://docs.stripe.com/testing)

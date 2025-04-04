@@ -8,8 +8,6 @@ from langchain.schema import HumanMessage, SystemMessage
 from portia import (
     DefaultToolRegistry,
     InMemoryToolRegistry,
-    LLMModel,
-    LLMProvider,
     MultipleChoiceClarification,
     Portia,
     McpToolRegistry,
@@ -21,7 +19,7 @@ from portia import (
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
 from portia.llm_wrapper import LLMWrapper
-from portia.config import LLM_TOOL_MODEL_KEY, CONDITIONAL_FEATURE_FLAG
+from portia.config import LLM_TOOL_MODEL_KEY
 
 
 class RefundHumanApprovalInput(BaseModel):
@@ -100,12 +98,12 @@ class RefundReviewerTool(Tool[str]):
     """
     A tool to review a refund request from a customer against the refund policy
 
-    This tool calls an LLM to assess the refund request against the refund policy and 
+    This tool calls an LLM to assess the refund request against the refund policy and
     either:
-    
+
     - Make a recommendation to approve it.
     - Reject the request and exit with an error message containing the reason for the rejection.
-    
+
     NB. This tool does not actually process the refund.
     """
 
@@ -152,12 +150,7 @@ class RefundReviewerTool(Tool[str]):
 
 
 def main(customer_email: str):
-    config = Config.from_default(
-        default_log_level="INFO",
-        feature_flags={CONDITIONAL_FEATURE_FLAG: True},
-        llm_model=LLMModel.GEMINI_2_0_FLASH,
-        llm_provider=LLMProvider.GOOGLE_GENERATIVE_AI,
-    )
+    config = Config.from_default(default_log_level="INFO")
 
     tools = (
         McpToolRegistry.from_stdio_connection(
