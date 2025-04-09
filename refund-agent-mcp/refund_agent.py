@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 from typing import Literal, Type
 from dotenv import load_dotenv
@@ -54,8 +55,8 @@ class RefundHumanApprovalTool(Tool[str]):
     description: str = "A tool to request human approval in order to continue. Given a summary of the reasoning for the approval decision, the human will approve or reject the request."
     args_schema: Type[BaseModel] = RefundHumanApprovalInput
     output_schema: tuple[str, str] = (
-        "None",
-        "This tool does not return anything. If the human rejects the request, it raises a ToolHardError.",
+        "str",
+        "APPROVED or REJECTED depending on the human decision",
     )
 
     def run(
@@ -81,14 +82,7 @@ class RefundHumanApprovalTool(Tool[str]):
                 argument_name="human_decision",
                 options=["APPROVED", "REJECTED"],
             )
-        elif human_decision == "APPROVED":
-            return None
-        elif human_decision == "REJECTED":
-            raise ToolHardError(
-                "The refund has been rejected by the customer service team"
-            )
-        else:
-            raise ToolHardError("Invalid human decision: " + human_decision)
+        return human_decision
 
 
 class RefundReviewerInput(BaseModel):
@@ -104,12 +98,12 @@ class RefundReviewerTool(Tool[str]):
     """
     A tool to review a refund request from a customer against the refund policy
 
-    This tool calls an LLM to assess the refund request against the refund policy and 
+    This tool calls an LLM to assess the refund request against the refund policy and
     either:
-    
+
     - Make a recommendation to approve it.
     - Reject the request and exit with an error message containing the reason for the rejection.
-    
+
     NB. This tool does not actually process the refund.
     """
 
@@ -122,8 +116,8 @@ class RefundReviewerTool(Tool[str]):
     )
     args_schema: Type[BaseModel] = RefundReviewerInput
     output_schema: tuple[str, str] = (
-        "str",
-        "Summary of why the refund was approved. If the refund is rejected, the tool raises a ToolHardError.",
+        "json",
+        "A JSON object with the following fields: 'decision' (str: 'APPROVED' or 'REJECTED'), 'reason' (str: the reason for the decision)",
     )
 
     def run(
@@ -148,9 +142,11 @@ class RefundReviewerTool(Tool[str]):
         response = llm.invoke(messages)
         llm_decision = response.content.split("\n")[-1].strip()
         if llm_decision == "APPROVED":
-            return response.content
+            return json.dumps({"decision": "APPROVED", "reason": response.content})
+        elif llm_decision == "REJECTED":
+            return json.dumps({"decision": "REJECTED", "reason": response.content})
         else:
-            raise ToolHardError("The refund request was rejected: " + response.content)
+            raise ToolHardError("Invalid LLM decision: " + llm_decision)
 
 
 def main(customer_email: str):
@@ -164,7 +160,7 @@ def main(customer_email: str):
                 "-y",
                 "@stripe/mcp",
                 "--tools=all",
-                f"--api-key={os.environ['STRIPE_API_KEY']}",
+                f"--api-key={os.environ['STRIPE_TEST_API_KEY']}",
             ],
         )
         + DefaultToolRegistry(
