@@ -2242,7 +2242,7 @@ tools-browser-local = ["browser-use (>=0.1.40,<0.2.0)", "playwright (>=1.49.0,<2
 type = "git"
 url = "https://github.com/portiaAI/portia-sdk-python.git"
 reference = "ollama-support"
-resolved_reference = "f15e08c690b576cfe54f5839a51560ea16664e5d"
+resolved_reference = "1793b85796a2fd3124b6ee3ada1c5e10719f088c"
 
 [[package]]
 name = "propcache"
