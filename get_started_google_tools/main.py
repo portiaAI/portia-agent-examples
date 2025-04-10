@@ -9,7 +9,6 @@ This demo requires you to have a Google Calendar and GMail account, and the emai
 """
 
 print(outline)
-user_email = input("Please enter your email address:\n")
 receipient_email = input(
     "Please enter the email address of the person you want to schedule a meeting with:\n"
 )
@@ -20,7 +19,7 @@ task = (
     lambda: f"""
 Please help me accomplish the following tasks, ensuring you take into account the following constraints: {"".join(constraints)}
 Tasks:
-- Get my ({user_email}) availability from Google Calendar tomorrow between 10:00 and 17:00
+- Get my availability from Google Calendar tomorrow between 10:00 and 17:00
 - If I am available, schedule a 30 minute meeting with {receipient_email} at a time that works for me with the title "Portia AI Demo" and a description of the meeting as "Test demo".
 - and send an email to {receipient_email} with the details of the meeting you scheduled.
 """
