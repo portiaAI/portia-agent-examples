@@ -15,11 +15,16 @@ from portia import (
     Tool,
     ToolHardError,
     ToolRunContext,
+    execution_context,
 )
+import portia.tool
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
 from portia.llm_wrapper import LLMWrapper
 from portia.config import LLM_TOOL_MODEL_KEY
+
+
+portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
 
 
 class RefundHumanApprovalInput(BaseModel):
@@ -150,6 +155,9 @@ class RefundReviewerTool(Tool[str]):
 
 
 def main(customer_email: str):
+    with open("inbox.txt", "w") as f:
+        f.write(customer_email)
+
     config = Config.from_default(default_log_level="INFO")
 
     tools = (
@@ -173,8 +181,11 @@ def main(customer_email: str):
 
     portia = Portia(config=config, tools=tools, execution_hooks=CLIExecutionHooks())
     # Run the test query and print the output!
-    plan = portia.plan(
-        f"""
+    with execution_context(
+        additional_data={"Tool Advice": "When calling tools that have a limit argument, ALWAYS use a value of 1"}
+    ):
+        plan = portia.plan(
+            """
 Read the refund request email from the customer and decide if it should be approved or rejected.
 If you think the refund request should be approved, check with a human for final approval and then process the refund.
 
@@ -185,13 +196,11 @@ Stripe instructions:
 
 The refund policy can be found in the file: ./refund_policy.txt
 
-The refund request email is as follows:
-
-{customer_email}
+The refund request email can be found in "inbox.txt" file
 """
-    )
+        )
     print("Plan:")
-    print(plan.model_dump_json(indent=2))
+    print(plan.pretty_print())
     portia.run_plan(plan)
 
 
