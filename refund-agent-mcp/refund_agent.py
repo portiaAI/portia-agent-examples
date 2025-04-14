@@ -182,7 +182,10 @@ def main(customer_email: str):
     portia = Portia(config=config, tools=tools, execution_hooks=CLIExecutionHooks())
     # Run the test query and print the output!
     with execution_context(
-        additional_data={"Tool Advice": "When calling tools that have a limit argument, ALWAYS use a value of 1"}
+        additional_data={
+            "Stripe MCP tool guidance": "If you encounter tools that require a limit argument, "
+                                        "ALWAYS USE A VALUE OF 1."
+        }
     ):
         plan = portia.plan(
             """
@@ -199,9 +202,9 @@ The refund policy can be found in the file: ./refund_policy.txt
 The refund request email can be found in "inbox.txt" file
 """
         )
-    print("Plan:")
-    print(plan.pretty_print())
-    portia.run_plan(plan)
+        print("Plan:")
+        print(plan.pretty_print())
+        portia.run_plan(plan)
 
 
 if __name__ == "__main__":
