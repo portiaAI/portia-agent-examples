@@ -78,7 +78,7 @@ class RefundHumanApprovalTool(Tool[str]):
                 options=["APPROVED", "REJECTED"],
             )
         assert context.clarifications[0].resolved is True
-        return context.clarifications[0].value
+        return context.clarifications[0].response
 
 
 class RefundReviewerInput(BaseModel):
