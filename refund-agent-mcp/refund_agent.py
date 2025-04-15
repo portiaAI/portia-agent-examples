@@ -36,15 +36,6 @@ class RefundHumanApprovalInput(BaseModel):
     summary: str = Field(
         ..., description="A summary of the reasoning for the approval decision."
     )
-    human_decision: Literal["APPROVED", "REJECTED"] | None = Field(
-        None,
-        description=(
-            "Whether we have already approved the refund.\n"
-            "This MUST be set to None until the clarification check has been done.\n"
-            "If the human approves, this value will be 'APPROVED'.\n"
-            "If the human rejects, this value will be 'REJECTED'."
-        ),
-    )
 
 
 class RefundHumanApprovalTool(Tool[str]):
@@ -69,9 +60,8 @@ class RefundHumanApprovalTool(Tool[str]):
         context: ToolRunContext,
         refund_request: str,
         summary: str,
-        human_decision: Literal["APPROVED", "REJECTED"] | None = None,
     ) -> bool:
-        if human_decision is None:
+        if len(context.clarifications) == 0:
             return MultipleChoiceClarification(
                 plan_run_id=context.plan_run_id,
                 user_guidance=(
@@ -87,7 +77,8 @@ class RefundHumanApprovalTool(Tool[str]):
                 argument_name="human_decision",
                 options=["APPROVED", "REJECTED"],
             )
-        return human_decision
+        assert context.clarifications[0].resolved is True
+        return context.clarifications[0].response
 
 
 class RefundReviewerInput(BaseModel):
