@@ -21,6 +21,8 @@ if not example_plans:
     print(
         "No example plans were found in Portia storage. Did you remember to create and 'like' the plans from the previous step?"
     )
+else:
+    print(f"{len(example_plans)} similar plans were found.")
 plan = portia_instance.plan(
     vague_prompt,
     example_plans=example_plans,
