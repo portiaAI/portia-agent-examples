@@ -183,10 +183,10 @@ def main(customer_email: str):
 Read the refund request email from the customer and decide if it should be approved or rejected.
 If you think the refund request should be approved, check with a human for final approval and then process the refund.
 
-Stripe instructions:
-* Customers can be found in Stripe using their email address.
-* The payment can be found against the Customer.
-* Refunds can be processed by creating a refund against the payment.
+Stripe instructions -- To create a refund in Stripe, you need to:
+* Find the Customer using their email address from the List of Customers in Stripe.
+* Find the Payment Intent ID using the Customer from the previous step, from the List of Payment Intents in Stripe.
+* Create a refund against the Payment Intent ID.g
 
 The refund policy can be found in the file: ./refund_policy.txt
 
