@@ -1,5 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
+#!/usr/bin/env python3
+
+"""
+This script demonstrates how to execute a (not very well-written) prompt with Portia.
+
+It is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
+"""
+
 
 from common import init_portia
 

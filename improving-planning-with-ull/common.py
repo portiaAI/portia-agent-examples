@@ -1,3 +1,13 @@
+"""
+common - Boilerplate code abstracted from the scripts in this user-led learning example project.
+
+This code is not meant to be run directly.
+
+Primarily, this code defines a handful of tool stubs (which will be used to demonstrate planning),
+and provides an `init_portia()` function which loads config from a `.env` file and configures an instance of Portia for use in scripts.
+"""
+
+
 import os
 from typing import Literal, Type
 
@@ -133,6 +143,10 @@ tools = (
 
 
 def init_portia():
+    """
+    Load config from a `.env` file and return a configured instance of `Portia`.
+    """
+    
     load_dotenv(override=True)
 
     portia_instance = Portia(

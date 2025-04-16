@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+
+"""
+This script demonstrates how to manually construct an example plan and provide it to Portia.
+
+It is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
+"""
+
+
 from portia.plan import PlanBuilder
 
 from common import init_portia

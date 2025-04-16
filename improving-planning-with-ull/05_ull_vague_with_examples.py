@@ -1,5 +1,12 @@
-#!/usr/bin/env python
-# coding: utf-8
+#!/usr/bin/env python3
+
+"""
+This script shows how to use `get_similar_plans` to obtain relevant example plans from Portia cloud.
+You must have run the previous script, `04_ull_create_example_plans.py`,
+and have 'liked' the resulting plans in the Portia dashboard before running this script.
+
+This script is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
+"""
 
 from common import init_portia
 

@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+This script demonstrates how to execute a well-written prompt with Portia.
+
+It is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
+"""
+
+
 from common import init_portia
 
 good_prompt = """

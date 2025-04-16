@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+
+"""
+This script will construct three plans and save them to Portia cloud.
+Once it has run, you should log into the Portia dashboard, and 'like' each of the plans.
+
+This script is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
+"""
+
 from portia.plan import PlanBuilder
 
 from common import init_portia
