@@ -24,3 +24,7 @@ Retrieve Github issues alongside a locally-implemented RAG tool to load and retr
 This example demonstrates how to integrate tools from a Model Context Protocol (MCP) server into the Portia SDK. Here we create an Agent that can handle customer service refund requests using a Stripe integration via their [MCP server](https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol).
 
 Alongside MCP integrations, this example also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
+
+## [Improving Planning with User-Led Learning](https://github.com/portiaAI/portia-agent-examples/tree/main/improving-planning-with-ull/)
+
+This project demonstrates Portia's User-Led Learning (ULL) feature, which allows agents to learn from example plans and improve their planning capabilities over time. Through a series of progressive examples, it shows how providing plan examples can guide the agent to create more effective plans for similar tasks, even when given vague instructions.
