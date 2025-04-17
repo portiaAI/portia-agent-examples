@@ -181,7 +181,7 @@ def main(customer_email: str):
         plan = portia.plan(
             """
 Read the refund request email from the customer and decide if it should be approved or rejected.
-If you think the refund request should be approved, ALWAYS check with a human for final approval and then process the refund.
+If you think the refund request should be approved, ALWAYS check with a human for final approval and if approved then process the refund.
 
 Stripe instructions -- To create a refund in Stripe, you need to:
 * Find the Customer using their email address from the List of Customers in Stripe.
