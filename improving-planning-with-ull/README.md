@@ -10,19 +10,22 @@ For more information on what the scripts do and what they demonstrate, you shoul
 
 ## Prerequisites
 
+- A Portia AI API key.
 - A Stripe test account and associated secret key.
 
 ## Getting Started
 
 Each script can be run independently to see the progression of planning capabilities as more examples are provided.
 
-You'll need a `.env` file configuring a `STRIPE_TEST_API_KEY`.
-(Or you can set this environment variable in whichever way you prefer.)
-The key must be a valid Stripe secret key, but can be a test key.
+You'll need a `.env` file configuring a `PORTIA_API_KEY` and `STRIPE_TEST_API_KEY`.
+You can copy `.env.example` to `.env` and paste your keys into the file.
+(Or you can set these environment variables in whichever way you prefer.)
+The Stripe key must be a valid Stripe secret key, but can be a test key.
 It is only used to interact with the MCP tool service to discover Stripe's available tools.
 
 ```sh
-export STRIPE_TEST_API_KEY='export STRIPE_TEST_API_KEY='sk_test_12ab23cdAMB54supernotarealkey'
+export PORTIA_API_KEY='prt-LrrnPyt.0n0TaRe4Lk3y'
+export STRIPE_TEST_API_KEY='sk_test_12ab23cdAMB54supernotarealkey'
 ```
 
 We recommend you use [`uv`](https://github.com/astral-sh/uv) to run these example scripts.
