@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 from typing import Literal, Type
 from dotenv import load_dotenv
@@ -14,11 +15,16 @@ from portia import (
     Tool,
     ToolHardError,
     ToolRunContext,
+    execution_context,
 )
+import portia.tool
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
 from portia.llm_wrapper import LLMWrapper
 from portia.config import LLM_TOOL_MODEL_KEY
+
+
+portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
 
 
 class RefundHumanApprovalInput(BaseModel):
@@ -29,15 +35,6 @@ class RefundHumanApprovalInput(BaseModel):
     )
     summary: str = Field(
         ..., description="A summary of the reasoning for the approval decision."
-    )
-    human_decision: Literal["APPROVED", "REJECTED"] | None = Field(
-        None,
-        description=(
-            "Whether we have already approved the refund.\n"
-            "This MUST be set to None until the clarification check has been done.\n"
-            "If the human approves, this value will be 'APPROVED'.\n"
-            "If the human rejects, this value will be 'REJECTED'."
-        ),
     )
 
 
@@ -54,8 +51,8 @@ class RefundHumanApprovalTool(Tool[str]):
     description: str = "A tool to request human approval in order to continue. Given a summary of the reasoning for the approval decision, the human will approve or reject the request."
     args_schema: Type[BaseModel] = RefundHumanApprovalInput
     output_schema: tuple[str, str] = (
-        "None",
-        "This tool does not return anything. If the human rejects the request, it raises a ToolHardError.",
+        "str",
+        "APPROVED or REJECTED depending on the human decision",
     )
 
     def run(
@@ -63,9 +60,8 @@ class RefundHumanApprovalTool(Tool[str]):
         context: ToolRunContext,
         refund_request: str,
         summary: str,
-        human_decision: Literal["APPROVED", "REJECTED"] | None = None,
     ) -> bool:
-        if human_decision is None:
+        if len(context.clarifications) == 0:
             return MultipleChoiceClarification(
                 plan_run_id=context.plan_run_id,
                 user_guidance=(
@@ -81,14 +77,8 @@ class RefundHumanApprovalTool(Tool[str]):
                 argument_name="human_decision",
                 options=["APPROVED", "REJECTED"],
             )
-        elif human_decision == "APPROVED":
-            return None
-        elif human_decision == "REJECTED":
-            raise ToolHardError(
-                "The refund has been rejected by the customer service team"
-            )
-        else:
-            raise ToolHardError("Invalid human decision: " + human_decision)
+        assert context.clarifications[0].resolved is True
+        return context.clarifications[0].response
 
 
 class RefundReviewerInput(BaseModel):
@@ -104,12 +94,12 @@ class RefundReviewerTool(Tool[str]):
     """
     A tool to review a refund request from a customer against the refund policy
 
-    This tool calls an LLM to assess the refund request against the refund policy and 
+    This tool calls an LLM to assess the refund request against the refund policy and
     either:
-    
+
     - Make a recommendation to approve it.
     - Reject the request and exit with an error message containing the reason for the rejection.
-    
+
     NB. This tool does not actually process the refund.
     """
 
@@ -122,8 +112,8 @@ class RefundReviewerTool(Tool[str]):
     )
     args_schema: Type[BaseModel] = RefundReviewerInput
     output_schema: tuple[str, str] = (
-        "str",
-        "Summary of why the refund was approved. If the refund is rejected, the tool raises a ToolHardError.",
+        "json",
+        "A JSON object with the following fields: 'decision' (str: 'APPROVED' or 'REJECTED'), 'reason' (str: the reason for the decision)",
     )
 
     def run(
@@ -148,12 +138,17 @@ class RefundReviewerTool(Tool[str]):
         response = llm.invoke(messages)
         llm_decision = response.content.split("\n")[-1].strip()
         if llm_decision == "APPROVED":
-            return response.content
+            return json.dumps({"decision": "APPROVED", "reason": response.content})
+        elif llm_decision == "REJECTED":
+            return json.dumps({"decision": "REJECTED", "reason": response.content})
         else:
-            raise ToolHardError("The refund request was rejected: " + response.content)
+            raise ToolHardError("Invalid LLM decision: " + llm_decision)
 
 
 def main(customer_email: str):
+    with open("inbox.txt", "w") as f:
+        f.write(customer_email)
+
     config = Config.from_default(default_log_level="INFO")
 
     tools = (
@@ -164,7 +159,7 @@ def main(customer_email: str):
                 "-y",
                 "@stripe/mcp",
                 "--tools=all",
-                f"--api-key={os.environ['STRIPE_API_KEY']}",
+                f"--api-key={os.environ['STRIPE_TEST_API_KEY']}",
             ],
         )
         + DefaultToolRegistry(
@@ -177,26 +172,30 @@ def main(customer_email: str):
 
     portia = Portia(config=config, tools=tools, execution_hooks=CLIExecutionHooks())
     # Run the test query and print the output!
-    plan = portia.plan(
-        f"""
+    with execution_context(
+        additional_data={
+            "Stripe MCP tool guidance": "If you encounter tools that require a limit argument, "
+                                        "ALWAYS USE A VALUE OF 1."
+        }
+    ):
+        plan = portia.plan(
+            """
 Read the refund request email from the customer and decide if it should be approved or rejected.
-If you think the refund request should be approved, check with a human for final approval and then process the refund.
+If you think the refund request should be approved, ALWAYS check with a human for final approval and if approved then process the refund.
 
-Stripe instructions:
-* Customers can be found in Stripe using their email address.
-* The payment can be found against the Customer.
-* Refunds can be processed by creating a refund against the payment.
+Stripe instructions -- To process a refund in Stripe, you need to:
+* Find the Customer using their email address from the List of Customers in Stripe.
+* Find the Payment Intent ID using the Customer from the previous step, from the List of Payment Intents in Stripe.
+* Create a refund against the Payment Intent ID.g
 
 The refund policy can be found in the file: ./refund_policy.txt
 
-The refund request email is as follows:
-
-{customer_email}
+The refund request email can be found in "inbox.txt" file
 """
-    )
-    print("Plan:")
-    print(plan.model_dump_json(indent=2))
-    portia.run_plan(plan)
+        )
+        print("Plan:")
+        print(plan.pretty_print())
+        portia.run_plan(plan)
 
 
 if __name__ == "__main__":
