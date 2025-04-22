@@ -101,27 +101,22 @@ portia = Portia(
     execution_hooks=CLIExecutionHooks(),
 )
 
-with execution_context(
-    end_user_id="portia-research-agent",
-):
-    # We plan and run the agent in separate steps so we can print out the plan.
-    # An alternative would be to just call portia.run() which will do both.
-    plan = portia.plan(
-        "Read all emails from today that contain 'AI' and summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
-        "Then post the summary with links to the #ai-news channel."
-        "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
-    )
-    print("\nHere are the steps in the generated plan:")
-    [print(step.model_dump_json(indent=2)) for step in plan.steps]
+# We plan and run the agent in separate steps so we can print out the plan.
+# An alternative would be to just call portia.run() which will do both.
+plan = portia.plan(
+    "Read all emails from today that contain 'AI' and summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
+    "Then post the summary with links to the #ai-news channel."
+    "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
+)
+print("\nHere are the steps in the generated plan:")
+[print(step.model_dump_json(indent=2)) for step in plan.steps]
 
-    if os.getenv("CI") != "true":
-        user_input = input("Are you happy with the plan? (y/n):\n")
-        if user_input != "y":
-            sys.exit(1)
+if os.getenv("CI") != "true":
+    user_input = input("Are you happy with the plan? (y/n):\n")
+    if user_input != "y":
+        sys.exit(1)
 
-    run = portia.run_plan(plan)
+run = portia.run_plan(plan)
 
-    if run.state != PlanRunState.COMPLETE:
-        raise Exception(
-            f"Plan run failed with state {run.state}. Check logs for details."
-        )
+if run.state != PlanRunState.COMPLETE:
+    raise Exception(f"Plan run failed with state {run.state}. Check logs for details.")
