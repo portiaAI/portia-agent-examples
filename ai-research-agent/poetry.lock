@@ -279,6 +279,18 @@ files = [
 dev = ["backports.zoneinfo ; python_version < \"3.9\"", "freezegun (>=1.0,<2.0)", "jinja2 (>=3.0)", "pytest (>=6.0)", "pytest-cov", "pytz", "setuptools", "tzdata ; sys_platform == \"win32\""]
 
 [[package]]
+name = "backoff"
+version = "2.2.1"
+description = "Function decoration for backoff and retry"
+optional = false
+python-versions = ">=3.7,<4.0"
+groups = ["main"]
+files = [
+    {file = "backoff-2.2.1-py3-none-any.whl", hash = "sha256:63579f9a0628e06278f7e47b7d7d5b6ce20dc65c5e96a6f3ca99a6adca0396e8"},
+    {file = "backoff-2.2.1.tar.gz", hash = "sha256:03f829f5bb1923180821643f8753b0502c3b682293992485b0eef2807afa5cba"},
+]
+
+[[package]]
 name = "beautifulsoup4"
 version = "4.13.3"
 description = "Screen-scraping library"
@@ -319,6 +331,55 @@ webencodings = "*"
 
 [package.extras]
 css = ["tinycss2 (>=1.1.0,<1.5)"]
+
+[[package]]
+name = "browser-use"
+version = "0.1.40"
+description = "Make websites accessible for AI agents"
+optional = false
+python-versions = "<4.0,>=3.11"
+groups = ["main"]
+files = [
+    {file = "browser_use-0.1.40-py3-none-any.whl", hash = "sha256:8deb6846bec00819bf150808357406e7847204c383351147c1f3d261c1904fb9"},
+    {file = "browser_use-0.1.40.tar.gz", hash = "sha256:ddafcda30a9f9fe0f63612af5bf19a0ec03454d2774f54543eee70eef7ab369f"},
+]
+
+[package.dependencies]
+httpx = ">=0.27.2"
+langchain-anthropic = "0.3.3"
+langchain-core = ">=0.3.35"
+langchain-ollama = "0.2.2"
+langchain-openai = "0.3.1"
+markdownify = "0.14.1"
+playwright = ">=1.49.0"
+posthog = ">=3.7.0"
+pydantic = ">=2.10.4"
+python-dotenv = ">=1.0.1"
+requests = ">=2.32.3"
+setuptools = ">=75.8.0"
+
+[package.extras]
+dev = ["build (>=1.2.2)", "fastapi (>=0.115.8)", "hatch (>=1.13.0)", "inngest (>=0.4.19)", "langchain (>=0.3.18)", "langchain-aws (>=0.2.11)", "langchain-fireworks (>=0.2.6)", "langchain-google-genai (==2.0.8)", "pytest (>=8.3.3)", "pytest-asyncio (>=0.24.0)", "tokencost (>=0.1.16)", "uvicorn (>=0.34.0)"]
+
+[[package]]
+name = "browserbase"
+version = "1.2.0"
+description = "The official Python library for the Browserbase API"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "browserbase-1.2.0-py3-none-any.whl", hash = "sha256:0b8d9429dea58f787b42b0109306f7a193770b78a24329ed13f50864debdf959"},
+    {file = "browserbase-1.2.0.tar.gz", hash = "sha256:44a1dbf2562893a8f9447c3d6de6fe72d3ae30fe743a5c2c52439928d0464a7b"},
+]
+
+[package.dependencies]
+anyio = ">=3.5.0,<5"
+distro = ">=1.7.0,<2"
+httpx = ">=0.23.0,<1"
+pydantic = ">=1.9.0,<3"
+sniffio = "*"
+typing-extensions = ">=4.10,<5"
 
 [[package]]
 name = "cachetools"
@@ -746,6 +807,21 @@ files = [
     {file = "et_xmlfile-2.0.0-py3-none-any.whl", hash = "sha256:7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa"},
     {file = "et_xmlfile-2.0.0.tar.gz", hash = "sha256:dab3f4764309081ce75662649be815c4c9081e88f0837825f90fd28317d4da54"},
 ]
+
+[[package]]
+name = "eval-type-backport"
+version = "0.2.2"
+description = "Like `typing._eval_type`, but lets older Python versions use newer typing features."
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "eval_type_backport-0.2.2-py3-none-any.whl", hash = "sha256:cb6ad7c393517f476f96d456d0412ea80f0a8cf96f6892834cd9340149111b0a"},
+    {file = "eval_type_backport-0.2.2.tar.gz", hash = "sha256:f0576b4cf01ebb5bd358d02314d31846af5e07678387486e2c798af0e7d849c1"},
+]
+
+[package.extras]
+tests = ["pytest"]
 
 [[package]]
 name = "execnet"
@@ -1352,7 +1428,6 @@ description = "Lightweight in-process concurrent programming"
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version < \"3.14\" and (platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\")"
 files = [
     {file = "greenlet-3.1.1-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:0bbae94a29c9e5c7e4a2b7f0aae5c17e8e90acbfd3bf6270eeba60c39fce3563"},
     {file = "greenlet-3.1.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0fde093fb93f35ca72a556cf72c92ea3ebfda3d79fc35bb19fbe685853869a83"},
@@ -1876,6 +1951,18 @@ files = [
 jsonpointer = ">=1.9"
 
 [[package]]
+name = "jsonpath-python"
+version = "1.0.6"
+description = "A more powerful JSONPath implementation in modern python"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "jsonpath-python-1.0.6.tar.gz", hash = "sha256:dd5be4a72d8a2995c3f583cf82bf3cd1a9544cfdabf2d22595b67aff07349666"},
+    {file = "jsonpath_python-1.0.6-py3-none-any.whl", hash = "sha256:1e3b78df579f5efc23565293612decee04214609208a2335884b3ee3f786b575"},
+]
+
+[[package]]
 name = "jsonpointer"
 version = "3.0.0"
 description = "Identify specific nodes in a JSON document (RFC 6901)"
@@ -1885,6 +1972,18 @@ groups = ["main"]
 files = [
     {file = "jsonpointer-3.0.0-py2.py3-none-any.whl", hash = "sha256:13e088adc14fca8b6aa8177c044e12701e6ad4b28ff10e65f2267a90109c9942"},
     {file = "jsonpointer-3.0.0.tar.gz", hash = "sha256:2b2d729f2091522d61c3b31f82e11870f60b68f43fbc705cb76bf4b832af59ef"},
+]
+
+[[package]]
+name = "jsonref"
+version = "1.1.0"
+description = "jsonref is a library for automatic dereferencing of JSON Reference objects for Python."
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "jsonref-1.1.0-py3-none-any.whl", hash = "sha256:590dc7773df6c21cbf948b5dac07a72a251db28b0238ceecce0a2abfa8ec30a9"},
+    {file = "jsonref-1.1.0.tar.gz", hash = "sha256:32fe8e1d85af0fdefbebce950af85590b22b60f9e95443176adbde4e1ecea552"},
 ]
 
 [[package]]
@@ -2022,20 +2121,20 @@ together = ["langchain-together"]
 
 [[package]]
 name = "langchain-anthropic"
-version = "0.3.0"
+version = "0.3.3"
 description = "An integration package connecting AnthropicMessages and LangChain"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "langchain_anthropic-0.3.0-py3-none-any.whl", hash = "sha256:96b74a9adfcc092cc2ae137d4189ca50e8f5ad9635618024f7c98d8f9fc1076a"},
-    {file = "langchain_anthropic-0.3.0.tar.gz", hash = "sha256:f9b5cbdbf2d5b3432f78f056e474efb10a2c1e37f9a471d3aceb50a0d9f945df"},
+    {file = "langchain_anthropic-0.3.3-py3-none-any.whl", hash = "sha256:385e6d6d719514369f38304ed5e9b74827feca36f3391595695dcb82696ed04a"},
+    {file = "langchain_anthropic-0.3.3.tar.gz", hash = "sha256:1faf0aa0aed392a18ed34d00e816d7c748ef342523deacc131690aae08ab4f1b"},
 ]
 
 [package.dependencies]
-anthropic = ">=0.39.0,<1"
+anthropic = ">=0.41.0,<1"
 defusedxml = ">=0.7.1,<0.8.0"
-langchain-core = ">=0.3.17,<0.4.0"
+langchain-core = ">=0.3.30,<0.4.0"
 pydantic = ">=2.7.4,<3.0.0"
 
 [[package]]
@@ -2066,14 +2165,14 @@ tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<10"
 
 [[package]]
 name = "langchain-core"
-version = "0.3.35"
+version = "0.3.55"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "langchain_core-0.3.35-py3-none-any.whl", hash = "sha256:81a4097226e180fa6c64e2d2ab38dcacbbc23b64fc109fb15622910fe8951670"},
-    {file = "langchain_core-0.3.35.tar.gz", hash = "sha256:328688228ece259da734417d477994a69cf8202dea9ed4271f2d792e3575c6fc"},
+    {file = "langchain_core-0.3.55-py3-none-any.whl", hash = "sha256:b3cb36bf37755a616158a79866657c6697b43a2f7c69dd723ce425f1c76c1baa"},
+    {file = "langchain_core-0.3.55.tar.gz", hash = "sha256:0f2b3e311621116a83510c70b0ac9d959030a0a457a69483535cff18501fedc9"},
 ]
 
 [package.dependencies]
@@ -2087,20 +2186,20 @@ typing-extensions = ">=4.7"
 
 [[package]]
 name = "langchain-google-genai"
-version = "2.0.9"
+version = "2.0.10"
 description = "An integration package connecting Google's genai package and LangChain"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "langchain_google_genai-2.0.9-py3-none-any.whl", hash = "sha256:48d8c78c42048d54f40dff333db9d359746644e0feb0e08b5eabdf34ad7149ca"},
-    {file = "langchain_google_genai-2.0.9.tar.gz", hash = "sha256:65205089da1f72688a0ed6e7c6914af308b6514ab8038fd8126ecb20f1df234c"},
+    {file = "langchain_google_genai-2.0.10-py3-none-any.whl", hash = "sha256:964a7542fd11fdec7592052b4eaef383227f7c4fa4d754a455e4bf0634f4ad28"},
+    {file = "langchain_google_genai-2.0.10.tar.gz", hash = "sha256:b51067b468853856f275bb7b1a85dbaf4467b59fe67e35fcd614fc0d744c810e"},
 ]
 
 [package.dependencies]
 filetype = ">=1.2.0,<2.0.0"
 google-generativeai = ">=0.8.0,<0.9.0"
-langchain-core = ">=0.3.27,<0.4.0"
+langchain-core = ">=0.3.37,<0.4.0"
 pydantic = ">=2,<3"
 
 [[package]]
@@ -2128,19 +2227,54 @@ anthropic = ["anthropic[vertexai] (>=0.35.0,<1)"]
 mistral = ["langchain-mistralai (>=0.2.0,<1)"]
 
 [[package]]
+name = "langchain-mistralai"
+version = "0.2.10"
+description = "An integration package connecting Mistral and LangChain"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+files = [
+    {file = "langchain_mistralai-0.2.10-py3-none-any.whl", hash = "sha256:fc3bc813eab034335236a3b01ba189cd00bcf2b7e6ac57628d0409438bd13425"},
+    {file = "langchain_mistralai-0.2.10.tar.gz", hash = "sha256:698620c7dee8ae85bf1ca1ed5b544285c0764c453efead9a4ae34ab884704ce1"},
+]
+
+[package.dependencies]
+httpx = ">=0.25.2,<1"
+httpx-sse = ">=0.3.1,<1"
+langchain-core = ">=0.3.49,<1.0.0"
+pydantic = ">=2,<3"
+tokenizers = ">=0.15.1,<1"
+
+[[package]]
+name = "langchain-ollama"
+version = "0.2.2"
+description = "An integration package connecting Ollama and LangChain"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+files = [
+    {file = "langchain_ollama-0.2.2-py3-none-any.whl", hash = "sha256:8a1ee72dbb6ea3b3ace1d9dd317e472d667a8ed491328550da59f4893a6796f8"},
+    {file = "langchain_ollama-0.2.2.tar.gz", hash = "sha256:2d9bcb06ffdbe43c7c6906c46e710d36d33b6b99cd4975cbf54060f13e51c875"},
+]
+
+[package.dependencies]
+langchain-core = ">=0.3.27,<0.4.0"
+ollama = ">=0.4.4,<1"
+
+[[package]]
 name = "langchain-openai"
-version = "0.3.6"
+version = "0.3.1"
 description = "An integration package connecting OpenAI and LangChain"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "langchain_openai-0.3.6-py3-none-any.whl", hash = "sha256:05f0869f6cc963e2ec9e2e54ea1038d9c2af784c67f0e217040dfc918b31649a"},
-    {file = "langchain_openai-0.3.6.tar.gz", hash = "sha256:7daf92e1cd98865ab5213ec5bec2cbd6c28f011e250714978b3a99c7e4fc88ce"},
+    {file = "langchain_openai-0.3.1-py3-none-any.whl", hash = "sha256:5cf2a1e115b12570158d89c22832fa381803c3e1e11d1eb781195c8d9e454bd5"},
+    {file = "langchain_openai-0.3.1.tar.gz", hash = "sha256:cce314f1437b2cad73e0ed2b55e74dc399bc1bbc43594c4448912fb51c5e4447"},
 ]
 
 [package.dependencies]
-langchain-core = ">=0.3.35,<1.0.0"
+langchain-core = ">=0.3.30,<0.4.0"
 openai = ">=1.58.1,<2.0.0"
 tiktoken = ">=0.7,<1"
 
@@ -2410,6 +2544,22 @@ rtd = ["jupyter_sphinx", "mdit-py-plugins", "myst-parser", "pyyaml", "sphinx", "
 testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
+name = "markdownify"
+version = "0.14.1"
+description = "Convert HTML to markdown."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "markdownify-0.14.1-py3-none-any.whl", hash = "sha256:4c46a6c0c12c6005ddcd49b45a5a890398b002ef51380cd319db62df5e09bc2a"},
+    {file = "markdownify-0.14.1.tar.gz", hash = "sha256:a62a7a216947ed0b8dafb95b99b2ef4a0edd1e18d5653c656f68f03db2bfb2f1"},
+]
+
+[package.dependencies]
+beautifulsoup4 = ">=4.9,<5"
+six = ">=1.15,<2"
+
+[[package]]
 name = "markupsafe"
 version = "3.0.2"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -2540,6 +2690,29 @@ files = [
 ]
 
 [[package]]
+name = "mistralai"
+version = "1.5.2"
+description = "Python Client SDK for the Mistral AI API."
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "mistralai-1.5.2-py3-none-any.whl", hash = "sha256:5b1112acebbcad1afd7732ce0bd60614975b64999801c555c54768ac41f506ae"},
+    {file = "mistralai-1.5.2.tar.gz", hash = "sha256:f39e6e51e8939aac2602e4badcb18712cbee2df33d86100c559333e609b92d17"},
+]
+
+[package.dependencies]
+eval-type-backport = ">=0.2.0"
+httpx = ">=0.27.0"
+jsonpath-python = ">=1.0.6"
+pydantic = ">=2.9.0"
+python-dateutil = ">=2.8.2"
+typing-inspect = ">=0.9.0"
+
+[package.extras]
+gcp = ["google-auth (>=2.27.0)", "requests (>=2.32.3)"]
+
+[[package]]
 name = "mistune"
 version = "3.1.2"
 description = "A sane and fast Markdown parser with useful plugins and renderers"
@@ -2549,6 +2722,18 @@ groups = ["main"]
 files = [
     {file = "mistune-3.1.2-py3-none-any.whl", hash = "sha256:4b47731332315cdca99e0ded46fc0004001c1299ff773dfb48fbe1fd226de319"},
     {file = "mistune-3.1.2.tar.gz", hash = "sha256:733bf018ba007e8b5f2d3a9eb624034f6ee26c4ea769a98ec533ee111d504dff"},
+]
+
+[[package]]
+name = "monotonic"
+version = "1.6"
+description = "An implementation of time.monotonic() for Python 2 & < 3.3"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "monotonic-1.6-py2.py3-none-any.whl", hash = "sha256:68687e19a14f11f26d140dd5c86f3dba4bf5df58003000ed467e0e2a69bca96c"},
+    {file = "monotonic-1.6.tar.gz", hash = "sha256:3a55207bcfed53ddd5c5bae174524062935efed17792e9de2ad0205ce9ad63f7"},
 ]
 
 [[package]]
@@ -2900,6 +3085,22 @@ files = [
 ]
 
 [[package]]
+name = "ollama"
+version = "0.4.8"
+description = "The official Python client for Ollama."
+optional = false
+python-versions = "<4.0,>=3.8"
+groups = ["main"]
+files = [
+    {file = "ollama-0.4.8-py3-none-any.whl", hash = "sha256:04312af2c5e72449aaebac4a2776f52ef010877c554103419d3f36066fe8af4c"},
+    {file = "ollama-0.4.8.tar.gz", hash = "sha256:1121439d49b96fa8339842965d0616eba5deb9f8c790786cdf4c0b3df4833802"},
+]
+
+[package.dependencies]
+httpx = ">=0.27,<0.29"
+pydantic = ">=2.9.0,<3.0.0"
+
+[[package]]
 name = "openai"
 version = "1.62.0"
 description = "The official Python library for the openai API"
@@ -2947,6 +3148,7 @@ description = "Fast, correct Python JSON library supporting dataclasses, datetim
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
+markers = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "orjson-3.10.15-cp310-cp310-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl", hash = "sha256:552c883d03ad185f720d0c09583ebde257e41b9521b74ff40e08b7dec4559c04"},
     {file = "orjson-3.10.15-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:616e3e8d438d02e4854f70bfdc03a6bcdb697358dbaa6bcd19cbe24d24ece1f8"},
@@ -3169,6 +3371,27 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=8.3.2)", "pytest-
 type = ["mypy (>=1.11.2)"]
 
 [[package]]
+name = "playwright"
+version = "1.51.0"
+description = "A high-level API to automate web browsers"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "playwright-1.51.0-py3-none-macosx_10_13_x86_64.whl", hash = "sha256:bcaaa3d5d73bda659bfb9ff2a288b51e85a91bd89eda86eaf8186550973e416a"},
+    {file = "playwright-1.51.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:2e0ae6eb44297b24738e1a6d9c580ca4243b4e21b7e65cf936a71492c08dd0d4"},
+    {file = "playwright-1.51.0-py3-none-macosx_11_0_universal2.whl", hash = "sha256:ab4c0ff00bded52c946be60734868febc964c8a08a9b448d7c20cb3811c6521c"},
+    {file = "playwright-1.51.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:d5c9f67bc6ef49094618991c78a1466c5bac5ed09157660d78b8510b77f92746"},
+    {file = "playwright-1.51.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:814e4ec2a1a0d6f6221f075622c06b31ceb2bdc6d622258cfefed900c01569ae"},
+    {file = "playwright-1.51.0-py3-none-win32.whl", hash = "sha256:4cef804991867ea27f608b70fa288ee52a57651e22d02ab287f98f8620b9408c"},
+    {file = "playwright-1.51.0-py3-none-win_amd64.whl", hash = "sha256:9ece9316c5d383aed1a207f079fc2d552fff92184f0ecf37cc596e912d00a8c3"},
+]
+
+[package.dependencies]
+greenlet = ">=3.1.1,<4.0.0"
+pyee = ">=12,<13"
+
+[[package]]
 name = "pluggy"
 version = "1.5.0"
 description = "plugin and hook calling mechanisms for python"
@@ -3268,40 +3491,79 @@ youtube-transcript-api = ">=0.6.2,<0.7.0"
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.1.10"
+version = "0.3.0"
 description = "Portia Labs Python SDK for building agentic workflows."
 optional = false
-python-versions = "<4.0,>=3.11"
+python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "portia_sdk_python-0.1.10-py3-none-any.whl", hash = "sha256:351ba6440bbb95e4e388f433827598f34bc3abefbc063f29fcf145be1108f557"},
-    {file = "portia_sdk_python-0.1.10.tar.gz", hash = "sha256:312ad2044c7ede0db2ebc5a5b261a872cff13a72f7c58bab686fbe94265721b1"},
+    {file = "portia_sdk_python-0.3.0-py3-none-any.whl", hash = "sha256:9002f27aeb7eafd59e5f5733fcc3ca42f534709cb85051de4336b76f48c3cc78"},
+    {file = "portia_sdk_python-0.3.0.tar.gz", hash = "sha256:c8a9d7fe55803f5596b285ecd2f68eea5f692b9c3c590515aaaaf9f346ba40fa"},
 ]
 
 [package.dependencies]
 anthropic = ">=0.41.0"
+browser-use = {version = ">=0.1.40,<0.2.0", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and (extra == \"tools-browser-local\" or extra == \"tools-browser-browserbase\" or extra == \"all\")"}
+browserbase = {version = ">=1.2.0,<2.0.0", optional = true, markers = "extra == \"tools-browser-browserbase\" or extra == \"all\""}
 click = ">=8.1.7,<9.0.0"
-instructor = ">=1.7.7,<2.0.0"
+google-generativeai = {version = ">=0.8.4,<0.9.0", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and (extra == \"google\" or extra == \"all\")"}
+instructor = {version = ">=1.7.7,<2.0.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 jinja2 = ">=3.1.4,<4.0.0"
-langchain = ">=0.3.17,<0.4.0"
-langchain-anthropic = ">=0.3.0,<0.4.0"
-langchain-core = ">=0.3.25,<0.4.0"
-langchain-openai = ">=0.3,<0.4"
-langgraph = ">=0.2.59,<0.3.0"
-langsmith = ">=0.3.15,<0.4.0"
-loguru = ">=0.7.3,<0.8.0"
-mcp = ">=1.3.0,<2.0.0"
+jsonref = ">=1.1.0,<2.0.0"
+langchain = {version = ">=0.3.17,<0.4.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langchain-anthropic = {version = ">=0.3.0,<0.4.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langchain-core = {version = ">=0.3.25,<0.4.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langchain-google-genai = {version = ">=2.0.10,<3.0.0", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and (extra == \"google\" or extra == \"all\")"}
+langchain-mistralai = {version = ">=0.2.3,<0.3.0", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and (extra == \"mistral\" or extra == \"mistralai\" or extra == \"all\")"}
+langchain-ollama = {version = ">=0.2.2,<0.3.0", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and (extra == \"ollama\" or extra == \"all\")"}
+langchain-openai = {version = ">=0.3,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langgraph = {version = ">=0.2.59,<0.3.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langsmith = {version = ">=0.3.15,<0.4.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+loguru = {version = ">=0.7.3,<0.8.0", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+mcp = ">=1.6.0,<2.0.0"
+mistralai = {version = ">=1.2.5,<2.0.0", optional = true, markers = "extra == \"mistral\" or extra == \"mistralai\" or extra == \"all\""}
 openpyxl = ">=3.1.5,<4.0.0"
 pandas = ">=2.2.3,<3.0.0"
+playwright = {version = ">=1.49.0,<2.0.0", optional = true, markers = "extra == \"tools-browser-local\" or extra == \"tools-browser-browserbase\" or extra == \"all\""}
 pydantic = ">=2.10.3,<3.0.0"
 pytest-mock = ">=3.14.0,<4.0.0"
 python-dotenv = ">=1.0.1,<2.0.0"
+tiktoken = ">=0.9.0,<0.10.0"
 
 [package.extras]
-all = ["google-generativeai (>=0.8.4,<0.9.0)", "langchain-google-genai (>=2.0.10,<3.0.0)", "langchain-mistralai (>=0.2.3,<0.3.0)", "mistralai (>=1.2.5,<2.0.0)"]
-google = ["google-generativeai (>=0.8.4,<0.9.0)", "langchain-google-genai (>=2.0.10,<3.0.0)"]
-mistral = ["langchain-mistralai (>=0.2.3,<0.3.0)", "mistralai (>=1.2.5,<2.0.0)"]
-tools-browser-local = ["browser-use (>=0.1.40,<0.2.0)", "playwright (>=1.49.0,<2.0.0)"]
+all = ["browser-use (>=0.1.40,<0.2.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "browserbase (>=1.2.0,<2.0.0)", "google-generativeai (>=0.8.4,<0.9.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-google-genai (>=2.0.10,<3.0.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-mistralai (>=0.2.3,<0.3.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-ollama (>=0.2.2,<0.3.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "mistralai (>=1.2.5,<2.0.0)", "playwright (>=1.49.0,<2.0.0)"]
+google = ["google-generativeai (>=0.8.4,<0.9.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-google-genai (>=2.0.10,<3.0.0) ; python_version >= \"3.11\" and python_version < \"4.0\""]
+mistral = ["langchain-mistralai (>=0.2.3,<0.3.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "mistralai (>=1.2.5,<2.0.0)"]
+mistralai = ["langchain-mistralai (>=0.2.3,<0.3.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "mistralai (>=1.2.5,<2.0.0)"]
+ollama = ["langchain-ollama (>=0.2.2,<0.3.0) ; python_version >= \"3.11\" and python_version < \"4.0\""]
+tools-browser-browserbase = ["browser-use (>=0.1.40,<0.2.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "browserbase (>=1.2.0,<2.0.0)", "playwright (>=1.49.0,<2.0.0)"]
+tools-browser-local = ["browser-use (>=0.1.40,<0.2.0) ; python_version >= \"3.11\" and python_version < \"4.0\"", "playwright (>=1.49.0,<2.0.0)"]
+
+[[package]]
+name = "posthog"
+version = "3.25.0"
+description = "Integrate PostHog into any python application."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "posthog-3.25.0-py2.py3-none-any.whl", hash = "sha256:85db78c13d1ecb11aed06fad53759c4e8fb3633442c2f3d0336bc0ce8a585d30"},
+    {file = "posthog-3.25.0.tar.gz", hash = "sha256:9168f3e7a0a5571b6b1065c41b3c171fbc68bfe72c3ac0bfd6e3d2fcdb7df2ca"},
+]
+
+[package.dependencies]
+backoff = ">=1.10.0"
+distro = ">=1.5.0"
+monotonic = ">=1.5"
+python-dateutil = ">2.1"
+requests = ">=2.7,<3.0"
+six = ">=1.5"
+
+[package.extras]
+dev = ["black", "django-stubs", "flake8", "flake8-print", "isort", "lxml", "mypy", "mypy-baseline", "pre-commit", "pydantic", "types-mock", "types-python-dateutil", "types-requests", "types-setuptools", "types-six"]
+langchain = ["langchain (>=0.2.0)"]
+sentry = ["django", "sentry-sdk"]
+test = ["anthropic", "coverage", "django", "flake8", "freezegun (==1.5.1)", "langchain-anthropic (>=0.2.0)", "langchain-community (>=0.2.0)", "langchain-openai (>=0.2.0)", "langgraph", "mock (>=2.0.0)", "openai", "parameterized (>=0.8.1)", "pydantic", "pylint", "pytest", "pytest-asyncio", "pytest-timeout"]
 
 [[package]]
 name = "propcache"
@@ -3640,6 +3902,24 @@ files = [
     {file = "pydub-0.25.1-py2.py3-none-any.whl", hash = "sha256:65617e33033874b59d87db603aa1ed450633288aefead953b30bded59cb599a6"},
     {file = "pydub-0.25.1.tar.gz", hash = "sha256:980a33ce9949cab2a569606b65674d748ecbca4f0796887fd6f46173a7b0d30f"},
 ]
+
+[[package]]
+name = "pyee"
+version = "12.1.1"
+description = "A rough port of Node.js's EventEmitter to Python with a few tricks of its own"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "pyee-12.1.1-py3-none-any.whl", hash = "sha256:18a19c650556bb6b32b406d7f017c8f513aceed1ef7ca618fb65de7bd2d347ef"},
+    {file = "pyee-12.1.1.tar.gz", hash = "sha256:bbc33c09e2ff827f74191e3e5bbc6be7da02f627b7ec30d86f5ce1a6fb2424a3"},
+]
+
+[package.dependencies]
+typing-extensions = "*"
+
+[package.extras]
+dev = ["black", "build", "flake8", "flake8-black", "isort", "jupyter-console", "mkdocs", "mkdocs-include-markdown-plugin", "mkdocstrings[python]", "pytest", "pytest-asyncio ; python_version >= \"3.4\"", "pytest-trio ; python_version >= \"3.7\"", "sphinx", "toml", "tox", "trio", "trio ; python_version > \"3.6\"", "trio-typing ; python_version > \"3.6\"", "twine", "twisted", "validate-pyproject[all]"]
 
 [[package]]
 name = "pygments"
@@ -4928,43 +5208,43 @@ test = ["pytest", "tornado (>=4.5)", "typeguard"]
 
 [[package]]
 name = "tiktoken"
-version = "0.8.0"
+version = "0.9.0"
 description = "tiktoken is a fast BPE tokeniser for use with OpenAI's models"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "tiktoken-0.8.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:b07e33283463089c81ef1467180e3e00ab00d46c2c4bbcef0acab5f771d6695e"},
-    {file = "tiktoken-0.8.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9269348cb650726f44dd3bbb3f9110ac19a8dcc8f54949ad3ef652ca22a38e21"},
-    {file = "tiktoken-0.8.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:25e13f37bc4ef2d012731e93e0fef21dc3b7aea5bb9009618de9a4026844e560"},
-    {file = "tiktoken-0.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f13d13c981511331eac0d01a59b5df7c0d4060a8be1e378672822213da51e0a2"},
-    {file = "tiktoken-0.8.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:6b2ddbc79a22621ce8b1166afa9f9a888a664a579350dc7c09346a3b5de837d9"},
-    {file = "tiktoken-0.8.0-cp310-cp310-win_amd64.whl", hash = "sha256:d8c2d0e5ba6453a290b86cd65fc51fedf247e1ba170191715b049dac1f628005"},
-    {file = "tiktoken-0.8.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d622d8011e6d6f239297efa42a2657043aaed06c4f68833550cac9e9bc723ef1"},
-    {file = "tiktoken-0.8.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:2efaf6199717b4485031b4d6edb94075e4d79177a172f38dd934d911b588d54a"},
-    {file = "tiktoken-0.8.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5637e425ce1fc49cf716d88df3092048359a4b3bbb7da762840426e937ada06d"},
-    {file = "tiktoken-0.8.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9fb0e352d1dbe15aba082883058b3cce9e48d33101bdaac1eccf66424feb5b47"},
-    {file = "tiktoken-0.8.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:56edfefe896c8f10aba372ab5706b9e3558e78db39dd497c940b47bf228bc419"},
-    {file = "tiktoken-0.8.0-cp311-cp311-win_amd64.whl", hash = "sha256:326624128590def898775b722ccc327e90b073714227175ea8febbc920ac0a99"},
-    {file = "tiktoken-0.8.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:881839cfeae051b3628d9823b2e56b5cc93a9e2efb435f4cf15f17dc45f21586"},
-    {file = "tiktoken-0.8.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:fe9399bdc3f29d428f16a2f86c3c8ec20be3eac5f53693ce4980371c3245729b"},
-    {file = "tiktoken-0.8.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9a58deb7075d5b69237a3ff4bb51a726670419db6ea62bdcd8bd80c78497d7ab"},
-    {file = "tiktoken-0.8.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d2908c0d043a7d03ebd80347266b0e58440bdef5564f84f4d29fb235b5df3b04"},
-    {file = "tiktoken-0.8.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:294440d21a2a51e12d4238e68a5972095534fe9878be57d905c476017bff99fc"},
-    {file = "tiktoken-0.8.0-cp312-cp312-win_amd64.whl", hash = "sha256:d8f3192733ac4d77977432947d563d7e1b310b96497acd3c196c9bddb36ed9db"},
-    {file = "tiktoken-0.8.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:02be1666096aff7da6cbd7cdaa8e7917bfed3467cd64b38b1f112e96d3b06a24"},
-    {file = "tiktoken-0.8.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:c94ff53c5c74b535b2cbf431d907fc13c678bbd009ee633a2aca269a04389f9a"},
-    {file = "tiktoken-0.8.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6b231f5e8982c245ee3065cd84a4712d64692348bc609d84467c57b4b72dcbc5"},
-    {file = "tiktoken-0.8.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4177faa809bd55f699e88c96d9bb4635d22e3f59d635ba6fd9ffedf7150b9953"},
-    {file = "tiktoken-0.8.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:5376b6f8dc4753cd81ead935c5f518fa0fbe7e133d9e25f648d8c4dabdd4bad7"},
-    {file = "tiktoken-0.8.0-cp313-cp313-win_amd64.whl", hash = "sha256:18228d624807d66c87acd8f25fc135665617cab220671eb65b50f5d70fa51f69"},
-    {file = "tiktoken-0.8.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:7e17807445f0cf1f25771c9d86496bd8b5c376f7419912519699f3cc4dc5c12e"},
-    {file = "tiktoken-0.8.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:886f80bd339578bbdba6ed6d0567a0d5c6cfe198d9e587ba6c447654c65b8edc"},
-    {file = "tiktoken-0.8.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6adc8323016d7758d6de7313527f755b0fc6c72985b7d9291be5d96d73ecd1e1"},
-    {file = "tiktoken-0.8.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b591fb2b30d6a72121a80be24ec7a0e9eb51c5500ddc7e4c2496516dd5e3816b"},
-    {file = "tiktoken-0.8.0-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:845287b9798e476b4d762c3ebda5102be87ca26e5d2c9854002825d60cdb815d"},
-    {file = "tiktoken-0.8.0-cp39-cp39-win_amd64.whl", hash = "sha256:1473cfe584252dc3fa62adceb5b1c763c1874e04511b197da4e6de51d6ce5a02"},
-    {file = "tiktoken-0.8.0.tar.gz", hash = "sha256:9ccbb2740f24542534369c5635cfd9b2b3c2490754a78ac8831d99f89f94eeb2"},
+    {file = "tiktoken-0.9.0-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:586c16358138b96ea804c034b8acf3f5d3f0258bd2bc3b0227af4af5d622e382"},
+    {file = "tiktoken-0.9.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:d9c59ccc528c6c5dd51820b3474402f69d9a9e1d656226848ad68a8d5b2e5108"},
+    {file = "tiktoken-0.9.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f0968d5beeafbca2a72c595e8385a1a1f8af58feaebb02b227229b69ca5357fd"},
+    {file = "tiktoken-0.9.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:92a5fb085a6a3b7350b8fc838baf493317ca0e17bd95e8642f95fc69ecfed1de"},
+    {file = "tiktoken-0.9.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:15a2752dea63d93b0332fb0ddb05dd909371ededa145fe6a3242f46724fa7990"},
+    {file = "tiktoken-0.9.0-cp310-cp310-win_amd64.whl", hash = "sha256:26113fec3bd7a352e4b33dbaf1bd8948de2507e30bd95a44e2b1156647bc01b4"},
+    {file = "tiktoken-0.9.0-cp311-cp311-macosx_10_12_x86_64.whl", hash = "sha256:f32cc56168eac4851109e9b5d327637f15fd662aa30dd79f964b7c39fbadd26e"},
+    {file = "tiktoken-0.9.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:45556bc41241e5294063508caf901bf92ba52d8ef9222023f83d2483a3055348"},
+    {file = "tiktoken-0.9.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:03935988a91d6d3216e2ec7c645afbb3d870b37bcb67ada1943ec48678e7ee33"},
+    {file = "tiktoken-0.9.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8b3d80aad8d2c6b9238fc1a5524542087c52b860b10cbf952429ffb714bc1136"},
+    {file = "tiktoken-0.9.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:b2a21133be05dc116b1d0372af051cd2c6aa1d2188250c9b553f9fa49301b336"},
+    {file = "tiktoken-0.9.0-cp311-cp311-win_amd64.whl", hash = "sha256:11a20e67fdf58b0e2dea7b8654a288e481bb4fc0289d3ad21291f8d0849915fb"},
+    {file = "tiktoken-0.9.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:e88f121c1c22b726649ce67c089b90ddda8b9662545a8aeb03cfef15967ddd03"},
+    {file = "tiktoken-0.9.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:a6600660f2f72369acb13a57fb3e212434ed38b045fd8cc6cdd74947b4b5d210"},
+    {file = "tiktoken-0.9.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:95e811743b5dfa74f4b227927ed86cbc57cad4df859cb3b643be797914e41794"},
+    {file = "tiktoken-0.9.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:99376e1370d59bcf6935c933cb9ba64adc29033b7e73f5f7569f3aad86552b22"},
+    {file = "tiktoken-0.9.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:badb947c32739fb6ddde173e14885fb3de4d32ab9d8c591cbd013c22b4c31dd2"},
+    {file = "tiktoken-0.9.0-cp312-cp312-win_amd64.whl", hash = "sha256:5a62d7a25225bafed786a524c1b9f0910a1128f4232615bf3f8257a73aaa3b16"},
+    {file = "tiktoken-0.9.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:2b0e8e05a26eda1249e824156d537015480af7ae222ccb798e5234ae0285dbdb"},
+    {file = "tiktoken-0.9.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:27d457f096f87685195eea0165a1807fae87b97b2161fe8c9b1df5bd74ca6f63"},
+    {file = "tiktoken-0.9.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2cf8ded49cddf825390e36dd1ad35cd49589e8161fdcb52aa25f0583e90a3e01"},
+    {file = "tiktoken-0.9.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cc156cb314119a8bb9748257a2eaebd5cc0753b6cb491d26694ed42fc7cb3139"},
+    {file = "tiktoken-0.9.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:cd69372e8c9dd761f0ab873112aba55a0e3e506332dd9f7522ca466e817b1b7a"},
+    {file = "tiktoken-0.9.0-cp313-cp313-win_amd64.whl", hash = "sha256:5ea0edb6f83dc56d794723286215918c1cde03712cbbafa0348b33448faf5b95"},
+    {file = "tiktoken-0.9.0-cp39-cp39-macosx_10_12_x86_64.whl", hash = "sha256:c6386ca815e7d96ef5b4ac61e0048cd32ca5a92d5781255e13b31381d28667dc"},
+    {file = "tiktoken-0.9.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:75f6d5db5bc2c6274b674ceab1615c1778e6416b14705827d19b40e6355f03e0"},
+    {file = "tiktoken-0.9.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e15b16f61e6f4625a57a36496d28dd182a8a60ec20a534c5343ba3cafa156ac7"},
+    {file = "tiktoken-0.9.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3ebcec91babf21297022882344c3f7d9eed855931466c3311b1ad6b64befb3df"},
+    {file = "tiktoken-0.9.0-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:e5fd49e7799579240f03913447c0cdfa1129625ebd5ac440787afc4345990427"},
+    {file = "tiktoken-0.9.0-cp39-cp39-win_amd64.whl", hash = "sha256:26242ca9dc8b58e875ff4ca078b9a94d2f0813e6a535dcd2205df5d49d927cc7"},
+    {file = "tiktoken-0.9.0.tar.gz", hash = "sha256:d02a5ca6a938e0490e1ff957bc48c8b078c88cb83977be1625b1fd8aac792c5d"},
 ]
 
 [package.dependencies]
@@ -5574,4 +5854,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "7a740f72e3feb00249443e0e01afcfde83d749583bcfbe2ee7e65777cf833689"
+content-hash = "88c3f024a975e2ab2f2d73bdb1373dc22e0146fe064998001d5e58fc816a50da"
