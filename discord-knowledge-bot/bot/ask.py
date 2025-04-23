@@ -3,7 +3,6 @@
 from portia import (
     Config,
     InMemoryToolRegistry,
-    LLMModel,
     LogLevel,
     PlanRunState,
     Portia,
@@ -13,7 +12,7 @@ from portia import (
 from bot.weaviate import RAGQueryDBTool, close_weaviate
 
 config = Config.from_default(
-    default_log_level=LogLevel.DEBUG, llm_model_name=LLMModel.GPT_4_O
+    default_log_level=LogLevel.DEBUG, default_model="openai/gpt-4o"
 )
 registry = PortiaToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
     [
