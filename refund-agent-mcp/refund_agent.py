@@ -1,9 +1,8 @@
 import argparse
 import json
 import os
-from typing import Literal, Type
+from typing import Type
 from dotenv import load_dotenv
-from langchain.schema import HumanMessage, SystemMessage
 
 from portia import (
     DefaultToolRegistry,
@@ -16,12 +15,11 @@ from portia import (
     ToolHardError,
     ToolRunContext,
     execution_context,
+    Message,
 )
 import portia.tool
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
-from portia.llm_wrapper import LLMWrapper
-from portia.config import LLM_TOOL_MODEL_KEY
 
 
 portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
@@ -122,20 +120,22 @@ class RefundReviewerTool(Tool[str]):
         refund_request: str,
         refund_policy: str,
     ) -> bool:
-        llm = LLMWrapper.for_usage(LLM_TOOL_MODEL_KEY, context.config).to_langchain()
+        llm = context.config.get_default_model()
         messages = [
-            SystemMessage(
+            Message(
+                role="system",
                 content="You are a helpful assistant that carefully reviews refund requests from customers against "
                 "the refund policy, and provides a break down of your reasoning about what the decision should be.\n"
                 "Following your detailed analysis, you will respond with a single word: 'APPROVED' or 'REJECTED' on a new line.\n"
                 "The refund policy is as follows:\n"
                 f"{refund_policy}\n"
             ),
-            HumanMessage(
+            Message(
+                role="user",
                 content=f"The refund request is as follows:\n{refund_request}"
             ),
         ]
-        response = llm.invoke(messages)
+        response = llm.get_response(messages)
         llm_decision = response.content.split("\n")[-1].strip()
         if llm_decision == "APPROVED":
             return json.dumps({"decision": "APPROVED", "reason": response.content})

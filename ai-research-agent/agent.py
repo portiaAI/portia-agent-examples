@@ -10,12 +10,10 @@ from portia import (
     DefaultToolRegistry,
     ExecutionContext,
     InMemoryToolRegistry,
-    LLMModel,
     LogLevel,
     PlanRunState,
     Portia,
     Tool,
-    execution_context,
 )
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
@@ -88,7 +86,7 @@ class PodcastTool(Tool[str]):
 
 
 config = Config.from_default(
-    llm_model_name=LLMModel.GPT_4_O,
+    default_model="openai/gpt-4o",
     default_log_level=LogLevel.DEBUG,
 )
 tools = DefaultToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
@@ -109,7 +107,7 @@ plan = portia.plan(
     "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
 )
 print("\nHere are the steps in the generated plan:")
-[print(step.model_dump_json(indent=2)) for step in plan.steps]
+print(plan.pretty_print())
 
 if os.getenv("CI") != "true":
     user_input = input("Are you happy with the plan? (y/n):\n")
