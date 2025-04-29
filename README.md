@@ -7,15 +7,15 @@ If you haven't checked it out already, check out our [SDK repo](https://github.c
 
 ## [Getting Started with Portia](https://github.com/portiaAI/portia-agent-examples/tree/main/getting-started/)
 
-A simple introduction to the Portia SDK that walks you through the basics of creating an agent, defining tasks, and executing plans. This project demonstrates fundamental concepts like:
-- Setting up a Portia agent
-- Creating and executing plans
-- Working with tools and context
-- Handling user input and agent responses
+An introduction to the Portia SDK that walks you through the basics of creating an agent,
+defining tasks,
+and executing plans.
+This project demonstrates fundamental concepts like:
 
 The project includes several examples:
+
 - GitHub OAuth integration for repository interactions
-- Using tools with end users and LLMs
+- Using tools with end user context.
 - Model Context Protocol (MCP) integration
 - Browser automation for web interactions
 
