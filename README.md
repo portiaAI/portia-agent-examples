@@ -13,6 +13,12 @@ A simple introduction to the Portia SDK that walks you through the basics of cre
 - Working with tools and context
 - Handling user input and agent responses
 
+The project includes several examples:
+- GitHub OAuth integration for repository interactions
+- Using tools with end users and LLMs
+- Model Context Protocol (MCP) integration
+- Browser automation for web interactions
+
 Perfect for newcomers to understand the core concepts of Portia before diving into more complex examples.
 
 
