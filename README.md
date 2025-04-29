@@ -7,7 +7,13 @@ If you haven't checked it out already, check out our [SDK repo](https://github.c
 
 ## [Getting Started with Portia](https://github.com/portiaAI/portia-agent-examples/tree/main/getting-started/)
 
-A simple introduction to the Portia SDK that walks you through the basics of creating an agent, defining tasks, and executing plans. Perfect for newcomers to understand the core concepts of Portia before diving into more complex examples.
+A simple introduction to the Portia SDK that walks you through the basics of creating an agent, defining tasks, and executing plans. This project demonstrates fundamental concepts like:
+- Setting up a Portia agent
+- Creating and executing plans
+- Working with tools and context
+- Handling user input and agent responses
+
+Perfect for newcomers to understand the core concepts of Portia before diving into more complex examples.
 
 
 ## [Get Started with Google Tools](https://github.com/portiaAI/portia-agent-examples/edit/main/get_started_google_tools/)
