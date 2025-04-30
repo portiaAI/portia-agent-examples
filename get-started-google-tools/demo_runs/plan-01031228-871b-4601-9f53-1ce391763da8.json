@@ -1,0 +1,42 @@
+{
+    "id": "plan-01031228-871b-4601-9f53-1ce391763da8",
+    "plan_context": {
+        "query": "Which stock price grew faster in 2024, Amazon or Google?",
+        "tool_ids": [
+            "calculator_tool",
+            "weather_tool",
+            "search_tool"
+        ]
+    },
+    "steps": [
+        {
+            "task": "Search for the stock price growth of Amazon in 2024",
+            "inputs": [],
+            "tool_id": "search_tool",
+            "output": "$amazon_stock_growth"
+        },
+        {
+            "task": "Search for the stock price growth of Google in 2024",
+            "inputs": [],
+            "tool_id": "search_tool",
+            "output": "$google_stock_growth"
+        },
+        {
+            "task": "Compare the stock price growth of Amazon and Google in 2024",
+            "inputs": [
+                {
+                    "name": "$amazon_stock_growth",
+                    "value": null,
+                    "description": "The stock price growth of Amazon in 2024"
+                },
+                {
+                    "name": "$google_stock_growth",
+                    "value": null,
+                    "description": "The stock price growth of Google in 2024"
+                }
+            ],
+            "tool_id": "llm_tool",
+            "output": "$stock_growth_comparison"
+        }
+    ]
+}

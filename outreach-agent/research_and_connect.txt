@@ -1,0 +1,9 @@
+Read the criteria Google Document with ID '16MwruStPOD29ySXZ1O1N59fLy6ja0v87_DX8dGJn_tc'
+
+Based on the criteria doc, construct the data fields that you'll need to extract from the persons LinkedIn profile to appropriately assess them according to the criteria. This should be a brief list of the key data points required, at this point you are just collecting data and should not provide the criteria as well as the data you are researching to the tool.
+
+Go to {linked_in_profile_url} and return the data required for the criteria to be assessed. Do not attempt login unless you cannot access all the data in the profile.
+
+Categorise the linked in profile using the criteria document from the first step, and data retrieved in the second, as BEST, GOOD, OK or PASS.
+
+If the user is in category BEST, GOOD or OK: Please take the action of going to LinkedIn and if the user is not already connected to them, send them a connection request with the connection request text from the Google Document in the first step.
