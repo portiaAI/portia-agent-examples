@@ -10,8 +10,9 @@ This project demonstrates how to use the Portia framework with local Large Langu
 
 - Python 3.11 or higher
 - Poetry (for dependency management)
-- [Ollama](https://ollama.ai/) installed locally
-- Qwen model pulled in Ollama
+- [Obsidian](https://obsidian.md/) installed locally.
+- [Ollama](https://ollama.ai/) installed locally (or any similar tool to deploy/run models locally)
+   - `ollama/qwen3:4b` model pulled in Ollama
 
 ## Installation
 
