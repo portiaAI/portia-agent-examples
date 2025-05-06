@@ -1,21 +1,31 @@
 [project]
 name = "local-llm"
 version = "0.1.0"
-description = ""
+description = "A cool demo using Portia with local LLMs and Obsidian"
 authors = [
     {name = "hello@portialabs.ai"}
 ]
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.11,<4.0"
 dependencies = [
-    "portia-sdk-python[all] (>=0.3.0,<0.4.0)"
+    "portia-sdk-python[all] (>=0.3.0,<0.4.0)",
+    "python-dotenv (>=1.0.0,<2.0.0)",
+    "pydantic (>=2.4.2,<3.0.0)"
 ]
 
 [tool.poetry]
 package-mode = false
+name = "local-llm"
+version = "0.1.0"
+description = "A demo using Portia with local LLMs and Obsidian"
+readme = "README.md"
 
 [tool.poetry.dependencies]
-portia-sdk-python = {allow-prereleases = true}
+python = ">=3.11,<4.0"
+portia-sdk-python = {extras = ["all"], version = ">=0.3.0,<0.4.0"}
+python-dotenv = "^1.0.0"
+pydantic = "^2.4.2"
+
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
