@@ -1,8 +1,7 @@
 """
-Main module for the local-llm project.
+A command-line script that generates concept maps of Obsidian notes.
 
-This module provides functionality to create concept maps from Obsidian notes
-using a local LLM. It interfaces with Obsidian through MCP and uses a visualization
+It interfaces with Obsidian through MCP and uses a vibe-coded visualization
 tool to generate concept maps based on the content of specified notes.
 """
 
@@ -31,16 +30,16 @@ portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
 def create_plan_local(portia: Portia, note_name: str):
     """
     Create a predefined plan for generating a concept map from an Obsidian note.
-    
+
     This function builds a plan with specific steps to:
     1. List available Obsidian vaults
     2. Fetch the specified note
     3. Create a concept map visualization from the note's content
-    
+
     Args:
         portia: The Portia instance to use for plan creation and execution
         note_name: The name of the Obsidian note to visualize
-        
+
     Returns:
         The created plan object
     """
@@ -68,14 +67,14 @@ def create_plan_local(portia: Portia, note_name: str):
 def create_plan_remote(portia: Portia, note_name: str):
     """
     Create a plan for generating a concept map using Portia's planning capabilities.
-    
+
     Instead of using a predefined plan structure, this function lets Portia generate
     a plan based on a natural language query describing the task.
-    
+
     Args:
         portia: The Portia instance to use for plan creation
         note_name: The name of the Obsidian note to visualize
-        
+
     Returns:
         The generated plan object
     """
@@ -90,17 +89,17 @@ def create_plan_remote(portia: Portia, note_name: str):
 
 def main(argv=sys.argv[1:]):
     """
-    Main function to run the local-llm application.
-    
+    Main function to run this application.
+
     This function:
     1. Loads environment variables
     2. Parses command line arguments
     3. Sets up Portia with the necessary configuration and tools
     4. Creates and executes a plan to generate a concept map from an Obsidian note
-    
+
     Args:
-        argv: Command line arguments (defaults to sys.argv[1:])
-        
+        argv: Command line arguments
+
     Raises:
         ValueError: If OBSIDIAN_VAULT_PATH environment variable is not set
     """
