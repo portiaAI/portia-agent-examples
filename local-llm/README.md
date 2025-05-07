@@ -9,10 +9,11 @@ This project demonstrates how to use the Portia framework with local Large Langu
 ## Prerequisites
 
 - Python 3.11 or higher
-- Poetry (for dependency management)
+- UV (for Python and dependency management)
 - [Obsidian](https://obsidian.md/) installed locally.
 - [Ollama](https://ollama.ai/) installed locally (or any similar tool to deploy/run models locally)
    - `ollama/qwen3:4b` model pulled in Ollama
+ - You'll need [npx](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed and available in your environment. (It's part of NodeJS, and is required for the Obsidian MCP server.)
 
 ## Installation
 
