@@ -9,22 +9,17 @@ import argparse
 import os
 import sys
 
-import portia.tool
 from dotenv import load_dotenv
 from portia import (
     Config,
     ExecutionAgentType,
-    LLMTool,
     McpToolRegistry,
     Portia,
     ToolRegistry,
 )
-from portia.cli import CLIExecutionHooks
 from portia.plan import PlanBuilder
 
 from tools.visualization_tool import VisualizationTool
-
-portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
 
 
 def create_plan_local(portia: Portia, note_name: str):
@@ -132,14 +127,11 @@ def main(argv=sys.argv[1:]):
         args=["-y", "obsidian-mcp", os.getenv("OBSIDIAN_VAULT_PATH")],
     )
 
-    visualization_tool = VisualizationTool()
-
     # Add all tools to the registry
-    tools = obsidian_mcp + ToolRegistry([LLMTool(), visualization_tool])
+    tools = obsidian_mcp + ToolRegistry([VisualizationTool()])
 
     portia = Portia(
         config=config,
-        execution_hooks=CLIExecutionHooks(),
         tools=tools,
     )
 

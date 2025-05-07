@@ -28,3 +28,7 @@ Alongside MCP integrations, this example also demonstrates how [Clarifications](
 ## [Improving Planning with User-Led Learning](https://github.com/portiaAI/portia-agent-examples/tree/main/improving-planning-with-ull/)
 
 This project demonstrates Portia's User-Led Learning (ULL) feature, which allows agents to learn from example plans and improve their planning capabilities over time. Through a series of progressive examples, it shows how providing plan examples can guide the agent to create more effective plans for similar tasks, even when given vague instructions.
+
+## [Local LLM with Obsidian](https://github.com/portiaAI/portia-agent-examples/tree/main/local-llm/)
+
+This project demonstrates how to use Portia with local LLMs and the Obsidian app. It uses the [Obsidian MCP server](https://github.com/StevenStavrakis/obsidian-mcp) to interact with the Obsidian app, and local LLM (default to [qwen3:4b](https://ollama.com/models/qwen3:4b)).
