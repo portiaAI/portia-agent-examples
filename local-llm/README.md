@@ -43,7 +43,7 @@ This project demonstrates how to use the Portia framework with local Large Langu
 To run the main script:
 
 ```bash
-uv run main.py
+uv run main.py note_name
 ```
 
 ## Features
