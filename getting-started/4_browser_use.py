@@ -13,11 +13,7 @@ which will execute the information extraction using the Browserbase API instead 
 
 from dotenv import load_dotenv
 from portia import (
-    ActionClarification,
     Config,
-    InputClarification,
-    MultipleChoiceClarification,
-    PlanRunState,
     Portia,
     StorageClass,
 )
@@ -25,6 +21,7 @@ from portia._unstable.browser_tool import (
     BrowserInfrastructureOption,
     BrowserTool,
 )
+from portia.cli import CLIExecutionHooks
 
 load_dotenv()
 
@@ -45,32 +42,10 @@ browserbase_browser_tool = BrowserTool(
 
 # Also see BrowserToolForUrl("https://www.linkedin.com")
 
-portia = Portia(config=my_config, tools=[local_browser_tool])
+portia = Portia(
+    config=my_config,
+    tools=[local_browser_tool],
+    execution_hooks=CLIExecutionHooks(),
+)
 
 plan_run = portia.run(task)
-
-while plan_run.state == PlanRunState.NEED_CLARIFICATION:
-    # If clarifications are needed, resolve them before resuming the workflow
-    print("\nPlease resolve the following clarifications to continue")
-    for clarification in plan_run.get_outstanding_clarifications():
-        # Usual handling of Input and Multiple Choice clarifications
-        if isinstance(clarification, (InputClarification, MultipleChoiceClarification)):
-            print(f"{clarification.user_guidance}")
-            user_input = input(
-                "Please enter a value:\n"
-                + (
-                    str(clarification.options)
-                    if isinstance(clarification, MultipleChoiceClarification)
-                    else ""
-                ),
-            )
-            plan_run = portia.resolve_clarification(clarification, user_input, plan_run)
-
-        # Handling of Action clarifications
-        if isinstance(clarification, ActionClarification):
-            print(f"{clarification.user_guidance} -- Please click on the link below to proceed.")
-            print(clarification.action_url)
-            input("Press Enter to continue...")
-
-    # Once clarifications are resolved, resume the workflow
-    plan_run = portia.resume(plan_run)
