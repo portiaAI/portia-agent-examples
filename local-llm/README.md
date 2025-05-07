@@ -22,12 +22,7 @@ This project demonstrates how to use the Portia framework with local Large Langu
    cd local-llm
    ```
 
-2. Install dependencies using Poetry:
-   ```bash
-   poetry install
-   ```
-
-3. Install and set up Ollama:
+2. Install and set up Ollama:
    ```bash
    # Install Ollama from https://ollama.ai/
    
@@ -35,7 +30,7 @@ This project demonstrates how to use the Portia framework with local Large Langu
    ollama pull qwen3:4b 
    ```
 
-4. Set up environment variables:
+3. Set up environment variables:
    Create a `.env` file in the root directory with the following variables:
    ```
    # Obsidian Configuration
@@ -47,14 +42,7 @@ This project demonstrates how to use the Portia framework with local Large Langu
 To run the main script:
 
 ```bash
-poetry run python main.py
-```
-
-Or activate the Poetry environment first and then run:
-
-```bash
-poetry shell
-python main.py
+uv run main.py
 ```
 
 ## Features
