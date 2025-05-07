@@ -1,3 +1,11 @@
+"""
+Visualization Tool for creating concept maps.
+
+This module provides a tool for creating concept map visualizations from relationships
+between concepts. It uses matplotlib and networkx to generate visual representations
+of concept relationships and saves them as image files.
+"""
+
 try:
     import matplotlib
     matplotlib.use('Agg')  # Use the Agg backend which doesn't require a GUI
@@ -14,7 +22,12 @@ from pydantic import BaseModel, Field
 from portia import Tool, ToolRunContext
 
 class VisualizationSchema(BaseModel):
-    """Input for VisualizationTool."""
+    """
+    Input schema for the VisualizationTool.
+    
+    This schema defines the required and optional parameters for creating
+    concept map visualizations.
+    """
     
     relationships: List[List[str]] = Field(
         ...,
@@ -30,7 +43,13 @@ class VisualizationSchema(BaseModel):
     )
 
 class VisualizationTool(Tool[str]):
-    """Tool for creating visualizations of concepts and their relationships."""
+    """
+    Tool for creating visualizations of concepts and their relationships.
+    
+    This tool generates concept map visualizations from a list of relationships
+    between concepts. It uses networkx for graph creation and matplotlib for
+    visualization, saving the resulting image to a specified directory.
+    """
     
     id: str = "visualization_tool"
     name: str = "Visualization Tool"
@@ -79,7 +98,23 @@ class VisualizationTool(Tool[str]):
         return self._create_concept_map(list(concepts), formatted_relationships, title, output_dir)
     
     def _create_concept_map(self, concepts: List[str], relationships: List[Tuple[str, str, str]], title: str, output_dir: str) -> str:
-        """Create a network graph showing relationships between concepts using NetworkX."""
+        """
+        Create a network graph showing relationships between concepts using NetworkX.
+        
+        This method generates a directed graph visualization where:
+        - Nodes represent concepts
+        - Edges represent relationships between concepts
+        - Edge labels show the type of relationship
+        
+        Args:
+            concepts: List of concept strings to be represented as nodes
+            relationships: List of (source, target, relationship_type) tuples
+            title: Title for the visualization
+            output_dir: Directory to save the visualization image
+            
+        Returns:
+            Path to the saved visualization file or an error message
+        """
         try:
             # Create a directed graph
             G = nx.DiGraph()
