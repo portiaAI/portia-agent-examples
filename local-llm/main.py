@@ -107,9 +107,8 @@ def main(argv=sys.argv[1:]):
 
     argument_parser = argparse.ArgumentParser()
     argument_parser.add_argument(
-        "note",
+        "note_name",
         help="The name of the note to be visualised.",
-        default="Local LLMs",
     )
 
     args = argument_parser.parse_args(argv)
@@ -120,7 +119,6 @@ def main(argv=sys.argv[1:]):
         execution_agent_type=ExecutionAgentType.ONE_SHOT,
     )
     # Make sure OBSIDIAN_VAULT_PATH is set in your environment variables
-
     obsidian_mcp = McpToolRegistry.from_stdio_connection(
         server_name="obsidian",
         command="npx",
@@ -135,7 +133,7 @@ def main(argv=sys.argv[1:]):
         tools=tools,
     )
 
-    plan = create_plan_local(portia, args.note)
+    plan = create_plan_local(portia, args.note_name)
     print(plan.pretty_print())
     portia.run_plan(plan)
 
