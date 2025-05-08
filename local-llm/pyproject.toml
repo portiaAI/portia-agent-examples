@@ -1,0 +1,14 @@
+[project]
+name = "local-llm"
+version = "0.1.0"
+description = "A cool demo using Portia with local LLMs and Obsidian"
+authors = [{ name = "hello@portialabs.ai" }]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "portia-sdk-python[ollama] (>=0.3.0,<0.4.0)",
+    "python-dotenv (>=1.0.0,<2.0.0)",
+    "pydantic (>=2.4.2,<3.0.0)",
+    "networkx>=3.4.2",
+    "matplotlib>=3.10.1",
+]

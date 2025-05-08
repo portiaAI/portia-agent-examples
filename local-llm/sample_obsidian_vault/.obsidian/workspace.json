@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "7f6f55e05ce3a4f6",
+    "type": "split",
+    "children": [
+      {
+        "id": "41f5fdd6d5fbb862",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b01b23b9f042336b",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "visualizations/DDD.png"
+              },
+              "icon": "lucide-image",
+              "title": "DDD"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b18d783a2f25e944",
+    "type": "split",
+    "children": [
+      {
+        "id": "6d33686cb0fb5426",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dc181df8c9ed8c5c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "27a9091c37b82e1f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "2bf5153439627863",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "677ec35a62d14d0a",
+    "type": "split",
+    "children": [
+      {
+        "id": "dff0bff0a64c9097",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f43d84ab55fcb703",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "1d99123c1296c937",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "0f728fa5ef6bbe94",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "4d5c3797de6cf566",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "visualizations/Microservices.png",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Microservices"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "dc181df8c9ed8c5c",
+  "lastOpenFiles": [
+    "visualizations/microservices.png",
+    "visualizations/DDD.png",
+    "visualizations/Microservices.png",
+    "visualizations/Pokemon.png",
+    "Welcome.md",
+    "DDD.md",
+    "Pokemon.md",
+    "Microservices.md",
+    "visualizations"
+  ]
+}
