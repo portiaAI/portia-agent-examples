@@ -32,10 +32,11 @@ This project demonstrates how to use the Portia framework with local Large Langu
    ```
 
 3. Set up environment variables:
-   Create a `.env` file in the root directory with the following variables:
+   Create a `.env` file in the root directory with the following variables.
+   The following path to a sample Obsidian vault in this repo:
    ```
    # Obsidian Configuration
-   OBSIDIAN_VAULT_PATH=/path/to/your/obsidian/vault
+   OBSIDIAN_VAULT_PATH=./sample_obsidian_vault
    ```
 
 ## Running the Demo
