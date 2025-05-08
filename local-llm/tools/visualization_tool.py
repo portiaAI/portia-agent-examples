@@ -19,7 +19,7 @@ except ImportError:
 import os
 from typing import List, Tuple
 from pydantic import BaseModel, Field
-from portia import Tool, ToolRunContext
+from portia import Tool, ToolRunContext, ToolHardError, ToolRetryError
 
 class VisualizationSchema(BaseModel):
     """
@@ -76,15 +76,15 @@ class VisualizationTool(Tool[str]):
             Path to the saved visualization file
         """
         if not VISUALIZATION_AVAILABLE:
-            return "Error: Visualization libraries not available. Please install matplotlib and networkx with 'pip install matplotlib networkx'."
+            raise ToolHardError("Error: Visualization libraries not available. Please install matplotlib and networkx with 'pip install matplotlib networkx'.")
             
         if not relationships:
-            return "Error: 'relationships' are required for concept maps"
+            raise ToolHardError("Error: 'relationships' are required for concept maps")
         
         # Validate relationships format
         for rel in relationships:
             if len(rel) < 3:
-                return f"Error: Each relationship must have 3 elements [source, target, relationship_type]. Found: {rel}"
+                raise ToolRetryError(f"Error: Each relationship must have 3 elements [source, target, relationship_type]. Found: {rel}")
         
         # Convert relationships to tuples
         formatted_relationships = [(rel[0], rel[1], rel[2]) for rel in relationships]
@@ -200,4 +200,4 @@ class VisualizationTool(Tool[str]):
             print(f"Error creating concept map: {str(e)}")
             import traceback
             traceback.print_exc()
-            return f"Failed to create concept map: {str(e)}"
+            raise ToolRetryError(f"Failed to create concept map: {str(e)}")
