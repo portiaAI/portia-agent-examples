@@ -25,7 +25,9 @@ from portia.cli import CLIExecutionHooks
 
 load_dotenv()
 
-task = "Find my connections called 'Bob' on LinkedIn (https://www.linkedin.com)"
+task = (
+    "Find my connections called 'Bob' on LinkedIn (https://www.linkedin.com)"
+)
 
 my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 
@@ -34,8 +36,8 @@ local_browser_tool = BrowserTool(
     infrastructure_option=BrowserInfrastructureOption.LOCAL
 )
 
-# Needs Browserbase API Key.
-# Not used by default - swap this for local_browser_tool in the tools list.
+# Needs Browserbase API Key and a paid account.
+# Not used by default - swap this for local_browser_tool in the tools list when configuring Portia.
 browserbase_browser_tool = BrowserTool(
     infrastructure_option=BrowserInfrastructureOption.BROWSERBASE
 )

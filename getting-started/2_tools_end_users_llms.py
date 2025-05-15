@@ -25,7 +25,10 @@ from portia.cli import CLIExecutionHooks
 load_dotenv()
 
 # Needs Tavily API key
-task2 = "Research the price of gold in the last 30 days, and send bob@portialabs.ai a report about it."
+task2 = (
+    "Research the price of gold in the last 30 days, "
+    "and send bob@portialabs.ai a report about it."
+)
 
 # Needs OpenWeatherMap API key
 task3 = (
