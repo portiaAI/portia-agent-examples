@@ -17,6 +17,7 @@ from portia import (
     Portia,
     StorageClass,
 )
+from portia.cli import CLIExecutionHooks
 
 load_dotenv()
 
@@ -32,7 +33,10 @@ registry = McpToolRegistry.from_stdio_connection(
     args=["mcp-server-fetch"],
 ) + DefaultToolRegistry(my_config)
 
-portia = Portia(config=my_config,
-                tools=registry)
+portia = Portia(
+    config=my_config,
+    tools=registry,
+    execution_hooks=CLIExecutionHooks(),
+)
 
 print(portia.run(task).outputs.final_output)
