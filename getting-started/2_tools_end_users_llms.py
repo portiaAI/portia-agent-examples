@@ -17,7 +17,6 @@ from portia import (
     Portia,
     PortiaToolRegistry,
     StorageClass,
-    execution_context,
     open_source_tool_registry,
 )
 from portia.cli import CLIExecutionHooks
@@ -47,13 +46,13 @@ portia = Portia(
 )
 
 # This plan will ask the user to authenticate against Google Mail.
+#
 # Within Portia's system,
 # the authentication token will be stored for the `end_user_id` below.
 # Repeated runs of this script won't require re-authentication,
 # unless the `end_user_id` is changed to a different value.
-with execution_context(end_user_id="its me, mario"):
-    # Change `task2` to `task3` to fetch a weather report:
-    plan = portia.plan(task2)
-    [print(step) for step in plan.steps]
+# Change `task2` to `task3` to fetch a weather report:
+plan = portia.plan(task2)
+[print(step) for step in plan.steps]
 
-    plan_run = portia.run_plan(plan)
+plan_run = portia.run_plan(plan, end_user="its me, mario")

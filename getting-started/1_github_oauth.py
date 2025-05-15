@@ -32,7 +32,7 @@ If I don't have any free times, please output the next time after 12pm when I am
 """
 
 # Instantiate a Portia runner. Load it with the default config and with Portia cloud tools above.
-# Use the CLIExecutionHooks to allow the user to handle any clarifications at the CLI.
+# Use the CLIExecutionHooks to allow the user to handle any clarifications in the CLI.
 my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 portia = Portia(
     config=my_config,

@@ -17,11 +17,11 @@ from portia import (
     Portia,
     StorageClass,
 )
-from portia._unstable.browser_tool import (
+from portia.cli import CLIExecutionHooks
+from portia.open_source_tools.browser_tool import (
     BrowserInfrastructureOption,
     BrowserTool,
 )
-from portia.cli import CLIExecutionHooks
 
 load_dotenv()
 
@@ -39,7 +39,7 @@ local_browser_tool = BrowserTool(
 # Needs Browserbase API Key and a paid account.
 # Not used by default - swap this for local_browser_tool in the tools list when configuring Portia.
 browserbase_browser_tool = BrowserTool(
-    infrastructure_option=BrowserInfrastructureOption.BROWSERBASE
+    infrastructure_option=BrowserInfrastructureOption.REMOTE
 )
 
 # Also see BrowserToolForUrl("https://www.linkedin.com")
