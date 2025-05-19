@@ -8,12 +8,12 @@ from podcastfy.client import generate_podcast
 from portia import (
     Config,
     DefaultToolRegistry,
-    ExecutionContext,
     InMemoryToolRegistry,
     LogLevel,
     PlanRunState,
     Portia,
     Tool,
+    ToolRunContext,
 )
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
@@ -48,7 +48,7 @@ class PodcastTool(Tool[str]):
         "The location of the output audio file.",
     )
 
-    def run(self, _: ExecutionContext, summary: str, details: str) -> str:
+    def run(self, _: ToolRunContext, summary: str, details: str) -> str:
         """Run the Podcast Tool."""
 
         config_path = os.path.join(
