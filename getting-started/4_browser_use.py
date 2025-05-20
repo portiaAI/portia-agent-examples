@@ -6,8 +6,7 @@ It also shows more fine-grained control of the plan run's control flow.
 This example uses a local instance of Chrome by default.
 Please close Chrome before running this example so that it can be opened with the required debug settings.
 
-If you have a paid Browserbase account,
-you can switch to the `browserbase_browser_tool`,
+If you have a paid Browserbase account, you can switch to the `browserbase_browser_tool`,
 which will execute the information extraction using the Browserbase API instead of the local browser.
 """
 
