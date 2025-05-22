@@ -6,7 +6,7 @@ Portia AI is an open source developer framework for stateful, authenticated agen
 If you haven't checked it out already, check out our [SDK repo](https://github.com/portiaAI/portia-sdk-python) and give the SDK repo a ⭐!
 
 
-## [Get Started with Google Tools](https://github.com/portiaAI/portia-agent-examples/tree/main/get_started_google_tools/)
+## [Get Started with Google Tools](https://github.com/portiaAI/portia-agent-examples/tree/main/get-started-google-tools/)
 
 Demonstrates a number of key features of the [Portia SDK](https://github.com/portiaAI/portia-sdk-python) including explicit planning, clarification and authentication. You can read more about the SDK and these concepts in the [Portia SDK documentation](https://docs.portialabs.ai/SDK/portia).
 
