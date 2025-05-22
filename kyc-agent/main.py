@@ -236,7 +236,7 @@ class FilteringStepTool(LLMTool):
 
     You should return one of FILTERED, NOT_FILTERED or NO_RESULT based on the details provided to you.
     
-    Its safe to default to NOT_FILTERED if your not sure.
+    Its safe to default to NOT_FILTERED if you're not sure.
     """
 
     def run(  # type: ignore
@@ -348,7 +348,6 @@ if __name__ == "__main__":
         ],
         tool_id="filtering-step-tool",
         output="$pep_status",
-        # condition="$matched_risk includes PEP risks",
     )
 
     plan_builder.step(
@@ -369,7 +368,6 @@ if __name__ == "__main__":
         ],
         tool_id="filtering-step-tool",
         output="$adverse_media_status",
-        # condition="$matched_risk includes adverse media risks",
     )
 
     plan_builder.step(
@@ -390,7 +388,6 @@ if __name__ == "__main__":
         ],
         tool_id="filtering-step-tool",
         output="$sanctions_status",
-        # condition="$matched_risk includes sanction risks",
     )
 
     plan_builder.step(
@@ -411,7 +408,6 @@ if __name__ == "__main__":
         ],
         tool_id="filtering-step-tool",
         output="$aml_status",
-        # condition="$matched_risk includes AML risks",
     )
 
     plan_builder.step(
