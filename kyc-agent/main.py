@@ -1,4 +1,3 @@
-from json import tool
 from pydantic import BaseModel, Field
 from typing import Any
 from portia import (
@@ -45,67 +44,91 @@ CUSTOMERS = [
     CustomerProfile(id="cus-123", name="Kier Starmer"),
 ]
 
-profile_match = ProfileMatch(
-    matched_name="Kier Starmer",
-    risk_details=[
-        RiskProfile(
-            risk_class="PEP",
-            details={
-                "pep_status": {
-                    "is_pep": True,
-                    "pep_class": "CLASS ONE",
-                    "pep_type": "Domestic PEP",
-                    "reason": "Prime Minister, Former Leader of the Opposition, Member of Parliament (MP)",
-                    "position": "Prime Minister, Leader of the Labour Party",
-                    "jurisdiction": "United Kingdom",
-                    "since": "2020-04-04",
-                    "last_updated": "2025-05-01",
-                },
-                "source": {
-                    "provider": "DemoKYCWatchlist",
-                    "source_name": "Global PEP List",
-                    "source_url": "https://example-kyc-provider.com/pep/keir-starmer",
-                    "retrieved_at": "2025-05-21T10:30:00Z",
-                },
-                "risk_score": 60,
-                "risk_level": "Medium",
-                "match_confidence": 95,
-                "comments": "Identified as a domestic PEP due to his senior political position within the UK government. No adverse media or sanctions detected.",
-                "flags": ["PEP"],
-            },
-        ),
-        RiskProfile(
-            risk_class="adverse-media",
-            details={
-                "adverse_media": {
-                    "last_5_articles": [
-                        "Politics latest: Judge clears way for Keir Starmer to sign Chagos Islands deal",
-                        "The UK risks falling apart. Keir Starmer can mend it now - but he doesn't have much time | Martin Kettle",
-                        "UK Prime Minister Keir Starmer reverses course on winter fuel payments",
-                        "Net migration halved last year in boost to Keir Starmer",
-                        "Starmer defends courts over Lucy Connolly racist post",
-                    ]
-                },
-                "source": {
-                    "provider": "Internal ",
-                    "source_name": "Media Watchlist",
-                    "source_url": "https://example-kyc-provider.com/adverse-media/keir-starmer",
-                    "retrieved_at": "2025-07-21T10:30:00Z",
-                },
-                "risk_score": 20,
-                "risk_level": "Low",
-                "match_confidence": 87,
-                "comments": "Media detected from multiple sources.",
-                "flags": ["adverse-media"],
-            },
-        ),
-    ],
-)
-
 
 RISK_PROFILES = [
-    profile_match,
+    ProfileMatch(
+        matched_name="Kier Starmer",
+        risk_details=[
+            RiskProfile(
+                risk_class="PEP",
+                details={
+                    "pep_status": {
+                        "is_pep": True,
+                        "pep_class": "CLASS ONE",
+                        "pep_type": "Domestic PEP",
+                        "reason": "Prime Minister, Former Leader of the Opposition, Member of Parliament (MP)",
+                        "position": "Prime Minister, Leader of the Labour Party",
+                        "jurisdiction": "United Kingdom",
+                        "since": "2020-04-04",
+                        "last_updated": "2025-05-01",
+                    },
+                    "source": {
+                        "provider": "DemoKYCWatchlist",
+                        "source_name": "Global PEP List",
+                        "source_url": "https://example-kyc-provider.com/pep/keir-starmer",
+                        "retrieved_at": "2025-05-21T10:30:00Z",
+                    },
+                    "risk_score": 60,
+                    "risk_level": "Medium",
+                    "match_confidence": 95,
+                    "comments": "Identified as a domestic PEP due to his senior political position within the UK government. No adverse media or sanctions detected.",
+                    "flags": ["PEP"],
+                },
+            ),
+            RiskProfile(
+                risk_class="adverse-media",
+                details={
+                    "adverse_media": {
+                        "last_5_articles": [
+                            "Politics latest: Judge clears way for Keir Starmer to sign Chagos Islands deal",
+                            "The UK risks falling apart. Keir Starmer can mend it now - but he doesn't have much time | Martin Kettle",
+                            "UK Prime Minister Keir Starmer reverses course on winter fuel payments",
+                            "Net migration halved last year in boost to Keir Starmer",
+                            "Starmer defends courts over Lucy Connolly racist post",
+                        ]
+                    },
+                    "source": {
+                        "provider": "Internal ",
+                        "source_name": "Media Watchlist",
+                        "source_url": "https://example-kyc-provider.com/adverse-media/keir-starmer",
+                        "retrieved_at": "2025-07-21T10:30:00Z",
+                    },
+                    "risk_score": 20,
+                    "risk_level": "Low",
+                    "match_confidence": 87,
+                    "comments": "Media detected from multiple sources.",
+                    "flags": ["adverse-media"],
+                },
+            ),
+        ],
+    )
 ]
+
+FILTER_POLICY = """
+When reviewing KYC risks use this policy to determine if the risk should be filtered or not.
+
+If the risk includes PEP (Politically Exposed Person):
+- We only care if the PEP is class ONE. If not return FILTERED
+- We only care if the PEP is from the UK. If not returned FILTERED
+- Otherwise return NOT_FILTERED.
+
+If the risk includes adverse media:
+- We only care about high severity adverse media (terrorism, violence, other serious crime). If the links
+do not indicate this return FILTERED.
+- Else return NOT_FILTERED
+
+If the risk includes sanctions:
+- return NOT_FILTERED
+
+If the risk includes AML:
+- return NOT_FILTERED
+
+If the risk does not match these categories return NO_RESULT
+
+When coming up with a FINAL RECOMMENDATION: 
+- If all status checks are FILTERED return FILTERED
+- If some status checks are FILTERED but some are NOT_FILTERED return NOT_FILTERED
+"""
 
 
 class CustomerLoadingToolSchema(BaseModel):
@@ -175,31 +198,7 @@ class FilterPolicyLoadingTool(Tool):
     )
 
     def run(self, _: ToolRunContext) -> str:
-        return """
-            When reviewing KYC risks use this policy to determine if the risk should be filtered or not.
-
-            If the risk includes PEP (Politically Exposed Person):
-            - We only care if the PEP is class ONE. If not return FILTERED
-            - We only care if the PEP is from the UK. If not returned FILTERED
-            - Otherwise return NOT_FILTERED.
-
-            If the risk includes adverse media:
-            - We only care about high severity adverse media (terrorism, violence, other serious crime). If the links
-            do not indicate this return FILTERED.
-            - Else return NOT_FILTERED
-
-            If the risk includes sanctions:
-            - return NOT_FILTERED
-
-            If the risk includes AML:
-            - return NOT_FILTERED
-
-            If the risk does not match these categories return NO_RESULT
-
-            When coming up with a FINAL RECOMMENDATION: 
-            - If all status checks are FILTERED return FILTERED
-            - If some status checks are FILTERED but some are NOT_FILTERED return NOT_FILTERED
-        """
+        return FILTER_POLICY
 
 
 class RiskFilteringAgentSchema(BaseModel):
