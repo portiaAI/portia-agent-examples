@@ -34,3 +34,5 @@ This project demonstrates Portia's User-Led Learning (ULL) feature, which allows
 This project demonstrates how to use Portia with local LLMs and the Obsidian app. It uses the [Obsidian MCP server](https://github.com/StevenStavrakis/obsidian-mcp) to interact with the Obsidian app, and local LLM (default to [qwen3:4b](https://ollama.com/models/qwen3:4b)).
 
 ## [KYC Agent](https://github.com/portiaAI/portia-agent-examples/tree/main/kyc-agent/)
+
+This agent shows the advantages of policy driven filtering within the KYC domain. It loads risks up for a given customer and then triages them against a policy. 
