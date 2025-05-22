@@ -41,13 +41,13 @@ class ProfileMatch(BaseModel):
 
 
 CUSTOMERS = [
-    CustomerProfile(id="cus-123", name="Kier Starmer"),
+    CustomerProfile(id="cus-123", name="Keir Starmer"),
 ]
 
 
 RISK_PROFILES = [
     ProfileMatch(
-        matched_name="Kier Starmer",
+        matched_name="Keir Starmer",
         risk_details=[
             RiskProfile(
                 risk_class="PEP",
@@ -107,6 +107,10 @@ RISK_PROFILES = [
 FILTER_POLICY = """
 When reviewing KYC risks use this policy to determine if the risk should be filtered or not.
 
+You should only focus on one risk type at a time. 
+
+If the risk type requested is not in the given risk profile return NO_RESULT
+
 If the risk includes PEP (Politically Exposed Person):
 - We only care if the PEP is class ONE. If not return FILTERED
 - We only care if the PEP is from the UK. If not returned FILTERED
@@ -128,6 +132,8 @@ If the risk does not match these categories return NO_RESULT
 When coming up with a FINAL RECOMMENDATION: 
 - If all status checks are FILTERED return FILTERED
 - If some status checks are FILTERED but some are NOT_FILTERED return NOT_FILTERED
+- If all status checks are NOT_FILTERED return NOT_FILTERED
+- You can ignore status checks which return NO_RESULT
 """
 
 
@@ -234,6 +240,9 @@ class FilteringStepTool(LLMTool):
     Your job is to take these two data points and a filter policy and decide if according to the 
     policy given the alert should be filtered or not.
 
+    IMPORTANT: You will be asked to reason about one type of risk at a time. Please focus only 
+    on this type of risk ignoring other parts of the policy.
+
     You should return one of FILTERED, NOT_FILTERED or NO_RESULT based on the details provided to you.
     
     Its safe to default to NOT_FILTERED if you're not sure.
@@ -243,10 +252,7 @@ class FilteringStepTool(LLMTool):
         self, ctx: ToolRunContext, task: str, task_data: list[Any] | str | None = None
     ) -> RiskFilteringAgentOutputSchema:
         """Run the LLMTool."""
-        model = (
-            ctx.config.get_generative_model(self.model)
-            or ctx.config.get_default_model()
-        )
+        model = ctx.config.get_planning_model() or ctx.config.get_default_model()
 
         context = (
             "Additional context for the LLM tool to use to complete the task, provided by the "
