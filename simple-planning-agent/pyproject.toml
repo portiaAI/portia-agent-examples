@@ -5,5 +5,5 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "portia-sdk-python[all]>=0.3.8",
+    "portia-sdk-python[all]>=0.4.0",
 ]

@@ -104,7 +104,7 @@ portia = Portia(
 plan = portia.plan(
     "Read all emails from today that contain 'AI'."
     "If there are no emails, exit. If there are emails, summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
-    "Then post the summary with links to the #ai-news slack channel."
+    "Then post the summary with links to the #ai-news slack channel (list slack conversations first to get the channel id)."
     "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
 )
 print("\nHere are the steps in the generated plan:")
