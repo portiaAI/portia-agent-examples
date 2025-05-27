@@ -30,22 +30,17 @@ task = (
 
 my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 
-
-local_browser_tool = BrowserTool(
+# Change `infrastructure_option` to `BrowserInfrastructureOption.REMOTE` to use Browserbase
+# instead of local Chrome.
+browser_tool = BrowserTool(
     infrastructure_option=BrowserInfrastructureOption.LOCAL
-)
-
-# Needs Browserbase API Key and a paid account.
-# Not used by default - swap this for local_browser_tool in the tools list when configuring Portia.
-browserbase_browser_tool = BrowserTool(
-    infrastructure_option=BrowserInfrastructureOption.REMOTE
 )
 
 # Also see BrowserToolForUrl("https://www.linkedin.com")
 
 portia = Portia(
     config=my_config,
-    tools=[local_browser_tool],
+    tools=[browser_tool],
     execution_hooks=CLIExecutionHooks(),
 )
 
