@@ -5,6 +5,18 @@ This repo contains example code demonstrating how to use Portia AI SDK and the P
 Portia AI is an open source developer framework for stateful, authenticated agentic workflows.
 If you haven't checked it out already, check out our [SDK repo](https://github.com/portiaAI/portia-sdk-python) and give the SDK repo a ⭐!
 
+## [Getting Started with Portia](https://github.com/portiaAI/portia-agent-examples/tree/main/getting-started/)
+
+An introduction to the Portia SDK that walks you through the basics of creating an agent, defining tasks, and executing plans.
+This project demonstrates fundamental concepts like:
+
+- GitHub OAuth integration for repository interactions
+- Using tools with end user context.
+- Model Context Protocol (MCP) integration
+- Browser automation for web interactions
+
+Perfect for newcomers to understand the core concepts of Portia before diving into more complex examples.
+
 
 ## [Get Started with Google Tools](https://github.com/portiaAI/portia-agent-examples/tree/main/get-started-google-tools/)
 
