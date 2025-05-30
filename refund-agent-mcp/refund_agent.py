@@ -7,22 +7,17 @@ from dotenv import load_dotenv
 from portia import (
     DefaultToolRegistry,
     InMemoryToolRegistry,
-    MultipleChoiceClarification,
     Portia,
     McpToolRegistry,
     Config,
     Tool,
     ToolHardError,
     ToolRunContext,
-    execution_context,
     Message,
 )
-import portia.tool
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
-
-
-portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
+from portia.execution_hooks import clarify_on_tool_calls
 
 
 class RefundHumanApprovalInput(BaseModel):
@@ -35,48 +30,6 @@ class RefundHumanApprovalInput(BaseModel):
         ..., description="A summary of the reasoning for the approval decision."
     )
 
-
-class RefundHumanApprovalTool(Tool[str]):
-    """
-    A tool to request human approval before proceeding with a refund, given a rationale from the Agent.
-
-    Given a summary of the reasoning for the approval decision, the human will approve or reject the request.
-    This tool does not actually issue the refund.
-    """
-
-    id: str = "human_approval"
-    name: str = "Human Approval"
-    description: str = "A tool to request human approval in order to continue. Given a summary of the reasoning for the approval decision, the human will approve or reject the request."
-    args_schema: Type[BaseModel] = RefundHumanApprovalInput
-    output_schema: tuple[str, str] = (
-        "str",
-        "APPROVED or REJECTED depending on the human decision",
-    )
-
-    def run(
-        self,
-        context: ToolRunContext,
-        refund_request: str,
-        summary: str,
-    ) -> bool:
-        if len(context.clarifications) == 0:
-            return MultipleChoiceClarification(
-                plan_run_id=context.plan_run_id,
-                user_guidance=(
-                    "User refund request:\n"
-                    f"{refund_request}\n\n"
-                    "---\n\n"
-                    "Suggestion: Approve the refund request.\n\n"
-                    "Reasoning:\n"
-                    f"{summary}\n\n"
-                    "---\n\n"
-                    "You can choose to APPROVE or REJECT the refund."
-                ),
-                argument_name="human_decision",
-                options=["APPROVED", "REJECTED"],
-            )
-        assert context.clarifications[0].resolved is True
-        return context.clarifications[0].response
 
 
 class RefundReviewerInput(BaseModel):
@@ -166,22 +119,21 @@ def main(customer_email: str):
             config=config,
         )
         + InMemoryToolRegistry.from_local_tools(
-            [RefundReviewerTool(), RefundHumanApprovalTool()]
+            [RefundReviewerTool()]
         )
     )
 
-    portia = Portia(config=config, tools=tools, execution_hooks=CLIExecutionHooks())
-    # Run the test query and print the output!
-    with execution_context(
-        additional_data={
-            "Stripe MCP tool guidance": "If you encounter tools that require a limit argument, "
-                                        "ALWAYS USE A VALUE OF 1."
-        }
-    ):
-        plan = portia.plan(
-            """
+    portia = Portia(
+        config=config,
+        tools=tools,
+        execution_hooks=CLIExecutionHooks(
+            before_tool_call=clarify_on_tool_calls("mcp:stripe:create_refund")
+        )
+    )
+    plan = portia.plan(
+        """
 Read the refund request email from the customer and decide if it should be approved or rejected.
-If you think the refund request should be approved, ALWAYS check with a human for final approval and if approved then process the refund.
+If it should be approved, then process the refund. Otherwise, do not process the refund.
 
 Stripe instructions -- To process a refund in Stripe, you need to:
 * Find the Customer using their email address from the List of Customers in Stripe.
@@ -192,10 +144,10 @@ The refund policy can be found in the file: ./refund_policy.txt
 
 The refund request email can be found in "inbox.txt" file
 """
-        )
-        print("Plan:")
-        print(plan.pretty_print())
-        portia.run_plan(plan)
+    )
+    print("Plan:")
+    print(plan.pretty_print())
+    portia.run_plan(plan)
 
 
 if __name__ == "__main__":
