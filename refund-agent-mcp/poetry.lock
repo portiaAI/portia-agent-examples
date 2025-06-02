@@ -2484,45 +2484,47 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.4.0"
+version = "0.4.1"
 description = "Portia Labs Python SDK for building agentic workflows."
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
-files = []
-develop = false
+files = [
+    {file = "portia_sdk_python-0.4.1-py3-none-any.whl", hash = "sha256:32c0c212ad3c9cf9157e82eaffab8ae4e25d6eb31cc8331dd494cce31bca4cc6"},
+    {file = "portia_sdk_python-0.4.1.tar.gz", hash = "sha256:991550b3260ab186db9739dc2f8740b89036f7657c7c70da381f109503eee853"},
+]
 
 [package.dependencies]
 anthropic = ">=0.41.0"
-browser-use = {version = "0.1.40", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
-browserbase = {version = ">=1.2.0,<2", optional = true}
+browser-use = {version = "0.1.40", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and extra == \"all\""}
+browserbase = {version = ">=1.2.0,<2", optional = true, markers = "extra == \"all\""}
 click = ">=8.1.7,<9"
-google-generativeai = {version = ">=0.8.4,<0.9", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+google-generativeai = {version = ">=0.8.4,<0.9", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and extra == \"all\""}
 instructor = {version = ">=1.7.7,<2", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 jinja2 = ">=3.1.4,<4"
 jsonref = ">=1.1.0,<2"
 langchain = {version = ">=0.3.17,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 langchain-anthropic = {version = ">=0.3.0,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 langchain-core = {version = ">=0.3.25,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
-langchain-google-genai = {version = ">=2.0.10,<3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
-langchain-mistralai = {version = ">=0.2.3,<0.3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
-langchain-ollama = {version = ">=0.2.2,<0.3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+langchain-google-genai = {version = ">=2.0.10,<3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and extra == \"all\""}
+langchain-mistralai = {version = ">=0.2.3,<0.3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and extra == \"all\""}
+langchain-ollama = {version = ">=0.2.2,<0.3", optional = true, markers = "python_version >= \"3.11\" and python_version < \"4.0\" and extra == \"all\""}
 langchain-openai = {version = ">=0.3,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
-langchain-redis = {version = ">=0.1.2", optional = true}
+langchain-redis = {version = ">=0.1.2", optional = true, markers = "extra == \"all\""}
 langgraph = {version = ">=0.2.59,<0.3", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 langsmith = {version = ">=0.3.15,<0.4", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 loguru = {version = ">=0.7.3,<0.8", markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 mcp = ">=1.9.2,<2"
-mistralai = {version = ">=1.2.5,<2", optional = true}
+mistralai = {version = ">=1.2.5,<2", optional = true, markers = "extra == \"all\""}
 openpyxl = ">=3.1.5,<4"
 pandas = ">=2.2.3,<3"
-playwright = {version = ">=1.49.0,<2", optional = true}
+playwright = {version = ">=1.49.0,<2", optional = true, markers = "extra == \"all\""}
 posthog = ">=3.23.0"
 pydantic = ">=2.10.3,<3"
 pytest-mock = ">=3.14.0,<4"
 pytest-repeat = ">=0.9.4"
 python-dotenv = ">=1.0.1,<2"
-redis = {version = ">=5.2.1,<6", optional = true}
+redis = {version = ">=5.2.1,<6", optional = true, markers = "extra == \"all\""}
 testcontainers = {version = ">=4.10.0", extras = ["redis"]}
 tiktoken = ">=0.9.0,<0.10"
 
@@ -2536,12 +2538,6 @@ ollama = ["langchain-ollama (>=0.2.2,<0.3) ; python_version >= \"3.11\" and pyth
 tools-browser-browserbase = ["browser-use (==0.1.40) ; python_version >= \"3.11\" and python_version < \"4.0\"", "browserbase (>=1.2.0,<2)", "playwright (>=1.49.0,<2)"]
 tools-browser-local = ["browser-use (==0.1.40) ; python_version >= \"3.11\" and python_version < \"4.0\"", "playwright (>=1.49.0,<2)"]
 tools-pdf-reader = ["mistralai (>=1.2.5,<2)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/portiaAI/portia-sdk-python.git"
-reference = "main"
-resolved_reference = "87ce7e7da20b04eebc447de26a20bee76a44301d"
 
 [[package]]
 name = "posthog"
@@ -4294,4 +4290,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.14"
-content-hash = "90cdd306397d3c94ea85888668d53d3b9277215aa1b4cd15e2a441a013b47c70"
+content-hash = "ec4757fa3596eb98097491f0cd3053e1ed63daeb925c3c33a78f9d962a5eda23"

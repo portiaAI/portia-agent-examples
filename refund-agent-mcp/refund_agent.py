@@ -31,7 +31,6 @@ class RefundHumanApprovalInput(BaseModel):
     )
 
 
-
 class RefundReviewerInput(BaseModel):
     """Input for the RefundReviewerTool."""
 
@@ -138,7 +137,7 @@ If it should be approved, then process the refund. Otherwise, do not process the
 Stripe instructions -- To process a refund in Stripe, you need to:
 * Find the Customer using their email address from the List of Customers in Stripe.
 * Find the Payment Intent ID using the Customer from the previous step, from the List of Payment Intents in Stripe.
-* Create a refund against the Payment Intent ID.g
+* Create a refund against the Payment Intent ID.
 
 The refund policy can be found in the file: ./refund_policy.txt
 
