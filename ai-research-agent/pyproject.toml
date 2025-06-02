@@ -7,7 +7,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
-portia-sdk-python = {version = "^0.3.8", extras = ["all"]}
+portia-sdk-python = {version = "^0.4.1"}
 python-dotenv = "^1.0.1"
 podcastfy = "^0.4.1"
 audioop-lts = "^0.2.1"

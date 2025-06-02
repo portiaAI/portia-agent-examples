@@ -3,7 +3,7 @@ name = "simple-planning-agent"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<4.0"
 dependencies = [
-    "portia-sdk-python[all]>=0.3.8",
+    "portia-sdk-python[google,mistralai,ollama] (>=0.4.1,<0.5.0)",
 ]
