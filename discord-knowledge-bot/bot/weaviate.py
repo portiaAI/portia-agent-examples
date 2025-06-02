@@ -1,13 +1,14 @@
 import os
 import time
 
+from portia import ToolRunContext
+
 import weaviate
 from dotenv import load_dotenv
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from markdownify import markdownify as md
-from portia.execution_context import ExecutionContext, empty_context
 from portia.tool import Tool
 from pydantic import BaseModel, Field
 from tqdm import tqdm
@@ -109,7 +110,7 @@ class RAGQueryDBTool(Tool[str]):
         "A list of results relevant to the query.",
     )
 
-    def run(self, _: ExecutionContext, question: str) -> str:
+    def run(self, _: ToolRunContext, question: str) -> str:
         """Run the RAG Query Tool."""
 
         result = DOCS_COLLECTION.query.near_text(
@@ -123,6 +124,6 @@ class RAGQueryDBTool(Tool[str]):
 if __name__ == "__main__":
     try:
         # Can be used for local testing of the tool
-        print(RAGQueryDBTool().run(empty_context(), question="What is the Portia SDK?"))
+        print(RAGQueryDBTool().run(None, question="What is the Portia SDK?"))  # type: ignore
     finally:
         close_weaviate()

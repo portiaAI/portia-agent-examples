@@ -28,7 +28,7 @@ of the server and channel you want your bot to be active in. Note that you'll ne
 6. You can then enter `/ask <question>` in the your discord channel to ask the bot a question.
 
 ## Usage
-`docker compose up` to start a local instance of Weaviate. You can then set the `WEAVIATE_URL` in the env file to `localhost` and leave the `WEAVIATE_API_KEY` empty to use this local instance.
+`d` to start a local instance of Weaviate. You can then set the `WEAVIATE_URL` in the env file to `localhost` and leave the `WEAVIATE_API_KEY` empty to use this local instance.
 `poetry run python -m bot.loader` to load the Portia SDK documentation into the vector database.
 `poetry run python -m bot.discord_server` to run the bot.
 `/ask <question>` to ask the bot a question on discord.
