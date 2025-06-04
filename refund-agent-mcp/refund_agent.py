@@ -20,17 +20,6 @@ from pydantic import BaseModel, Field
 from portia.execution_hooks import clarify_on_tool_calls
 
 
-class RefundHumanApprovalInput(BaseModel):
-    """Input for the HumanApprovalTool."""
-
-    refund_request: str = Field(
-        ..., description="The exact refund request from the customer"
-    )
-    summary: str = Field(
-        ..., description="A summary of the reasoning for the approval decision."
-    )
-
-
 class RefundReviewerInput(BaseModel):
     """Input for the RefundReviewerTool."""
 
