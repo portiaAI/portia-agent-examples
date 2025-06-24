@@ -56,7 +56,7 @@ while not ready_to_proceed:
 
 # Execute the plan
 print("\nThe plan will now be executed. Please wait...")
-plan_run = portia.run_plan(plan, end_user="monkey monkey")
+plan_run = portia.run_plan(plan)
 
 # Serialise into JSON and print the output
 print(f"{plan_run.model_dump_json(indent=2)}")
