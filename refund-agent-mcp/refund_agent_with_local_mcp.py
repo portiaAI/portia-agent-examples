@@ -137,7 +137,7 @@ The refund request email can be found in "inbox.txt" file
     )
     print("Plan:")
     print(plan.pretty_print())
-    portia.run_plan(plan, end_user="ht2")
+    portia.run_plan(plan)
 
 
 if __name__ == "__main__":
