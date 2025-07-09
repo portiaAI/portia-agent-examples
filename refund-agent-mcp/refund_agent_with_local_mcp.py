@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 from typing import Type
 from dotenv import load_dotenv
 
@@ -7,6 +8,7 @@ from portia import (
     DefaultToolRegistry,
     InMemoryToolRegistry,
     Portia,
+    McpToolRegistry,
     Config,
     Tool,
     ToolHardError,
@@ -88,28 +90,33 @@ def main(customer_email: str):
     with open("inbox.txt", "w") as f:
         f.write(customer_email)
 
-    config = Config.from_default(default_log_level="INFO")
+    config = Config.from_default(default_log_level="INFO",
+                                 argument_clarifications_enabled=False)
 
     tools = (
-        DefaultToolRegistry(
+        McpToolRegistry.from_stdio_connection(
+            server_name="stripe",
+            command="npx",
+            args=[
+                "-y",
+                "@stripe/mcp",
+                "--tools=all",
+                f"--api-key={os.environ['STRIPE_TEST_API_KEY']}",
+            ],
+        )
+        + DefaultToolRegistry(
             config=config,
         )
         + InMemoryToolRegistry.from_local_tools(
             [RefundReviewerTool()]
         )
     )
-    if not tools.get_tool("portia:mcp:mcp.stripe.com:create_refund"):
-        raise ValueError("Stripe MCP tool not found. Please install the Stripe MCP tool on Portia "
-                         "cloud by going to https://app.portialabs.ai/dashboard/tool-registry")
-
-    tools.with_tool_description("portia:mcp:mcp.stripe.com:create_refund",
-                            "The amount should be provided in cents without any decimal points, e.g 10.00 should be 1000")
 
     portia = Portia(
         config=config,
         tools=tools,
         execution_hooks=CLIExecutionHooks(
-            before_tool_call=clarify_on_tool_calls("portia:mcp:mcp.stripe.com:create_refund")
+            before_tool_call=clarify_on_tool_calls("mcp:stripe:create_refund")
         )
     )
     plan = portia.plan(
