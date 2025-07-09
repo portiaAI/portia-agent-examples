@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-# Define personas participating in the planning poker and load Portia codebase summary to help with estimation
+# Define personas of in the planning poker and load Portia codebase summary to help with estimation
 personas = [
     "You are a frontend developer, assess the ticket and estimate with your relevant experience",
     "You are a backend developer, assess the ticket and estimate with your relevant experience",

@@ -1,4 +1,4 @@
-# This is a heavier code approach to the planning poker agent implementation (less LLM centric).
+# This is a heavier code method to the planning poker agent implementation (less LLM centric).
 from portia import Portia, PlanRunState, PlanBuilder, Config
 from portia.open_source_tools.llm_tool import LLMTool
 from pydantic import BaseModel, Field
