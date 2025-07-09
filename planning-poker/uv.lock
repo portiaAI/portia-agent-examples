@@ -1266,7 +1266,7 @@ wheels = [
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.4.9"
+version = "0.4.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anthropic" },
@@ -1290,9 +1290,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "testcontainers", extra = ["redis"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/02/ca/35ec16a232df4d30901d8c77b4dc2afc15667ce7714fa1b37dad5165f8d5/portia_sdk_python-0.4.9.tar.gz", hash = "sha256:3f1c4829469dc92ca55c3a35c2734f235cb90e43d1c8805467e8e97ad7d1fac6", size = 123669, upload-time = "2025-07-04T08:04:12.352Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c6/4b/f539a5056acb8fa9322d7cc61c244fb7c039af9fdc915ab57daddebd8b9a/portia_sdk_python-0.4.11.tar.gz", hash = "sha256:eea8c53cd52707a8a08b3e70e26155351dfd93d342bf0e9612a53b7ad06939a8", size = 124515, upload-time = "2025-07-09T12:13:17.751Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c3/17/b387a6d03d39813096fea4306d3f5bc48e40352ef10739d66a32f6482f00/portia_sdk_python-0.4.9-py3-none-any.whl", hash = "sha256:c8955321f1f7c2dac0875fce88a683eb2404e51a8849dea23be894f85382e80f", size = 156431, upload-time = "2025-07-04T08:04:10.395Z" },
+    { url = "https://files.pythonhosted.org/packages/df/bf/f73ae1dee720d9872899546e27c3a932af383d82a3599f609004fa35caf2/portia_sdk_python-0.4.11-py3-none-any.whl", hash = "sha256:0db968a79eee06d7853f97146e75245b787ed97f604cc01fa8c46ea89077fc92", size = 157396, upload-time = "2025-07-09T12:13:16.538Z" },
 ]
 
 [[package]]
