@@ -114,10 +114,10 @@ def main(customer_email: str):
     )
     plan = portia.plan(
         """
-Read the refund request email from the customer (in "inbox.txt") and decide if it should be approved
-or rejected based on the refund policy in "refund_policy.txt".
+Check my email for any refund requests. For any refund requests, decide if it should be approved
+or rejected based on the refund policy in "refund_policy.txt" file.
 If it should be approved, then process the refund. Otherwise, do not process the refund.
-Finally, send a polite email to the customer with details of what you did.
+Finally, send a polite email from me to the customer with details of what you did.
 
 Stripe instructions -- To process a refund in Stripe, you need to:
 * Find the Customer using their email address from the List of Customers in Stripe.
@@ -127,7 +127,7 @@ Stripe instructions -- To process a refund in Stripe, you need to:
     )
     print("Plan:")
     print(plan.pretty_print())
-    portia.run_plan(plan)
+    portia.run_plan(plan, end_user="ht6")
 
 
 if __name__ == "__main__":
