@@ -114,18 +114,15 @@ def main(customer_email: str):
     )
     plan = portia.plan(
         """
-Read the refund request email from the customer and decide if it should be approved or rejected.
+Read the customer's refund request email from the file "inbox.txt" and decide if it should be
+approved or rejected based on the refund policy in "refund_policy.txt" file.
 If it should be approved, then process the refund. Otherwise, do not process the refund.
-Finally, send a polite email from me to the customer with details of what you did.
+Finally, send a polite email to the customer with details of what you did.
 
 Stripe instructions -- To process a refund in Stripe, you need to:
 * Find the Customer using their email address from the List of Customers in Stripe.
 * Find the Payment Intent ID using the Customer from the previous step, from the List of Payment Intents in Stripe.
 * Create a refund against the Payment Intent ID.
-
-The refund policy can be found in the file: ./refund_policy.txt
-
-The refund request email can be found in "inbox.txt" file
 """
     )
     print("Plan:")
