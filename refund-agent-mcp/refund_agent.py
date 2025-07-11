@@ -114,8 +114,7 @@ def main(customer_email: str):
     )
     plan = portia.plan(
         """
-Check my email for any refund requests. For any refund requests, decide if it should be approved
-or rejected based on the refund policy in "refund_policy.txt" file.
+Read the refund request email from the customer and decide if it should be approved or rejected.
 If it should be approved, then process the refund. Otherwise, do not process the refund.
 Finally, send a polite email from me to the customer with details of what you did.
 
