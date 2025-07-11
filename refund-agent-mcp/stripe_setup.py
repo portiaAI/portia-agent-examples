@@ -29,12 +29,18 @@ def setup_stripe_test_environment(customer_email):
     try:
         # 1. Create a customer
         payment_method = stripe.PaymentMethod.retrieve("pm_card_visa")
-        customer = stripe.Customer.create(
-            email=customer_email,
-            description="Test customer for refund example",
-            payment_method=payment_method.id,
-        )
-        print(f"Created customer: {customer.id}")
+        customers = stripe.Customer.list(email=customer_email)
+        if customers.data:
+            customer = customers.data[0]
+            payment_method = stripe.Customer.list_payment_methods(customer.id).data[0]
+            print(f"Customer already exists: {customer.id}")
+        else:
+            customer = stripe.Customer.create(
+                email=customer_email,
+                description="Test customer for refund example",
+                payment_method=payment_method.id,
+            )
+            print(f"Created customer: {customer.id}")
 
         # 2. Create a product
         product = stripe.Product.create(
