@@ -21,7 +21,7 @@ from portia.cli import CLIExecutionHooks
 
 load_dotenv()
 
-task = "Read the portialabs.ai website and tell me what they do"
+task = "Read the docs.portialabs.ai website and tell me what they do"
 
 my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 
