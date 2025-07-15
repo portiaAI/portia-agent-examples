@@ -3549,14 +3549,14 @@ youtube-transcript-api = ">=0.6.2,<0.7.0"
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.4.11"
+version = "0.4.12"
 description = "Portia Labs Python SDK for building agentic workflows."
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "portia_sdk_python-0.4.11-py3-none-any.whl", hash = "sha256:0db968a79eee06d7853f97146e75245b787ed97f604cc01fa8c46ea89077fc92"},
-    {file = "portia_sdk_python-0.4.11.tar.gz", hash = "sha256:eea8c53cd52707a8a08b3e70e26155351dfd93d342bf0e9612a53b7ad06939a8"},
+    {file = "portia_sdk_python-0.4.12-py3-none-any.whl", hash = "sha256:355c941958f518afe9c38a2281974c379518a9a3cc669979123415bc90139ee9"},
+    {file = "portia_sdk_python-0.4.12.tar.gz", hash = "sha256:04d8855d1eb122e72d4a7ad9ff4cc78db47940135e677b4ff1d78dcd7c517dde"},
 ]
 
 [package.dependencies]
@@ -3579,10 +3579,10 @@ posthog = ">=6.0,<7.0"
 pydantic = ">=2.10.3,<3"
 pytest-mock = ">=3.14.0,<4"
 python-dotenv = ">=1.0.1,<2"
-testcontainers = {version = ">=4.10.0", extras = ["redis"]}
+testcontainers = {version = ">=4.10.0", extras = ["redis"], markers = "python_version >= \"3.9\" and python_version < \"4.0\""}
 
 [package.extras]
-all = ["browser-use (>=0.4.2) ; python_version >= \"3.11\" and python_version < \"4.0\"", "browserbase (>=1.2.0,<2)", "google-genai (>=1.18.0)", "langchain-google-genai (>=2.0.10,<3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-mistralai (>=0.2.3,<0.3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-ollama (>=0.2.2,<0.3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-redis (>=0.1.2)", "mistralai (>=1.2.5,<2)", "playwright (>=1.49.0,<2)", "redis (>=5.2.1,<6)"]
+all = ["browser-use (>=0.4.2) ; python_version >= \"3.11\" and python_version < \"4.0\"", "browserbase (>=1.2.0,<2)", "google-genai (>=1.18.0)", "langchain-google-genai (>=2.0.10,<3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-mistralai (>=0.2.3,<0.3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-ollama (>=0.2.2,<0.3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "langchain-redis (>=0.1.2) ; python_version >= \"3.11\" and python_version < \"3.14\"", "mistralai (>=1.2.5,<2)", "playwright (>=1.49.0,<2)", "redis (>=5.2.1,<6)"]
 cache = ["langchain-redis (>=0.1.2)", "redis (>=5.2.1,<6)"]
 google = ["google-genai (>=1.18.0)", "langchain-google-genai (>=2.0.10,<3) ; python_version >= \"3.11\" and python_version < \"4.0\""]
 mistral = ["langchain-mistralai (>=0.2.3,<0.3) ; python_version >= \"3.11\" and python_version < \"4.0\"", "mistralai (>=1.2.5,<2)"]
@@ -4214,7 +4214,7 @@ description = "Python for Window Extensions"
 optional = false
 python-versions = "*"
 groups = ["main"]
-markers = "platform_system == \"Windows\" and platform_python_implementation != \"PyPy\" or sys_platform == \"win32\""
+markers = "sys_platform == \"win32\" or platform_system == \"Windows\" and platform_python_implementation != \"PyPy\""
 files = [
     {file = "pywin32-310-cp310-cp310-win32.whl", hash = "sha256:6dd97011efc8bf51d6793a82292419eba2c71cf8e7250cfac03bba284454abc1"},
     {file = "pywin32-310-cp310-cp310-win_amd64.whl", hash = "sha256:c3e78706e4229b915a0821941a84e7ef420bf2b77e08c9dae3c76fd03fd2ae3d"},
