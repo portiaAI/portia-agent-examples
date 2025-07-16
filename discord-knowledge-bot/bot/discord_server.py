@@ -32,7 +32,17 @@ async def ask(ctx: discord.ApplicationContext, question: str):
         await ctx.respond("Sorry, this command can't be used in this channel.")
         return
     response = get_answer(question)
-    await ctx.respond(response)
+    if response is None:
+        await ctx.respond("Sorry, I wasn't able to find an answer.")
+        return
+    await ctx.respond("Question: " + question)
+    # There is a 2000 character limit on Discord messages
+    if len(response) > 1500:
+        l, r = response[1500:1600].split(" ", maxsplit=1)
+        await ctx.respond(response[:1500] + l + "...")
+        await ctx.respond("..." + r + response[1600:])
+    else:
+        await ctx.respond(response)
 
 
 bot.run(os.getenv("DISCORD_BOT_TOKEN"))  # run the bot with the token
