@@ -1,10 +1,13 @@
-poetry sync
+#!/bin/bash
+
+set -e
+logfile="log_$(date +%Y%m%d_%H%M%S).txt"
 echo "Setting up Stripe user and payment"
-poetry run python stripe_setup.py --email test@portialabs.ai 
+uv run python stripe_setup.py --email test@portialabs.ai >> $logfile 2>&1
 echo "Running success case - AI should refund..."
-yes | poetry run python refund_agent.py --email test@portialabs.ai | tail -n 1
+yes | uv run python refund_agent.py --email test@portialabs.ai >> $logfile 2>&1
 echo "Running error case - AI should not refund, should exit normally with no refund..."
-poetry run python refund_agent.py --email test@portialabs.ai --request "I sat on my hoverboard and it broke. I want a refund." | tail -n 1
+uv run python refund_agent.py --email test@portialabs.ai --request "I sat on my hoverboard and it broke. I want a refund." >> $logfile 2>&1
 echo "Running error case - Human rejects refund, should fail with error..."
-yes N | poetry run python refund_agent.py --email test@portialabs.ai | tail -n 1
+yes N | uv run python refund_agent.py --email test@portialabs.ai >> $logfile 2>&1
 echo "Done"
