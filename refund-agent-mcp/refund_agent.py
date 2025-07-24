@@ -127,7 +127,7 @@ Stripe instructions -- To process a refund in Stripe, you need to:
     )
     print("Plan:")
     print(plan.pretty_print())
-    portia.run_plan(plan, end_user="emma2407")
+    portia.run_plan(plan)
 
 
 if __name__ == "__main__":
