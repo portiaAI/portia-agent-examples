@@ -12,7 +12,7 @@ At Portia, we have an email inbox that is signed up to multiple AI newsletters. 
 - A Portia AI API key: You can get one from [app.portialabs.ai](https://app.portialabs.ai) > API Keys.
 - An OpenAI API key
 - If you want to use Gemini for the podcast creation (this can give better quality speech): A Gemini API key
-- A slack client ID and secret: You can get these by followign the steps [here](https://docs.portialabs.ai/portia-tools/slack/send-message#configure-your-slack-tools-with-portia-ai)
+- A slack client ID and secret: You can get these by following the steps [here](https://docs.portialabs.ai/portia-tools/slack/send-message#configure-your-slack-tools-with-portia-ai)
 - We use poetry to manage dependencies. You can install it from [here](https://python-poetry.org/docs/#installation).
 
 ## Setup

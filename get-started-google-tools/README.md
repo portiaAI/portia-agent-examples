@@ -10,14 +10,13 @@ This example demonstrates how to use Portia AI with Google Calendar and GMail to
 - The email address of someone you want to schedule a meeting with
 - A Portia AI API key: You can get one from [app.portialabs.ai](https://app.portialabs.ai) > API Keys.
 - An LLM API key for a supported model (e.g Anthropic, OpenAI or Mistral)
-- We use poetry to manage dependencies. You can install it from [here](https://python-poetry.org/docs/#installation).
+- We use `uv` to manage dependencies. You can install it from [here](https://docs.astral.sh/uv/getting-started/installation/).
 
 ## Setup
 
 1. Clone the repository and select this folder.
 2. Copy the `.env.example` file to `.env` and add your API keys to it.
-3. Install the dependencies by running `poetry install`.
-4. Run the `main.py` file by running `poetry run python main.py`.
+3. Run the `main.py` file by running `uv run main.py`.
 
 ## Running the example
 
