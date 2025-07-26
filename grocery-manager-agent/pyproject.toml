@@ -1,0 +1,10 @@
+[project]
+name = "portia-grocery-manager"
+version = "0.1.0"
+description = "Grocery agent to let you add items from shopping list to checkout basket."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "portia-sdk-python[tools-browser-browserbase]>=0.3.5",
+    "python-dotenv>=1.1.1",
+]
