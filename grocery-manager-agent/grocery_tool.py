@@ -37,6 +37,9 @@ class GroceryTool(Tool[Dict[str, str]]):
     ) -> Dict[str, str] | MultipleChoiceClarification:
         """Handle product alternatives through clarification"""
         if choice:
+            if choice == "Skip this item":
+                print("⏭️ Skipping this item")
+                return {"product": ""}
             print(f"User chose: {choice}")
             return {"product": choice.split(" - ")[0]}
 
@@ -69,8 +72,10 @@ class GroceryTool(Tool[Dict[str, str]]):
             print("No valid options found")
             return {"product": ""}
 
+        options.append("Skip this item")
+
         clarification = MultipleChoiceClarification(
-            user_guidance="Choose which item you'd like to add to cart:",
+            user_guidance="Choose which item you'd like to add to cart (or skip):",
             options=options,
             argument_name="choice",
             plan_run_id=str(ctx.plan_run.id),

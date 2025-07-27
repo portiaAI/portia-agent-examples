@@ -23,11 +23,11 @@ def get_user_preferences() -> Tuple[str, str]:
     print("Let me ask you a couple of quick questions...\n")
 
     print("Which notes app do you use for your grocery lists?")
-    print("   (Keep, Obsidian, Notion, Apple Notes, or other)")
+    print("(Google Keep is supported as of now, others coming soon!)")
     notes_app = input("Your notes app: ").strip()
 
     print("Which grocery store would you like to shop at?")
-    print("   (Morrisons, Tesco, ASDA, Sainsbury's, or other)")
+    print("(Morrisons is supported as of now, others coming soon!)")
     grocery_store = input("Your preferred store: ").strip()
 
     notes_app_lower = notes_app.lower()
@@ -69,5 +69,6 @@ if __name__ == "__main__":
 
     # Create and use the shopping agent
     print(f"🛒 Shopping at {grocery_website}")
-    agent = ShoppingAgent(portia, grocery_website)
-    agent.process_list(grocery_list)
+    agent = ShoppingAgent(portia, grocery_website, grocery_list)
+    agent.process_list()
+    agent.notify_user()
