@@ -8,7 +8,7 @@ from portia.open_source_tools.browser_tool import (
     BrowserTool,
     BrowserInfrastructureOption,
 )
-from grocery_tool import GroceryTool
+from grocery_tool import GroceryAlternativesTool
 from shopping_agent import ShoppingAgent
 from notes_agent import NotesAgent
 
@@ -52,7 +52,7 @@ def get_user_preferences() -> Tuple[str, str]:
 
 if __name__ == "__main__":
     browser_tool = BrowserTool(infrastructure_option=BrowserInfrastructureOption.LOCAL)
-    alternatives_tool = GroceryTool()
+    alternatives_tool = GroceryAlternativesTool()
 
     tool_registry = ToolRegistry([browser_tool, alternatives_tool])
     portia = Portia(config=Config.from_default(), tools=tool_registry)

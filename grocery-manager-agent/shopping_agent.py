@@ -28,7 +28,7 @@ class ShoppingAgent:
             4. If the product is not available, search for alternative products. Like for example, if crocin is not available, search for paracetamol.
             5. Extract the search results in format:
                {{
-                   "results": [
+                   "grocery_items": [
                        {{
                            "name": "Product Name",
                            "price": "£X.XX"
