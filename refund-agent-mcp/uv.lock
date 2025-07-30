@@ -1930,7 +1930,7 @@ wheels = [
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.5.1"
+version = "0.5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anthropic" },
@@ -1954,9 +1954,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "testcontainers", extra = ["redis"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/04/887687f862b4c6266738edcfa474c136caa6a5fd1487e4935ecae156a428/portia_sdk_python-0.5.1.tar.gz", hash = "sha256:7fc754a2b3cfef59633db4c086a4c5ae051494e8b62bcfe50819bf16073dd2e1", size = 131516 }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/f4/1c2c7f2bb280d067875d7ce66087f1307f5fa1fa3c0344e6afbe8cd8a6e7/portia_sdk_python-0.5.2.tar.gz", hash = "sha256:4fc0cd60e367207613bf61e8fcba84c8071678c131a807bfd4f6667fd48078c4", size = 134133 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4b/3f/c2fc23ef389406488c4ea4e4d44407f3a3fcf5bf6beef830b521cfb37707/portia_sdk_python-0.5.1-py3-none-any.whl", hash = "sha256:831ca18667195e0530e38e74d741996416e6887464bc35c9510fc537f5ea3721", size = 166955 },
+    { url = "https://files.pythonhosted.org/packages/48/53/620a7f74835df08f45fe25ac7dd10cf520ff236cf0886c6b7c4270c5c3bb/portia_sdk_python-0.5.2-py3-none-any.whl", hash = "sha256:0b347c10f30e71b46dd0f67c99e842a699d125d9b4dbdea377f4d28189e0a8e7", size = 169449 },
 ]
 
 [package.optional-dependencies]
