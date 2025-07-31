@@ -6,7 +6,7 @@ authors = [{ name = "hello@portialabs.ai" }]
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
-    "portia-sdk-python[ollama] (>=0.4.0,<0.5.0)",
+    "portia-sdk-python[ollama] (>=0.5.3,<0.6.0)",
     "python-dotenv (>=1.0.0,<2.0.0)",
     "pydantic (>=2.4.2,<3.0.0)",
     "networkx>=3.4.2",
