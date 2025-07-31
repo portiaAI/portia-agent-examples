@@ -2,8 +2,8 @@
 
 ## Introduction
 The Portia Grocery Store Agent is an automated shopping assistant that helps you manage your grocery shopping. It can:
-- Extract your grocery list from Google Keep(or other note apps)
-- Search for items on Morrisons website(or other grocery websites)
+- Extract your grocery list from Google Keep.
+- Search for items on Morrisons website.
 - Handle product alternatives when items aren't available
 - Add items to your cart
 - Provide a summary of your cart and total price
@@ -13,10 +13,9 @@ Currently supported:
 - Grocery Store: Morrisons
 
 ## Prerequisites
-- Python 3.8 or higher
+- Python 3.11 or higher
 - A Morrisons online account
 - A Google account with access to Google Keep
-- The Portia SDK installed
 
 ## Setup
 1. Clone this repository:
