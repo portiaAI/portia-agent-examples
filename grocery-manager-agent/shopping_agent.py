@@ -70,7 +70,6 @@ class ShoppingAgent:
                     plan_run = self.portia.resolve_clarification(
                         clarification, "completed", plan_run
                     )
-
             plan_run = self.portia.resume(plan_run)
 
         # Check if the item was skipped

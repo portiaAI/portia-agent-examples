@@ -1,6 +1,10 @@
 from typing import List
 import json
 from portia import Portia
+from portia import (
+    PlanRunState,
+    ActionClarification,
+)
 
 
 class NotesAgent:
@@ -27,6 +31,18 @@ class NotesAgent:
             Return ONLY the JSON object, no additional text.
         """
         plan_run = self.portia.run(task)
+
+        while plan_run.state == PlanRunState.NEED_CLARIFICATION:
+            for clarification in plan_run.get_outstanding_clarifications():
+                if isinstance(clarification, ActionClarification):
+                    print(f"\n🔐 {clarification.user_guidance}")
+                    print("Please complete the action and press Enter to continue...")
+                    input()
+                    plan_run = self.portia.resolve_clarification(
+                        clarification, "completed", plan_run
+                    )
+            plan_run = self.portia.resume(plan_run)
+
         final_output = json.loads(plan_run.outputs.final_output.value)
         if "grocery_list" not in final_output:
             print("⚠️ Grocery list not found in final output")
