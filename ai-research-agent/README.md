@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This example demonstrates how to use Portia AI to build an agent that can receive emails about a topic, summarise them to slack and then create a short (2-3 mins) podcast from them. It utilises the [Gmail tools](https://docs.portialabs.ai/gmail-tools) and [Slack tools](https://docs.portialabs.ai/portia-tools/slack/) provided by Portia Cloud to read emails about 'AI' and post the summary to slack, as well as creating a new local [Podcastfy](https://github.com/souzatharsis/podcastfy/tree/main) for podcast creation.
+This example demonstrates how to use Portia AI to build an agent that can receive emails about a topic, summarise them and then create a short (2-3 mins) podcast from them which is shared to slack / discord. It utilises the [Gmail tools](https://docs.portialabs.ai/gmail-tools) and [Slack tools](https://docs.portialabs.ai/portia-tools/slack/) provided by Portia Cloud to read emails about 'AI' and post the summary to slack, as well as creating a new local [Podcastfy](https://github.com/souzatharsis/podcastfy/tree/main) for podcast creation.
 
-At Portia, we have an email inbox that is signed up to multiple AI newsletters. We then use this agent to summarise the emails and post the summary along with the podcast to our #ai-news slack channel once per day.
+At Portia, we have an email inbox that is signed up to multiple AI newsletters. We then use this agent to summarise the emails and post the summary along with the podcast to our #ai-news slack channel and to our discord server once per day. More details can be found in [this blog post](TODO).
 
 ## Prerequisites
 
@@ -14,6 +14,7 @@ At Portia, we have an email inbox that is signed up to multiple AI newsletters. 
 - If you want to use Gemini for the podcast creation (this can give better quality speech): A Gemini API key
 - A slack client ID and secret: You can get these by following the steps [here](https://docs.portialabs.ai/portia-tools/slack/send-message#configure-your-slack-tools-with-portia-ai)
 - We use poetry to manage dependencies. You can install it from [here](https://python-poetry.org/docs/#installation).
+- If you want the agent to post to discord as well as slack, you will need a discord bot token and a discord channel id. Follow the steps [here](https://discord.com/developers/docs/quick-start/getting-started) to create a Discord bot and get the token. You should also follow the steps to install the bot into your server. Then, follow the steps [here](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID) to find the channel ID of the channel you want your bot to be active in. Note that you'll need to enable developer mode in Discord to get the IDs.
 
 ## Setup
 
@@ -23,7 +24,7 @@ At Portia, we have an email inbox that is signed up to multiple AI newsletters. 
 4. Install the dependencies by running `poetry install`.
 5. Install 'ffmpeg' by following the steps [here](https://chatgpt.com/share/67cf7d0f-fd38-8007-9d94-2bae48fd7311) - this is needed for the podcast generation.
 6. If you want to improve the quality of the speech in your podcast, follow the steps [here](https://github.com/souzatharsis/podcastfy/blob/a68ea95e96952f34338e86c8ef6395f402d53830//usage/config.md#setting-up-google-tts-model) to set up a Gemini API key capable of using Google's Multi-Speaker voices, and out this key into your .env fila as: `GEMINI_API_KEY=<key>`.
-7. Run the `agent.py` file by running `poetry run python agent.py`.
+7. If you only want the agent to post to slack, run the `agent.py` file by running `poetry run python agent.py`. If you would also like to post to discord, run `poetry run python discord_bot.py`
 
 ## Running the example
 
