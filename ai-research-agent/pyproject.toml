@@ -7,11 +7,12 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
-portia-sdk-python = {version = "^0.4.1"}
+portia-sdk-python = {version = "^0.5.2"}
 python-dotenv = "^1.0.1"
 podcastfy = "^0.4.1"
 audioop-lts = "^0.2.1"
 tornado = ">=6.5.0"
+py-cord = "^2.6.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
