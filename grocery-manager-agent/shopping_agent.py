@@ -34,7 +34,8 @@ class ShoppingAgent:
                            "price": "£X.XX"
                        }}
                    ],
-                   "alternative": "true if these are alternative products for {item}, false if exact matches"
+                   "alternative": "true if these are alternative products for {item}, false if exact matches",
+                   "original_search_query": "{item}"
                }}
             6. Call the alternatives tool with the search results.
             7. Add the chosen product to cart (unless skipped).
