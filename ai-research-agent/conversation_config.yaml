@@ -15,7 +15,7 @@ engagement_techniques:
   - "anecdotes"
   - "analogies"
   - "humor"
-creativity: 1
+creativity: 0.7
 user_instructions: "Connect the news with AI agents if possible"
 
 text_to_speech:

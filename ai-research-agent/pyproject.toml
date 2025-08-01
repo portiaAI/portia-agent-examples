@@ -10,6 +10,7 @@ dependencies = [
     "podcastfy>=0.4.1,<0.5",
     "audioop-lts>=0.2.1,<0.3",
     "tornado>=6.5.0",
+    "py-cord>=2.6.1",
 ]
 
 [tool.uv]

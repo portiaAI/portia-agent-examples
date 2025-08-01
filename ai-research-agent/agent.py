@@ -8,7 +8,6 @@ from podcastfy.client import generate_podcast
 from portia import (
     Config,
     DefaultToolRegistry,
-    InMemoryToolRegistry,
     LogLevel,
     PlanRunState,
     Portia,
@@ -21,6 +20,13 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 
+class ResearchAgentOutput(BaseModel):
+    new_post_text: str = Field(
+        ...,
+        description=("The text that was sent to the #ai-news slack channel."),
+    )
+
+
 class PodcastToolSchema(BaseModel):
     """Input for PodcastTool."""
 
@@ -29,8 +35,7 @@ class PodcastToolSchema(BaseModel):
         description=("The high-level summary for the podcast."),
     )
     details: str = Field(
-        ...,
-        description=("Further details that can be used in creating the podcast."),
+        ..., description=("Further details that can be used in creating the podcast.")
     )
 
 
@@ -85,37 +90,51 @@ class PodcastTool(Tool[str]):
         return latest_podcast_path
 
 
-config = Config.from_default(
-    default_model="openai/gpt-4o",
-    default_log_level=LogLevel.DEBUG,
-)
-tools = DefaultToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
-    [PodcastTool()]
-)
-# Instantiate a Portia instance. Load it with the default config and with the example tools.
-portia = Portia(
-    config=config,
-    tools=tools,
-    execution_hooks=CLIExecutionHooks(),
-)
+def run_agent() -> ResearchAgentOutput:
+    """Run the AI research agent."""
+    config = Config.from_default(
+        default_model="openai/gpt-4o",
+        default_log_level=LogLevel.DEBUG,
+    )
+    tools = DefaultToolRegistry(config) + [PodcastTool()]
+    portia = Portia(
+        config=config,
+        tools=tools,
+        execution_hooks=CLIExecutionHooks(),
+    )
 
-# We plan and run the agent in separate steps so we can print out the plan.
-# An alternative would be to just call portia.run() which will do both.
-plan = portia.plan(
-    "Read all emails from today that contain 'AI'."
-    "If there are no emails, exit. If there are emails, summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
-    "Then post the summary with links to the #ai-news slack channel."
-    "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
-)
-print("\nHere are the steps in the generated plan:")
-print(plan.pretty_print())
+    # We plan and run the agent in separate steps so we can print out the plan.
+    # An alternative would be to just call portia.run() which will do both.
+    plan = portia.plan(
+        "Read all emails from today that contain 'AI'. If there are no emails, exit. "
+        "If there are emails, summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
+        "The summary should be focussed on 3 key themes, with each having a text summary and then a bullet-pointed list (up to 3 bullets) associated with each theme with web pages (title + link) for people to investigate further. "
+        "The heading should be 'Daily AI News Update' and the summary should be in a format suitable for sending on slack / discord (i.e. no markdown formatting)."
+        "For this step, when calling the llm_tool, use templating to pass the emails in (rather than copying them verbatim)."
+        "Then post the summary with links to the #ai-news slack channel. "
+        "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails. "
+        "For this step, when calling the podcast tool, use templating to pass the emails in (rather than copying them verbatim)."
+    )
 
-if os.getenv("CI") != "true":
-    user_input = input("Are you happy with the plan? (y/n):\n")
-    if user_input != "y":
-        sys.exit(1)
+    print("\nHere are the steps in the generated plan:")
+    print(plan.pretty_print())
 
-run = portia.run_plan(plan)
+    if os.getenv("CI") != "true":
+        user_input = input("Are you happy with the plan? (y/n):\n")
+        if user_input != "y":
+            sys.exit(1)
 
-if run.state != PlanRunState.COMPLETE:
-    raise Exception(f"Plan run failed with state {run.state}. Check logs for details.")
+    run = portia.run_plan(
+        plan,
+        structured_output_schema=ResearchAgentOutput,
+    )
+
+    if run.state != PlanRunState.COMPLETE:
+        raise Exception(
+            f"Plan run failed with state {run.state}. Check logs for details."
+        )
+    return ResearchAgentOutput.model_validate(run.outputs.final_output.value)
+
+
+if __name__ == "__main__":
+    run_agent()
