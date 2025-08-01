@@ -13,9 +13,14 @@ Currently supported:
 - Grocery Store: Morrisons
 
 ## Prerequisites
-- Python 3.11 or higher
+- Python 3.11
 - A Morrisons online account
 - A Google account with access to Google Keep
+- The Portia SDK installed
+- uv (Python package installer) - A fast, reliable Python package installer and resolver. Install it using:
+  ```bash
+  pip install uv
+  ```
 
 ## Setup
 1. Clone this repository:
