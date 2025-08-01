@@ -11,6 +11,7 @@ from portia.open_source_tools.browser_tool import (
 from grocery_tool import GroceryAlternativesTool
 from shopping_agent import ShoppingAgent
 from notes_agent import NotesAgent
+from portia.cli import CLIExecutionHooks
 
 
 # This method can be extended to support other notes apps and grocery stores.
@@ -37,7 +38,11 @@ if __name__ == "__main__":
     alternatives_tool = GroceryAlternativesTool()
 
     tool_registry = ToolRegistry([browser_tool, alternatives_tool])
-    portia = Portia(config=Config.from_default(), tools=tool_registry)
+    portia = Portia(
+        config=Config.from_default(),
+        execution_hooks=CLIExecutionHooks(),
+        tools=tool_registry,
+    )
 
     grocery_website, notes_website = get_user_preferences()
 
