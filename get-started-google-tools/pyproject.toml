@@ -5,7 +5,7 @@ description = "Get started with Google tools and Portia AI"
 authors = [{ name = "Portia AI", email = "hello@portialabs.ai" }]
 requires-python = ">=3.11,<4"
 dependencies = [
-    "portia-sdk-python>=0.5.0,<0.6.0",
+    "portia-sdk-python>=0.5.03,<0.6.0",
     "python-dotenv>=1.0.1,<2",
 ]
 
