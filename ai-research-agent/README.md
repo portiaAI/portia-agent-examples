@@ -4,7 +4,7 @@
 
 This example demonstrates how to use Portia AI to build an agent that can receive emails about a topic, summarise them and then create a short (2-3 mins) podcast from them which is shared to slack / discord. It utilises the [Gmail tools](https://docs.portialabs.ai/gmail-tools) and [Slack tools](https://docs.portialabs.ai/portia-tools/slack/) provided by Portia Cloud to read emails about 'AI' and post the summary to slack, as well as creating a new local [Podcastfy](https://github.com/souzatharsis/podcastfy/tree/main) for podcast creation.
 
-At Portia, we have an email inbox that is signed up to multiple AI newsletters. We then use this agent to summarise the emails and post the summary along with the podcast to our #ai-news slack channel and to our discord server once per day. More details can be found in [this blog post](TODO).
+At Portia, we have an email inbox that is signed up to multiple AI newsletters. We then use this agent to summarise the emails and post the summary along with the podcast to our #ai-news slack channel and to our discord server once per day. More details can be found in [this blog post](https://dev.to/portia-ai/how-i-built-an-ai-agent-that-turns-daily-ai-news-into-a-commute-sized-podcast-44pg).
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ At Portia, we have an email inbox that is signed up to multiple AI newsletters. 
 4. Install the dependencies by running `uv sync`.
 5. Install 'ffmpeg' by following the steps [here](https://chatgpt.com/share/67cf7d0f-fd38-8007-9d94-2bae48fd7311) - this is needed for the podcast generation.
 6. If you want to improve the quality of the speech in your podcast, follow the steps [here](https://github.com/souzatharsis/podcastfy/blob/a68ea95e96952f34338e86c8ef6395f402d53830//usage/config.md#setting-up-google-tts-model) to set up a Gemini API key capable of using Google's Multi-Speaker voices, and out this key into your .env fila as: `GEMINI_API_KEY=<key>`.
-7. If you only want the agent to post to slack, run the `agent.py` file by running `uv run agent.py`. If you would also like to post to discord, run `uv run python discord_bot.py`
+7. If you only want the agent to post to slack, run the `agent.py` file by running `uv run agent.py`. If you would also like to post to discord, run `uv run discord_bot.py`
 
 ## Running the example
 
