@@ -24,8 +24,17 @@ async def on_ready():
         )
         if channel and os.path.exists(podcast_path):
             file = discord.File(podcast_path, filename="ai_news_podcast.mp3")
-            msg = f"Daily AI news update \n\n{result.summary}\n\nAlso available as a podcast below - enjoy!"
-            await channel.send(msg, file=file)
+
+            # Split message on blank lines - we do this so we don't exceed the maximum message length
+            message_parts = [
+                part.strip()
+                for part in result.new_post_text.split("\n\n")
+                if part.strip()
+            ]
+            for part in message_parts:
+                await channel.send(part)
+
+            await channel.send("Also available as a podcast below - enjoy!", file=file)
         else:
             print(f"Channel with ID {channel_id} not found")
     except Exception as e:

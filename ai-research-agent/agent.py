@@ -106,15 +106,16 @@ def run_agent() -> ResearchAgentOutput:
     # We plan and run the agent in separate steps so we can print out the plan.
     # An alternative would be to just call portia.run() which will do both.
     plan = portia.plan(
-        "Read all emails from today that contain 'AI'."
-        "If there are no emails, exit."
-        "If there are emails, pick out 3 key topic areas from the emails and prepare a short summary for each topic area. "
-        "Underneath each summary there should be a bullet-pointed list of webpages (title with link) from the emails that are relevant to that topic area."
-        "Then post the summary with links to the #ai-news slack channel."
-        "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails."
-        "The final output should be the text that was sent to the #ai-news slack channel.",
-        structured_output_schema=ResearchAgentOutput,
+        "Read all emails from today that contain 'AI'. If there are no emails, exit. "
+        "If there are emails, summarise them into a single, coherent summary (i.e. don't summarise each email separately). "
+        "The summary should be focussed on 3 key themes, with each having a text summary and then a bullet-pointed list (up to 3 bullets) associated with each theme with web pages (title + link) for people to investigate further. "
+        "The heading should be 'Daily AI News Update' and the summary should be in a format suitable for sending on slack / discord (i.e. no markdown formatting)."
+        "For this step, when calling the llm_tool, use templating to pass the emails in (rather than copying them verbatim)."
+        "Then post the summary with links to the #ai-news slack channel. "
+        "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails. "
+        "For this step, when calling the podcast tool, use templating to pass the emails in (rather than copying them verbatim)."
     )
+
     print("\nHere are the steps in the generated plan:")
     print(plan.pretty_print())
 
