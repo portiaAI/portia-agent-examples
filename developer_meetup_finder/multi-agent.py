@@ -5,7 +5,7 @@ from portia.cli import CLIExecutionHooks
 
 load_dotenv(override=True)
 
-with open('recipient_data.json', 'r') as file:
+with open('data.json', 'r') as file:
     data = json.load(file)
     recipient_interest = data['recipient_interest']
     recipient_location = data['recipient_location']
