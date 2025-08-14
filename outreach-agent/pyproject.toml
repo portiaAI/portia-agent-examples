@@ -5,7 +5,7 @@ description = "Outreach agent for Portia AI"
 authors = [{ name = "Portia AI", email = "hello@portialabs.ai" }]
 requires-python = "~=3.11"
 dependencies = [
-    "portia-sdk-python[tools-browser-local]>=0.6.1,<0.7",
+    "portia-sdk-python[tools-browser-local]>=0.6.2,<0.7",
     "python-dotenv>=1.0.1,<2",
 ]
 
