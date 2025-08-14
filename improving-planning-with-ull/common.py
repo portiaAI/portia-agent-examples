@@ -11,6 +11,7 @@ import os
 
 import portia.tool
 from dotenv import load_dotenv
+from mock_tools import RefundHumanApprovalTool, RefundReviewerTool
 from portia import (
     Config,
     DefaultToolRegistry,
@@ -20,9 +21,6 @@ from portia import (
 )
 from portia.cli import CLIExecutionHooks
 
-from mock_tools import RefundReviewerTool, RefundHumanApprovalTool
-
-
 portia.tool.MAX_TOOL_DESCRIPTION_LENGTH = 2048
 
 
@@ -30,7 +28,7 @@ def init_portia():
     """
     Load config from a `.env` file and return a configured instance of `Portia`.
     """
-    
+
     load_dotenv(override=True)
 
     config = Config.from_default(default_log_level="INFO")

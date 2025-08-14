@@ -6,7 +6,6 @@ This script demonstrates how to execute a (not very well-written) prompt with Po
 It is part of a set of scripts designed to demonstrate how user-led learning can improve planning results.
 """
 
-
 from common import init_portia
 
 # Define the prompt for testing

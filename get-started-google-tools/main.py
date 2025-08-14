@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from portia import Config, Portia, PortiaToolRegistry
+from portia import Config, DefaultToolRegistry, Portia
 from portia.cli import CLIExecutionHooks
 
 load_dotenv(override=True)
@@ -32,7 +32,7 @@ print("\nA plan will now be generated. Please wait...")
 my_config = Config.from_default()
 portia = Portia(
     config=my_config,
-    tools=PortiaToolRegistry(my_config),
+    tools=DefaultToolRegistry(my_config),
     execution_hooks=CLIExecutionHooks(),
 )
 

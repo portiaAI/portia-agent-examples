@@ -12,8 +12,8 @@ Required configuration:
 from dotenv import load_dotenv
 from portia import (
     Config,
+    DefaultToolRegistry,
     Portia,
-    PortiaToolRegistry,
     StorageClass,
 )
 from portia.cli import CLIExecutionHooks
@@ -36,7 +36,7 @@ If I don't have any free times, please output the next time after 12pm when I am
 my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 portia = Portia(
     config=my_config,
-    tools=PortiaToolRegistry(my_config),
+    tools=DefaultToolRegistry(my_config),
     execution_hooks=CLIExecutionHooks(),
 )
 
