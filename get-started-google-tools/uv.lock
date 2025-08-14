@@ -1450,7 +1450,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "portia-sdk-python", specifier = ">=0.6.1rc0,<0.7.0" },
+    { name = "portia-sdk-python", specifier = ">=0.6.1,<0.7.0" },
     { name = "python-dotenv", specifier = ">=1.0.1,<2" },
 ]
 

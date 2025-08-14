@@ -7,7 +7,7 @@ import re
 
 from dotenv import load_dotenv
 
-from portia import Portia, PortiaToolRegistry, Config, StorageClass, DefaultToolRegistry
+from portia import Portia, Config, StorageClass, DefaultToolRegistry
 from portia.open_source_tools.browser_tool import (
     BrowserToolForUrl,
     BrowserInfrastructureOption,

@@ -2,11 +2,11 @@
 
 from portia import (
     Config,
+    DefaultToolRegistry,
     InMemoryToolRegistry,
     LogLevel,
     PlanRunState,
     Portia,
-    PortiaToolRegistry,
 )
 
 from bot.weaviate import RAGQueryDBTool, close_weaviate
@@ -15,7 +15,7 @@ config = Config.from_default(
     default_log_level=LogLevel.DEBUG,
     default_model="openai/gpt-4o",
 )
-registry = PortiaToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
+registry = DefaultToolRegistry(config) + InMemoryToolRegistry.from_local_tools(
     [
         RAGQueryDBTool(
             description="Used to retrieve information from the Portia SDK docs.",

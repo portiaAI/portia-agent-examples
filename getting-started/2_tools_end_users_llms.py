@@ -14,8 +14,8 @@ Required configuration:
 from dotenv import load_dotenv
 from portia import (
     Config,
+    DefaultToolRegistry,
     Portia,
-    PortiaToolRegistry,
     StorageClass,
     open_source_tool_registry,
 )
@@ -30,9 +30,7 @@ task2 = (
 )
 
 # Needs OpenWeatherMap API key
-task3 = (
-    "Fetch the weather in London and email bob@portialabs.ai with the results."
-)
+task3 = "Fetch the weather in London and email bob@portialabs.ai with the results."
 
 
 # Instantiate a Portia runner. Load it with the default config and with Portia cloud tools above.
@@ -41,7 +39,7 @@ my_config = Config.from_default(storage_class=StorageClass.CLOUD)
 
 portia = Portia(
     config=my_config,
-    tools=PortiaToolRegistry(my_config) + open_source_tool_registry,
+    tools=DefaultToolRegistry(my_config) + open_source_tool_registry,
     execution_hooks=CLIExecutionHooks(),
 )
 

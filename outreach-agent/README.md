@@ -25,8 +25,8 @@ This example demonstrates how to use Portia AI to build an agent that does outre
 
 1. Clone the repository and select this folder.
 2. Copy the `.env.example` file to `.env` and add your API keys to it.
-4. Install the dependencies by running `uv sync`.
-7. Run the `agent.py` file by running `uv run agent.py`.
+4. Install the dependencies by running `poetry install`.
+7. Run the `agent.py` file by running `poetry run python agent.py`.
 
 ## Running the example
 
