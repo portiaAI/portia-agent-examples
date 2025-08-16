@@ -76,6 +76,9 @@ A custom Portia tool that:
 - Manages user choices
 - Provides skip functionality for unwanted items
 
+You can also take a look at the Youtube Video [here](https://www.youtube.com/watch?v=YHkojGhYhvw&ab_channel=AtibhiAgrawal)
+which provides a walkthrough of the code along with a demo of the agent.
+
 ### Key Features
 - Automated login handling
 - Smart product alternative suggestions
