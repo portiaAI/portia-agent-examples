@@ -67,11 +67,11 @@ class RefundReviewerTool(Tool[str]):
                 "the refund policy, and provides a break down of your reasoning about what the decision should be.\n"
                 "Following your detailed analysis, you will respond with a single word: 'APPROVED' or 'REJECTED' on a new line.\n"
                 "The refund policy is as follows:\n"
-                f"{refund_policy}\n"
+                f"{refund_policy}\n",
             ),
             Message(
                 role="user",
-                content=f"The refund request is as follows:\n{refund_request}"
+                content=f"The refund request is as follows:\n{refund_request}",
             ),
         ]
         response = llm.get_response(messages)
@@ -90,17 +90,14 @@ def main(customer_email: str):
 
     config = Config.from_default(default_log_level="INFO")
 
-    tools = (
-        DefaultToolRegistry(
-            config=config,
-        )
-        + InMemoryToolRegistry.from_local_tools(
-            [RefundReviewerTool()]
-        )
-    )
+    tools = DefaultToolRegistry(
+        config=config,
+    ) + InMemoryToolRegistry.from_local_tools([RefundReviewerTool()])
     if not tools.get_tool("portia:mcp:mcp.stripe.com:create_refund"):
-        raise ValueError("Stripe MCP tool not found. Please install the Stripe MCP tool on Portia "
-                         "cloud by going to https://app.portialabs.ai/dashboard/tool-registry")
+        raise ValueError(
+            "Stripe MCP tool not found. Please install the Stripe MCP tool on Portia "
+            "cloud by going to https://app.portialabs.ai/dashboard/tool-registry"
+        )
 
     tools.with_tool_description(
         "portia:mcp:mcp.stripe.com:create_refund",
@@ -111,15 +108,17 @@ def main(customer_email: str):
             "- fraudulent\n"
             "- requested_by_customer\n"
             "`reason` is optional - if none of the above are valid, leave it out."
-        )
+        ),
     )
 
     portia = Portia(
         config=config,
         tools=tools,
         execution_hooks=CLIExecutionHooks(
-            before_tool_call=clarify_on_tool_calls("portia:mcp:mcp.stripe.com:create_refund")
-        )
+            before_tool_call=clarify_on_tool_calls(
+                "portia:mcp:mcp.stripe.com:create_refund"
+            )
+        ),
     )
     plan = portia.plan(
         """
