@@ -102,8 +102,17 @@ def main(customer_email: str):
         raise ValueError("Stripe MCP tool not found. Please install the Stripe MCP tool on Portia "
                          "cloud by going to https://app.portialabs.ai/dashboard/tool-registry")
 
-    tools.with_tool_description("portia:mcp:mcp.stripe.com:create_refund",
-                            "The amount should be provided in cents without any decimal points, e.g 10.00 should be 1000")
+    tools.with_tool_description(
+        "portia:mcp:mcp.stripe.com:create_refund",
+        updated_description=(
+            "The amount should be provided in cents without any decimal points, e.g 10.00 should be 1000.\n"
+            "The `reason` field is an enum, that must be one of the following (if present):\n"
+            "- duplicate\n"
+            "- fraudulent\n"
+            "- requested_by_customer\n"
+            "`reason` is optional - if none of the above are valid, leave it out."
+        )
+    )
 
     portia = Portia(
         config=config,
