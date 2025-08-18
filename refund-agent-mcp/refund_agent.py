@@ -99,6 +99,8 @@ def main(customer_email: str):
             "cloud by going to https://app.portialabs.ai/dashboard/tool-registry"
         )
 
+    # Stripe added a `reason` field to the create_refund MCP tool, which is modelled as a string
+    # in their schema, but in fact is an enum with 3 possible values: duplicate, fraudulent, requested_by_customer.
     tools.with_tool_description(
         "portia:mcp:mcp.stripe.com:create_refund",
         updated_description=(
