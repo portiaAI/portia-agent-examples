@@ -69,11 +69,11 @@ class RefundReviewerTool(Tool[str]):
                 "the refund policy, and provides a break down of your reasoning about what the decision should be.\n"
                 "Following your detailed analysis, you will respond with a single word: 'APPROVED' or 'REJECTED' on a new line.\n"
                 "The refund policy is as follows:\n"
-                f"{refund_policy}\n"
+                f"{refund_policy}\n",
             ),
             Message(
                 role="user",
-                content=f"The refund request is as follows:\n{refund_request}"
+                content=f"The refund request is as follows:\n{refund_request}",
             ),
         ]
         response = llm.get_response(messages)
@@ -90,8 +90,9 @@ def main(customer_email: str):
     with open("inbox.txt", "w") as f:
         f.write(customer_email)
 
-    config = Config.from_default(default_log_level="INFO",
-                                 argument_clarifications_enabled=False)
+    config = Config.from_default(
+        default_log_level="INFO", argument_clarifications_enabled=False
+    )
 
     tools = (
         McpToolRegistry.from_stdio_connection(
@@ -107,9 +108,7 @@ def main(customer_email: str):
         + DefaultToolRegistry(
             config=config,
         )
-        + InMemoryToolRegistry.from_local_tools(
-            [RefundReviewerTool()]
-        )
+        + InMemoryToolRegistry.from_local_tools([RefundReviewerTool()])
     )
 
     portia = Portia(
@@ -117,7 +116,7 @@ def main(customer_email: str):
         tools=tools,
         execution_hooks=CLIExecutionHooks(
             before_tool_call=clarify_on_tool_calls("mcp:stripe:create_refund")
-        )
+        ),
     )
     plan = portia.plan(
         """
