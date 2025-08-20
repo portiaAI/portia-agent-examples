@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12, <4"
 resolution-markers = [
     "python_full_version >= '3.13'",
@@ -233,7 +233,7 @@ requires-dist = [
     { name = "langchain-openai", specifier = ">=0.3,<0.4" },
     { name = "langchain-text-splitters", specifier = ">=0.3.5,<0.4.0" },
     { name = "markdownify", specifier = ">=0.14.1,<0.15.0" },
-    { name = "portia-sdk-python", specifier = ">=0.6.2,<0.7.0" },
+    { name = "portia-sdk-python", specifier = ">=0.7.0,<0.8.0" },
     { name = "py-cord", specifier = ">=2.6.1,<3.0.0" },
     { name = "ruff", specifier = ">=0.9.6,<0.10.0" },
     { name = "tiktoken", specifier = ">=0.9.0,<0.10.0" },
@@ -243,11 +243,11 @@ requires-dist = [
 
 [[package]]
 name = "certifi"
-version = "2025.7.14"
+version = "2025.8.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b3/76/52c535bcebe74590f296d6c77c86dabf761c41980e1347a2422e4aa2ae41/certifi-2025.7.14.tar.gz", hash = "sha256:8ea99dbdfaaf2ba2f9bac77b9249ef62ec5218e7c2b2e903378ed5fccf765995", size = 163981, upload-time = "2025-07-14T03:29:28.449Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/67/960ebe6bf230a96cda2e0abcf73af550ec4f090005363542f0765df162e0/certifi-2025.8.3.tar.gz", hash = "sha256:e564105f78ded564e3ae7c923924435e1daa7463faeab5bb932bc53ffae63407", size = 162386, upload-time = "2025-08-03T03:07:47.08Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4f/52/34c6cf5bb9285074dc3531c437b3919e825d976fde097a7a73f79e726d03/certifi-2025.7.14-py3-none-any.whl", hash = "sha256:6b31f564a415d79ee77df69d757bb49a5bb53bd9f756cbbe24394ffd6fc1f4b2", size = 162722, upload-time = "2025-07-14T03:29:26.863Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/48/1549795ba7742c948d2ad169c1c8cdbae65bc450d6cd753d124b17c8cd32/certifi-2025.8.3-py3-none-any.whl", hash = "sha256:f6c12493cfb1b06ba2ff328595af9350c65d6644968e5d3a2ffd78699af217a5", size = 161216, upload-time = "2025-08-03T03:07:45.777Z" },
 ]
 
 [[package]]
@@ -1452,7 +1452,7 @@ wheels = [
 
 [[package]]
 name = "portia-sdk-python"
-version = "0.6.2"
+version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anthropic" },
@@ -1469,6 +1469,7 @@ dependencies = [
     { name = "litellm" },
     { name = "loguru" },
     { name = "mcp" },
+    { name = "openai" },
     { name = "openpyxl" },
     { name = "pandas" },
     { name = "posthog" },
@@ -1477,9 +1478,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "testcontainers", extra = ["redis"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e6/86/1f03f81256014f19309dfc972a195ffac4cdd1ea7aa21532f0b885a6e32e/portia_sdk_python-0.6.2.tar.gz", hash = "sha256:0dc204bacacf9614be4b7368e918ace4812061acfa6ce0194f5944da16beaced", size = 138218, upload-time = "2025-08-14T13:04:59.664Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/be/0c/c621f32ba7d3def04aaaa4994d28e26ad88d73529f3f8a07415e4c031807/portia_sdk_python-0.7.0.tar.gz", hash = "sha256:68fb3d62b9415d1e2983da0eb26c0b054ef5518a9ebe76a52261aa4368ebe75e", size = 152793, upload-time = "2025-08-20T11:38:04.091Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4f/6e/3fd4134687d7c7322bed9642553efb672139319640bb32050d8d54a1cca9/portia_sdk_python-0.6.2-py3-none-any.whl", hash = "sha256:809d1b9941604cdf91810fe48566d5852d257aed1d1c8ea9f07d2037cae36b3f", size = 173483, upload-time = "2025-08-14T13:04:58.065Z" },
+    { url = "https://files.pythonhosted.org/packages/be/2c/2e00cbf7116143ca9daf6cc05d22de4d08eef303ab6ef167e55c36c0d34f/portia_sdk_python-0.7.0-py3-none-any.whl", hash = "sha256:044ba477dd9736a482c4d56d7c0cfa16cfe564ff91ca6cd80600bcfe1e5372a8", size = 191247, upload-time = "2025-08-20T11:38:02.83Z" },
 ]
 
 [[package]]
