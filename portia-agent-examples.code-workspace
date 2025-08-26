@@ -64,8 +64,8 @@
             "**/*.pyc": true,
             "**/.pytest_cache": true,
             "**/.mypy_cache": true,
-            "**/.venv": false,
-            "**/venv": false
+            "**/.venv": true,
+            "**/venv": true
         }
     },
 }
