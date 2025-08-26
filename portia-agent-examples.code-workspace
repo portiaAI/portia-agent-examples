@@ -1,0 +1,72 @@
+{
+    "folders": [
+        {
+            "name": "Root",
+            "path": "."
+        },
+        {
+            "name": "AI Research Agent",
+            "path": "./ai-research-agent"
+        },
+        {
+            "name": "Simple Planning Agent",
+            "path": "./simple-planning-agent"
+        },
+        {
+            "name": "Refund Agent MCP",
+            "path": "./refund-agent-mcp"
+        },
+        {
+            "name": "Outreach Agent",
+            "path": "./outreach-agent"
+        },
+        {
+            "name": "Planning Poker",
+            "path": "./planning-poker"
+        },
+        {
+            "name": "Improving Planning with ULL",
+            "path": "./improving-planning-with-ull"
+        },
+        {
+            "name": "Local LLM",
+            "path": "./local-llm"
+        },
+        {
+            "name": "Grocery Manager Agent",
+            "path": "./grocery-manager-agent"
+        },
+        {
+            "name": "Getting Started",
+            "path": "./getting-started"
+        },
+        {
+            "name": "Get Started Google Tools",
+            "path": "./get-started-google-tools"
+        },
+        {
+            "name": "Discord Knowledge Bot",
+            "path": "./discord-knowledge-bot"
+        },
+        {
+            "name": "Scraper Agent",
+            "path": "./scraper-agent"
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "./ai-research-agent/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoSearchPaths": true,
+        "python.analysis.extraPaths": [],
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/.pytest_cache": true,
+            "**/.mypy_cache": true,
+            "**/.venv": false,
+            "**/venv": false
+        }
+    },
+}
