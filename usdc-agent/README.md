@@ -189,7 +189,7 @@ The main entry point that:
 
 ### Getting Help:
 1. Check the [CDP SDK Documentation](https://docs.cdp.coinbase.com/)
-2. Visit [Portia Documentation](https://docs.portia.ai/)
+2. Visit [Portia Documentation](https://docs.portialabs.ai/)
 3. Test on testnet first before reporting issues
 
 ## License

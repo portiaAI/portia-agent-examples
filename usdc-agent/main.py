@@ -2,13 +2,12 @@
 import os
 import asyncio
 from decimal import Decimal
-from typing import Optional
-import secrets
 
 from dotenv import load_dotenv
 from portia import Portia, Config, Tool, ToolRunContext
+from portia.errors import ToolSoftError
 from portia.cli import CLIExecutionHooks
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Type
 
 load_dotenv(override=True)
@@ -54,11 +53,35 @@ def parse_token_balances(balance_response):
 class USDCTransferInput(BaseModel):
     """Input schema for USDC transfer tool."""
     recipient_address: str = Field(
-        description="The recipient's wallet address (0x...)"
+        description="The recipient's wallet address - must start with 0x followed by 40 hexadecimal characters",
+        min_length=42,
+        max_length=42,
+        pattern=r"^0x[a-fA-F0-9]{40}$"
     )
     amount: str = Field(
-        description="Amount of USDC to send (e.g., '1' for 1 USDC)"
+        description="Amount of USDC to send (e.g., '1' for 1 USDC) - must be a positive number",
+        pattern=r"^\d+(\.\d+)?$"
     )
+    
+    @field_validator('recipient_address')
+    @classmethod
+    def validate_recipient_address(cls, v: str) -> str:
+        if not v.startswith('0x'):
+            raise ValueError("Address must start with '0x'")
+        if len(v) != 42:
+            raise ValueError("Address must be exactly 42 characters long (0x + 40 hex chars)")
+        return v
+    
+    @field_validator('amount')
+    @classmethod
+    def validate_amount(cls, v: str) -> str:
+        try:
+            amount_decimal = Decimal(v)
+            if amount_decimal <= 0:
+                raise ValueError("Amount must be greater than 0")
+        except Exception:
+            raise ValueError(f"Invalid amount format: {v}")
+        return v
 
 class USDCTransferTool(Tool[str]):
     """Tool for transferring USDC to any wallet address (gasless)."""
@@ -75,16 +98,6 @@ class USDCTransferTool(Tool[str]):
     def run(self, context: ToolRunContext, recipient_address: str, amount: str) -> str:
         """Execute USDC transfer."""
         try:
-            if not recipient_address.startswith('0x') or len(recipient_address) != 42:
-                return f"Error: Invalid recipient address format. Expected 0x followed by 40 characters, got: {recipient_address}"
-            
-            try:
-                amount_decimal = Decimal(amount)
-                if amount_decimal <= 0:
-                    return "Error: Amount must be greater than 0"
-            except Exception:
-                return f"Error: Invalid amount format: {amount}"
-            
             print(f"Initiating gasless USDC transfer of {amount} USDC to {recipient_address}...")
             
             result = asyncio.run(self._async_usdc_transfer(recipient_address, amount))
@@ -108,7 +121,7 @@ class USDCTransferTool(Tool[str]):
             try:
                 wallet_private_key = os.getenv('WALLET_PRIVATE_KEY')
                 
-                if wallet_private_key and wallet_private_key != 'your_wallet_private_key_here':
+                if wallet_private_key:
                     if not wallet_private_key.startswith('0x'):
                         wallet_private_key = '0x' + wallet_private_key
                     
@@ -131,7 +144,7 @@ class USDCTransferTool(Tool[str]):
                 # Check USDC balance
                 try:
                     balance_response = await account.list_token_balances(
-                        network="base-sepolia",
+                        network=network_id,
                     )
                     
                     eth_balance, usdc_balance = parse_token_balances(balance_response)
@@ -155,10 +168,11 @@ class USDCTransferTool(Tool[str]):
 💡 You can get test USDC from faucets or transfer from another wallet.
 """
                 except Exception as e:
-                    print(f"⚠️ Could not check balance: {e}")
+                    error_msg = f"⚠️ Could not check balance: {e}. Aborting transaction."
+                    print(error_msg)
+                    return error_msg
                 
                 print(f"🚀 Executing USDC transfer...")
-                
                 try:
                     tx = await account.transfer(
                         to=recipient_address,
@@ -185,7 +199,7 @@ class USDCTransferTool(Tool[str]):
                 return result
                 
             except Exception as e:
-                return f"❌ Transfer failed: {str(e)}"
+                raise ToolSoftError(f"❌ Transfer failed: {str(e)}")
     
 
 
@@ -288,7 +302,7 @@ Available commands:
                 return result
                 
             except Exception as e:
-                return f"❌ Error getting wallet info: {str(e)}"
+                raise ToolSoftError(f"❌ Error getting wallet info: {str(e)}")
     
 
 
@@ -296,10 +310,10 @@ Available commands:
 def main():
     """Main function to run the crypto agent."""
     
+    # Check for required CDP keys
     required_env_vars = [
         'CDP_API_KEY_ID',
-        'CDP_API_KEY_SECRET', 
-        'PORTIA_API_KEY'
+        'CDP_API_KEY_SECRET'
     ]
     
     missing_vars = [var for var in required_env_vars if not os.getenv(var)]
