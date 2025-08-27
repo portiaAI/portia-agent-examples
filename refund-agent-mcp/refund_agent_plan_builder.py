@@ -121,7 +121,6 @@ def main(customer_email: str):
 
 
 if __name__ == "__main__":
-    load_dotenv()
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--email",

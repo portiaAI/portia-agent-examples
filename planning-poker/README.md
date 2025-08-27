@@ -55,5 +55,5 @@ The agent uses several key components:
 The estimation process follows a planning poker methodology where each "developer" provides their estimate based on their expertise, helping to identify potential challenges and assumptions from different technical perspectives.
 
 ## Note
-This folder contains the main.py implementation which is more LLM-driven as well as mainethan.py which relies more on code.
-This is discussed in a dev.to article here https://dev.to/portia-ai/code-vs-llm-in-a-simple-planning-poker-agent-example-5dg0
+This folder contains the main.py implementation which is mainly LLM-driven in the tasks of planning and multi-step execution. We also have a version `mainethan.py` where we demonstrate how you can rely on the declarative `PlanBuilderV2` interface to define the plan that you want the refund agent to pursue. More on this approach to planning can be found in our docs [here](https://docs.portialabs.ai/build-plan).
+The difference between approaches is discussed in a dev.to article here https://dev.to/portia-ai/code-vs-llm-in-a-simple-planning-poker-agent-example-5dg0.
