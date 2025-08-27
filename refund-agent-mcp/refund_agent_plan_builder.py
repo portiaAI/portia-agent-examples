@@ -4,13 +4,14 @@ import argparse
 from enum import Enum
 
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
 from portia import Config
 from portia.builder.plan_builder_v2 import PlanBuilderV2
 from portia.builder.reference import StepOutput
 from portia.cli import CLIExecutionHooks
 from portia.portia import Portia
 from portia.tool_registry import DefaultToolRegistry
-from pydantic import BaseModel, Field
 
 load_dotenv(override=True)
 
@@ -68,10 +69,7 @@ def main(customer_email: str):
             task="Review the refund request against the refund policy. \
                 Decide if the refund should be approved or rejected. \
                 Return the decision in the format: 'APPROVED' or 'REJECTED'.",
-            inputs=[
-                StepOutput("read_refund_policy"),
-                StepOutput("read_refund_request"),
-            ],
+            inputs=[StepOutput("read_refund_policy"), StepOutput("read_refund_request")],
             output_schema=RefundDecision,
         )
         .if_(
@@ -123,6 +121,7 @@ def main(customer_email: str):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--email",
