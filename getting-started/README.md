@@ -42,3 +42,11 @@ uv run 3_mcp.py
 ```bash
 uv run 4_browser_use.py
 ```
+
+### 5. PlanBuilderV2 - Declarative Plan Building
+
+[5_plan_builder.py](./5_plan_builder.py) - Demonstrates how to use PlanBuilderV2 to create plans declaratively. This example shows how to build a plan that searches for gold prices, calculates costs, writes poems, and sends emails.
+
+```bash
+uv run 5_plan_builder.py
+```
