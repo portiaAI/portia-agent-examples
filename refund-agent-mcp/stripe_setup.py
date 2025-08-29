@@ -6,6 +6,7 @@ This script creates a state where we have a customer that has paid for a product
 Args:
     --email: The email address of the customer to create.
 """
+
 import json
 import os
 import stripe
