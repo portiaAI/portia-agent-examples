@@ -40,6 +40,13 @@ class CommodityPriceWithCurrency(BaseModel):
     currency: str
 
 
+class TotalCostResult(BaseModel):
+    """Result of total cost calculation."""
+    
+    total_cost: float
+    currency: str
+
+
 class FinalOutput(BaseModel):
     """Final output of the plan."""
     
@@ -81,14 +88,16 @@ plan = (
     )
     # Step 2: Calculate total cost using a Python function
     .function_step(
-        function=lambda price_with_currency, purchase_quantity: (
-            price_with_currency.price * purchase_quantity
+        function=lambda price_with_currency, purchase_quantity: TotalCostResult(
+            total_cost=float(price_with_currency.price) * float(purchase_quantity),
+            currency=price_with_currency.currency
         ),
         args={
             "price_with_currency": StepOutput("Search gold price"),
             "purchase_quantity": Input("purchase_quantity"),
         },
         step_name="Calculate total cost",
+        output_schema=TotalCostResult,
     )
     # Step 3: Write a poem about the current price of gold using LLM
     .llm_step(
@@ -102,6 +111,20 @@ plan = (
         tool="portia:google:gmail:send_email",
         inputs=[StepOutput("Write gold poem")],
         step_name="Send email",
+    )
+    # Step 5: Create final output combining poem and cost information
+    .function_step(
+        function=lambda poem, cost_result: FinalOutput(
+            poem=poem,
+            total_cost=cost_result.total_cost,
+            currency=cost_result.currency
+        ),
+        args={
+            "poem": StepOutput("Write gold poem"),
+            "cost_result": StepOutput("Calculate total cost"),
+        },
+        step_name="Create final output",
+        output_schema=FinalOutput,
     )
     # Define the final output schema
     .final_output(
