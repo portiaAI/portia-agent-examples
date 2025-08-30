@@ -13,6 +13,10 @@ For more information about the Portia SDK, visit the [Portia SDK documentation](
 
 ### 1. GitHub OAuth Integration
 
+> [!NOTE]
+> This example requires the Github (Legacy) app enabled in your dashboard!
+
+
 [1_github_oauth.py](./1_github_oauth.py) - Demonstrates how to use Portia with GitHub OAuth authentication. This example shows how to star a GitHub repository and check Google Calendar availability to schedule meetings.
 
 ```bash
