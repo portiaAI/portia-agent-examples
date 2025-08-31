@@ -2,7 +2,6 @@ import os
 import shutil
 import sys
 from datetime import datetime
-from typing import Any
 
 import yaml
 from dotenv import load_dotenv
