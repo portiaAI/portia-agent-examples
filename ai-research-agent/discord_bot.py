@@ -2,7 +2,7 @@ import asyncio
 import os
 
 import discord
-from agent import run_agent
+from agent_with_plan_builder import run_agent
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
@@ -16,13 +16,32 @@ async def on_ready():
         # Run the agent in a thread to avoid blocking the event loop
         result = await asyncio.get_event_loop().run_in_executor(None, run_agent)
 
+        # Validate result type
+        if isinstance(result, str):
+            print(f"Error: Agent returned string instead of ResearchAgentOutput: {result}")
+            return
+                     
+        if not hasattr(result, 'new_post_text'):
+            print(f"Error: Result missing new_post_text attribute: {type(result)}")
+            return
+
         # Send Discord message with podcast
         channel_id = int(os.getenv("DISCORD_CHANNEL_ID"))
         channel = bot.get_channel(channel_id)
-        podcast_path = os.path.join(
-            os.path.dirname(__file__), "data", "audio", "podcast_latest.mp3"
-        )
-        if channel and os.path.exists(podcast_path):
+        
+        if not channel:
+            print(f"Channel with ID {channel_id} not found")
+            return
+                     
+        # Use podcast location from result if available, otherwise fallback
+        if hasattr(result, 'podcast_location') and os.path.exists(result.podcast_location):
+            podcast_path = result.podcast_location
+        else:
+            podcast_path = os.path.join(
+                os.path.dirname(__file__), "data", "audio", "podcast_latest.mp3"
+            )
+                 
+        if os.path.exists(podcast_path):
             file = discord.File(podcast_path, filename="ai_news_podcast.mp3")
 
             # Split message on blank lines - we do this so we don't exceed the maximum message length
