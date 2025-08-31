@@ -38,7 +38,7 @@ Before running this agent, you'll need the following:
 
 `uv run refund_agent.py --email "<replace-with-stripe-customer-email>"` to run the Agent.
 
-You can play around with the refund email by setting the `--request` arg, e.g. `uv run python refund_agent.py --email "<stripe-email>" --request "I dropped my Hoverboard in the flux-capacitor, can I get a refund?"`
+You can play around with the refund email by setting the `--request` arg, e.g. `uv run refund_agent.py --email "<stripe-email>" --request "I dropped my Hoverboard in the flux-capacitor, can I get a refund?"`
 
 ## Understanding the code
 

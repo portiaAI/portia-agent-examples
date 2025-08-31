@@ -22,7 +22,7 @@ The agent uses different personas to simulate a team-based planning poker sessio
    ```
 3. Install the dependencies by running `uv sync`.
 4. Create a `context.md` file with relevant codebase context to help with estimation.
-5. Run the agent by running `uv run python main.py`.
+5. Run the agent by running `uv run main.py`.
 
 ## Running the example
 
