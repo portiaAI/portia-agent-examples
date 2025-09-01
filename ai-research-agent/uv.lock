@@ -19,7 +19,7 @@ dependencies = [
 requires-dist = [
     { name = "audioop-lts", specifier = ">=0.2.1,<0.3" },
     { name = "podcastfy", specifier = ">=0.4.1,<0.5" },
-    { name = "portia-sdk-python", specifier = ">=0.7.0" },
+    { name = "portia-sdk-python", specifier = ">=0.7.3" },
     { name = "py-cord", specifier = ">=2.6.1" },
     { name = "python-dotenv", specifier = ">=1.0.1,<2" },
     { name = "tornado", specifier = ">=6.5.0" },
