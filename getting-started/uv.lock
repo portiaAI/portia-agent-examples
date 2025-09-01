@@ -1107,7 +1107,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "portia-sdk-python", extras = ["tools-browser-browserbase"], specifier = ">=0.7.0" }]
+requires-dist = [{ name = "portia-sdk-python", extras = ["tools-browser-browserbase"], specifier = ">=0.7.3" }]
 
 [[package]]
 name = "portia-sdk-python"
