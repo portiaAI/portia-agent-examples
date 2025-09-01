@@ -16,6 +16,7 @@ from portia import (
 )
 from portia.cli import CLIExecutionHooks
 from pydantic import BaseModel, Field
+from podcast_tool import PodcastToolSchema, PodcastTool, PodcastContent
 
 load_dotenv()
 
@@ -24,33 +25,6 @@ class ResearchAgentOutput(BaseModel):
     new_post_text: str = Field(
         ...,
         description=("The text that was sent to the #ai-news slack channel."),
-    )
-
-
-class PodcastToolSchema(BaseModel):
-    """Input for PodcastTool."""
-
-    summary: str = Field(
-        ...,
-        description=("The high-level summary for the podcast."),
-    )
-    details: str = Field(
-        ..., description=("Further details that can be used in creating the podcast.")
-    )
-
-
-class PodcastTool(Tool[str]):
-    """Create a podcast based on a high-level summary and further details."""
-
-    id: str = "podcast_tool"
-    name: str = "Podcast Tool"
-    description: str = (
-        "Used to create a podcast based on a high-level summary and further details."
-    )
-    args_schema: type[BaseModel] = PodcastToolSchema
-    output_schema: tuple[str, str] = (
-        "str",
-        "The location of the output audio file.",
     )
 
     def run(self, _: ToolRunContext, summary: str, details: str) -> str:
@@ -111,7 +85,7 @@ def run_agent() -> ResearchAgentOutput:
         "The summary should be focussed on 3 key themes, with each having a text summary and then a bullet-pointed list (up to 3 bullets) associated with each theme with web pages (title + link) for people to investigate further. "
         "The heading should be 'Daily AI News Update' and the summary should be in a format suitable for sending on slack / discord (i.e. no markdown formatting)."
         "For this step, when calling the llm_tool, use templating to pass the emails in (rather than copying them verbatim)."
-        "Then post the summary with links to the slack channel with ID C08D31BNFGV. "
+        "Then post the summary with links to the slack channel with ID C09CTCQ8WPQ. "
         "Then, create a short podcast based on the emails, driven by the summary but with further details coming from the emails. "
         "For this step, when calling the podcast tool, use templating to pass the emails in (rather than copying them verbatim)."
     )

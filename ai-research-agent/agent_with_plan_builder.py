@@ -1,7 +1,6 @@
 from enum import Enum
 from typing import List
 
-
 from dotenv import load_dotenv
 from portia import Config, DefaultToolRegistry, InMemoryToolRegistry, Plan, PlanBuilderV2, Portia, StepOutput
 from portia.cli import CLIExecutionHooks
@@ -73,7 +72,6 @@ def create_planning_poker_plan(project: str = "Async Portia") -> Plan:
     """
     plan = (
         PlanBuilderV2("Planning Poker Estimation")
-        
         .input(
             name="project",
             description="The project name to filter Linear tickets for",
@@ -194,4 +192,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

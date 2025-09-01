@@ -16,15 +16,6 @@ async def on_ready():
         # Run the agent in a thread to avoid blocking the event loop
         result = await asyncio.get_event_loop().run_in_executor(None, run_agent)
 
-        # Validate result type
-        if isinstance(result, str):
-            print(f"Error: Agent returned string instead of ResearchAgentOutput: {result}")
-            return
-                     
-        if not hasattr(result, 'new_post_text'):
-            print(f"Error: Result missing new_post_text attribute: {type(result)}")
-            return
-
         # Send Discord message with podcast
         channel_id = int(os.getenv("DISCORD_CHANNEL_ID"))
         channel = bot.get_channel(channel_id)
