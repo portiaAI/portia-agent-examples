@@ -13,12 +13,6 @@ and generating a receipt. PlanBuilderV2 offers methods to create each part of th
 - .llm_step() uses the LLM to generate content (receipt in this case)
 - .single_tool_agent_step() uses an agent to handle tool interactions
 - .final_output() defines the final output schema
-
-Required configuration:
-- `PORTIA_API_KEY`
-- `OPENAI_API_KEY` (or `ANTHROPIC_API_KEY`)
-- `TAVILY_API_KEY` (for search functionality)
-- `GOOGLE_APPLICATION_CREDENTIALS` (for Gmail functionality)
 """
 
 from dotenv import load_dotenv
