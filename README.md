@@ -44,3 +44,7 @@ This project demonstrates Portia's User-Led Learning (ULL) feature, which allows
 ## [Local LLM with Obsidian](https://github.com/portiaAI/portia-agent-examples/tree/main/local-llm/)
 
 This project demonstrates how to use Portia with local LLMs and the Obsidian app. It uses the [Obsidian MCP server](https://github.com/StevenStavrakis/obsidian-mcp) to interact with the Obsidian app, and local LLM (default to [qwen3:4b](https://ollama.com/models/qwen3:4b)).
+
+## [Community Agents](https://github.com/portiaAI/portia-agent-examples/tree/main/community_agents/)
+
+A collection of community-contributed agents showcasing various use cases and integrations. These projects are contributed by open source developers and demonstrate real-world applications of the Portia framework, including cryptocurrency transfers, blockchain integrations, and other innovative AI agent implementations.
