@@ -4,4 +4,4 @@ version = "0.1.0"
 description = "Sample code to help you get started with some of the features of the Portia AI framework."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["portia-sdk-python[tools-browser-browserbase]>=0.7.0"]
+dependencies = ["portia-sdk-python[tools-browser-browserbase]>=0.7.3"]
