@@ -83,7 +83,6 @@ def build_plan() -> PlanBuilderV2:
 async def main() -> PlanRun:
     load_dotenv(override=True)
 
-    # Configure Portia with default cloud tools (includes Google tools) and CLI clarifications.
     cfg = Config.from_default()
     portia = Portia(config=cfg, tools=DefaultToolRegistry(cfg), execution_hooks=CLIExecutionHooks())
 
