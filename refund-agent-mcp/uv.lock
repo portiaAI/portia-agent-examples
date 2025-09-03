@@ -1981,7 +1981,11 @@ wheels = [
 
 [[package]]
 name = "portia-sdk-python"
+<<<<<<< HEAD
 version = "0.7.3"
+=======
+version = "0.7.2"
+>>>>>>> parent of c75f439 (Revert refund example (#82))
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anthropic" },
@@ -2007,9 +2011,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "testcontainers", extra = ["redis"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4b/c5/559a8a8f234d9465b99d28b92f47236afa3c903d54700c9558794d9356ff/portia_sdk_python-0.7.3.tar.gz", hash = "sha256:904c7e0a66f512d6d37f7860dbf21184a753755e0aba964c689349dc7fd61a3e", size = 158561, upload-time = "2025-08-28T11:32:44.653Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/86/1b/211344b0e0d577c4e493e5015221a13a94fc3e413c8c84867727921d7e72/portia_sdk_python-0.7.2.tar.gz", hash = "sha256:4169518f9fe9dbdde83c70ab83dc9d26fe6664be01bf784c52fa19fc2574d3cb", size = 154122, upload-time = "2025-08-21T23:57:05.365Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c3/9b/b4b7a3c4ca5ab48b5705f08caac1b59b40aeb43caf76af18c968b1e77545/portia_sdk_python-0.7.3-py3-none-any.whl", hash = "sha256:66aae52838c0c1edb9cc5964c3bcd6de44c8026fcc767fe85b09cc080eda7317", size = 197255, upload-time = "2025-08-28T11:32:43.086Z" },
+    { url = "https://files.pythonhosted.org/packages/83/60/2ed863a58f7fe6fb36922a59c9856c41327414c5dc4d496a5ba2c26eb3f2/portia_sdk_python-0.7.2-py3-none-any.whl", hash = "sha256:50577efe709f3cf30cd1d4cc2fd9fb793d2d6da90bb059d2373baf1430040ba3", size = 192647, upload-time = "2025-08-21T23:57:03.645Z" },
 ]
 
 [package.optional-dependencies]
@@ -2527,7 +2531,11 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9,<0.10.0" },
+<<<<<<< HEAD
     { name = "portia-sdk-python", extras = ["all"], specifier = ">=0.6.2,<0.8.0" },
+=======
+    { name = "portia-sdk-python", extras = ["all"], specifier = ">0.7.0" },
+>>>>>>> parent of c75f439 (Revert refund example (#82))
     { name = "stripe", specifier = ">=12.0.0,<13.0.0" },
 ]
 
