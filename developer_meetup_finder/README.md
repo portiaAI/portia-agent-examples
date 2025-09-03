@@ -32,6 +32,7 @@ Before running this agent, you'll need the following:
    PORTIA_API_KEY=your_portia_api_key_here
    OPENAI_API_KEY=your_openai_api_key_here
    FIRECRAWL_API_KEY=your_firecrawl_api_key_here
+   TYPEFORM_API_TOKEN= your_typeform_api_key_here
    ```
 4. Configure your `data.json` file with your event discovery preferences:
    ```json

@@ -1,11 +1,11 @@
 import os
 from portia import tool
 from typeform import Typeform
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 from firecrawl import Firecrawl
 from datetime import date, time
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 load_dotenv()
 
@@ -13,11 +13,11 @@ app = Firecrawl(api_key=os.environ["FIRECRAWL_API_KEY"])
 tf = Typeform(token=os.environ["TYPEFORM_API_TOKEN"])
 
 class EventSchema(BaseModel):
-    event_name: str
-    event_date: date
-    event_time: time
-    event_location: str
-    event_url: str
+    event_name: str = Field(..., description="The name/title of the event")
+    event_date: str = Field(..., description="Date in ISO format YYYY-MM-DD")
+    event_time: Optional[str] = Field(None, description="Time, ideally HH:MM in 24-hour format")
+    event_location: Optional[str] = Field(None, description="Location name or city")
+    event_url: str = Field(..., description="Canonical URL for the event")
     
 class EventsSchema(BaseModel):
     events: List[EventSchema]
@@ -44,7 +44,7 @@ def meetup_events(url, location) -> Dict[str, Any]:
         formats=[{
         "type": "json",
         "schema": EventsSchema,
-        "prompt": "Look for the most events most relevant and extract their names, dates, times, locations, and the registration URL."}],
+        "prompt": "Look for the events most relevant and extract their names, dates, times, locations, and the registration URL."}],
         location={
         'country': location,
         },
