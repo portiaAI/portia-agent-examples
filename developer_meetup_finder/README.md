@@ -1,124 +1,164 @@
 # Portia Developer Meetup Finder
 
-This agent discovers and curates relevant tech events and meetups from Luma and Meetup based on user interests and location. It scrapes events using Firecrawl, filters them for relevance and proximity, and sends personalized event recommendations via Gmail. The agent can handle multiple interests and provides intelligent event curation across a 3-month timeframe.
+This agent discovers and curates relevant tech events and meetups from Luma and Meetup based on user interests and location. It automatically registers users for events using browser automation or creates dynamic RSVP forms via Typeform, and sends intelligent email notifications with registration status updates. The system provides end-to-end event management across a 3-month timeframe.
 
 ## Introduction
 
-This example demonstrates how to build an intelligent meetup discovery system using the Portia SDK with custom web scraping tools. The agent combines data from multiple event platforms (Luma and Meetup) to create personalized developer event recommendations. It showcases custom tool creation, web scraping with structured data extraction, and automated Gmail communication.
+This example demonstrates how to build an intelligent, fully-automated meetup discovery and registration system using the Portia SDK. The agent combines data from multiple event platforms (Luma and Meetup), automatically registers users for events using browser automation, and provides intelligent email communication with context-aware content.
 
-The agent reads user preferences from a JSON configuration file, discovers events across multiple categories and platforms, applies intelligent filtering and ranking, and delivers curated recommendations via professional HTML email using Gmail integration.
+The system features a modular architecture with three specialized agents:
+- **Event Discovery Agent**: Scrapes and curates events from multiple platforms
+- **Event Registration Agent**: Automatically registers users using browser automation
+- **Email Service**: Sends context-aware notifications with registration updates
 
-You can read more about building custom tools in the [Portia SDK documentation](https://docs.portialabs.ai/add-custom-tools).
+You can read more about building custom tools in the [Portia SDK documentation](https://docs.portialabs.ai/add-custom-tools) and browser automation in the [Browser Tool documentation](https://docs.portialabs.ai/browser-tools).
 
 ## Prerequisites
 
 Before running this agent, you'll need the following:
 
-- Python 3.11 (or greater): You can download it from [python.org](https://www.python.org/downloads/) or install it using [pyenv](https://github.com/pyenv/pyenv)
+- Python 3.12.5 (or greater): You can download it from [python.org](https://www.python.org/downloads/) or install it using [pyenv](https://github.com/pyenv/pyenv)
 - UV: We use uv to manage dependencies. You can install it from [here](https://docs.astral.sh/uv/concepts/projects/dependencies/).
-- A Portia AI API key: You can get one from [app.portialabs.ai](https://app.portialabs.ai) > API Keys.
+- A Portia AI API key: You can get one from [app.portialabs.ai](https://app.portialabs.ai).
 - An OpenAI API key: You can get one from [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
 - A Firecrawl API key: You can get one from [firecrawl.dev](https://firecrawl.dev)
+- A Typeform API token: You can get one from [developer.typeform.com](https://developer.typeform.com/get-started/personal-access-token/)
+- Gmail configured in your Portia tool registry: You can enable it by going to the [Portia tool registry](https://app.portialabs.ai/dashboard/tool-registry) in the dashboard and configure Gmail for sending emails.
 
 ## Setup
 
 1. Clone the repository and navigate to this folder.
-2. Install the required Python packages:
-   ```bash
-   pip install firecrawl-py portia python-dotenv pydantic
+2. Install dependencies using uv:
+   ```
+   bashuv sync
    ```
 3. Copy the `.env.example` file to `.env` and add your API keys:
    ```
    PORTIA_API_KEY=your_portia_api_key_here
    OPENAI_API_KEY=your_openai_api_key_here
    FIRECRAWL_API_KEY=your_firecrawl_api_key_here
-   TYPEFORM_API_TOKEN= your_typeform_api_key_here
+   TYPEFORM_API_TOKEN=your_typeform_api_key_here
    ```
 4. Configure your `data.json` file with your event discovery preferences:
    ```json
-   {
-     "recipient_interest": [],
-     "recipient_location": "",
-     "recipient_email": "",
-     "recipient_name": "",
-     "no_of_events": 
-   }
+{
+  "recipient_interest": [],
+  "recipient_location": "",
+  "recipient_email": "",
+  "recipient_name": "",
+  "no_of_events": 0,
+  "Job Title":"",
+  "Company":"",
+  "Linkedin":"",
+  "Automatic_registration": "Yes"
+}
    ```
 
 ## Usage
 
-Run the meetup finder:
+### Basic Event Discovery and Registration
+
+Run the complete meetup finder with automatic registration:
 
 ```bash
 python main.py
 ```
 
-The agent will:
-1. Discover events from Luma across relevant categories (AI, Arts & Culture, Climate, Fitness, Wellness, Crypto)
-2. Search Meetup for events matching your interests
-3. Filter and rank events by relevance, proximity, and temporal distribution
-4. Send a curated list of events via email
+### Event Discovery Only (No Registration)
 
-## Understanding the code
+Run without automatic registration:
+
+```bash
+python main.py --config data.json
+```
+
+### Command Line Options
+
+- `--config`, `-c`: Path to configuration JSON file (default: `data.json`)
+
+## Features
+
+The agent will:
+1. **Discover Events**: Search Luma and Meetup for events matching your interests and location
+2. **Intelligent Filtering**: Remove duplicates, rank by relevance and proximity
+3. **Automatic Registration**: Use browser automation to register for events (skips paid events)
+4. **Form Creation**: Generate Typeform for RSVP collection when needed
+5. **Smart Email Notifications**: Send context-aware emails with registration status updates
+
+## Understanding the Architecture
+
+### Modular Agent System
+
+The system is built with three specialized agents:
+
+#### 1. Event Discovery Agent (`events_discover.py`)
+- Scrapes events from Luma category pages and Meetup search results
+- Uses Firecrawl for structured data extraction with Pydantic schemas
+- Implements intelligent filtering and deduplication across platforms
+- Optionally creates Typeform for RSVP collection
+
+#### 2. Event Registration Agent (`event_registration.py`)
+- Uses Portia's Browser Tool for automated event registration
+- Handles form filling with user configuration data
+- Manages different registration scenarios (free events, waitlists, group joins)
+- Returns detailed registration status for each event
+
+#### 3. Email Service (`email_service.py`)
+- Context-aware email generation based on registration outcomes
+- Adaptive content strategy (discovery-only vs. registration updates)
+- Professional HTML formatting with chronological event ordering
+- Integration with Gmail via Portia's email tools
 
 ### Custom Tool Integration
 
-The agent defines custom tools in `custom_tools.py` for scraping event data:
+The system defines several custom tools in `custom_tools.py`:
 
-- `luma_events`: Scrapes events from Luma category pages using structured data extraction
-- `meetup_events`: Searches and extracts events from Meetup based on keyword queries
+- **`luma_events`**: Scrapes events from Luma category pages using structured JSON extraction
+- **`meetup_events`**: Searches Meetup with keyword-based queries and location filtering
+- **`create_typeform`**: Dynamically generates forms with event-specific RSVP questions
 
-Both tools use Firecrawl's JSON extraction capabilities with Pydantic schemas to ensure consistent data structure.
+### Automated Browser Registration
 
-### Multi-Platform Event Discovery
+The registration agent uses sophisticated browser automation:
 
-The agent implements a sophisticated discovery pipeline:
+```python
+# Registration rules implemented:
+- Prefer 'In person' events over virtual
+- Skip events requiring payment
+- Auto-join groups when prompted
+- Fill forms using configuration data
+- Handle subscription prompts intelligently
+- Capture registration status and feedback
+```
 
-1. **Interest Analysis**: Parses multiple interests and maps them to relevant Luma categories
-2. **Platform Integration**: Simultaneously queries both Luma and Meetup platforms
-3. **Intelligent Filtering**: Removes duplicates, filters by location/timeframe, and ranks by relevance
-4. **Temporal Distribution**: Ensures event recommendations are spread across the 3-month window
+### Intelligent Email Adaptation
 
-### Structured Data Extraction
+The email service adapts content based on context:
 
-Using Pydantic schemas, the agent extracts:
-- Event name and description
-- Date and time information
-- Location details
-- Registration URLs
-- Platform source
-
-### Gmail Integration
-
-The final step generates professional HTML emails using Portia's Gmail tool integration with:
-- Chronologically ordered event listings
-- Platform-specific registration buttons ("Register on Luma" / "Register on Meetup")
-- Consistent formatting and branding
-- Personalized content based on user interests and location
+**Registration Mode**: Includes registration status, success/failure details, and event links
+**Discovery Mode**: Focuses on event showcase with optional Typeform integration
 
 ## Configuration
 
-### Supported Interest Categories
+### Registration Configuration
 
-**Luma Categories:**
-- AI → https://lu.ma/ai
-- Arts & Culture → https://lu.ma/arts  
-- Climate → https://lu.ma/climate
-- Fitness → https://lu.ma/fitness
-- Wellness → https://lu.ma/wellness
-- Crypto → https://lu.ma/crypto
+The `data.json` file should include personal details for form filling:
 
-**Meetup:** Supports any keyword-based search with automatic URL encoding
+- **recipient_name**: Full name for registration forms
+- **recipient_email**: Email for event registration and notifications
+- **recipient_location**: City name for location-based filtering
+- **recipient_interest**: Array of interests for event discovery
+- **no_of_events**: Maximum number of events to process
+- **Job Title**: Professional title for networking forms
+- **Company**: Company name for professional event registration
+- **Linkedin**: LinkedIn profile URL for networking opportunities
+- **Automatic_registration**: "Yes" or "No" to enable/disable auto-registration
 
-### Location Processing
+### Browser Automation Settings
 
-The agent processes city names and converts them to ISO 3166-1 alpha-2 country codes for accurate regional filtering. Simply provide your city name (e.g., "London", "New York", "Berlin").
-
-### Data Format
-
-The `data.json` configuration supports:
-- **recipient_name**: Full name for email personalization
-- **recipient_email**: Target email address  
-- **recipient_location**: City name (e.g., "London", "San Francisco")
-- **recipient_interest**: Array of interests (e.g., ["AI", "machine learning", "blockchain"])
-- **no_of_events**: Number of events to include in final recommendations (integer)
+The system uses local browser infrastructure by default. Registration behavior:
+- **Free events**: Attempts registration automatically
+- **Paid events**: Skips registration, includes in email for manual review
+- **Group membership**: Automatically joins when required
+- **Form fields**: Uses configuration data with reasonable fallbacks
+- **Retry logic**: Attempts registration twice per event before marking as failed

@@ -9,8 +9,6 @@ def load_config(config_path: str) -> dict:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--auto-register', '-a', action='store_true', 
-                       help='Automatically register for all discovered events')
     parser.add_argument('--config', '-c', default='data.json',
                        help='Path to configuration JSON file')
     args = parser.parse_args()
@@ -23,17 +21,20 @@ def main():
         recipient_location=config['recipient_location'],
         no_of_events=config['no_of_events'],
         recipient_name=config['recipient_name'],
-        has_form = False
-    )
+        has_form = True if config['automatic_registration'] == "Yes" else False)
     # Register for events
     event_registration = EventRegistrationAgent(config)
+    email_sent = EmailService(config)
     
-    events = discovery_agent.run()
-    events_attendance = event_registration.run(events)
-    
-    EmailService(config, events_attendance)
-
-    print("Done!")
-
+    if config['automatic_registration'] == "Yes":
+        events = discovery_agent.run()
+        events_attendance = event_registration.run(events)
+        email_sent.run(events_attendance)
+    else:
+        events = discovery_agent.run()
+        email_sent.run(events)
+        
 if __name__ == "__main__":
     main()
+    
+    # /Users/hemhemoh/Desktop/portia-agent-examples/developer_meetup_finder/main.py

@@ -48,6 +48,8 @@ class EventRegistrationAgent:
                 "- Prefer 'In person'. Skip events that require payment.\n"
                 "- If asked to join a group: click Join/Request to join; if asked 'why', say you’re interested in learning and meeting people in the same field as you.\n"
                 "- If a form appears, fill it using {config} (name/email/etc.).\n"
+                "- If form requires more than what you have in {config} try to make up reasonable answers"
+                "- If asked to subscribe to a news letter, only accept if there is no option to decline"
                 "- After submitting, capture the exact on-page message(s) or a concise summary.\n"
                 "- For each event, output: event_name, event_date, event_time, event_location, event_url, registration_status (registered|requires_payment|waitlisted|failed), registration_notes.\n"
                 "Return a single AttendanceSchema containing all processed events."),

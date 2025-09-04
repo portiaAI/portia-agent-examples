@@ -6,9 +6,8 @@ from portia import Portia, Config, DefaultToolRegistry, default_config, PlanBuil
 class EmailService:
     """Service responsible for sending event-related emails with intelligent content adaptation."""
     
-    def __init__(self, event_details, config):
+    def __init__(self, config):
         load_dotenv(override=True)
-        self.event_details = event_details
         self.config = config
         self._setup_portia()
     
@@ -20,9 +19,9 @@ class EmailService:
     def send_event_email(self):
         builder = (
             PlanBuilderV2("Send event email with intelligent content based on context using Newsletter style.")
-            .input(name="events", description="List of events and their registration details to send email about.", default_value=self.event_details)
+            .input(name="events", description="List of events and their registration details to send email about.")
             .input(name="config",description="Personal details (name, email, phone, etc.) for filling forms.",default_value=self.config)
-            .single_tool_agent_step(tool="portia:google:gmail:send_email",task=("""INTELLIGENT EVENT EMAIL TASK
+            .single_tool_agent_step(tool="portia:google:gmail:send_email", task=("""INTELLIGENT EVENT EMAIL TASK
                 Analyze the context and send an appropriate email to {recipient_email}:
 
                 CONTEXT ANALYSIS:
@@ -83,10 +82,11 @@ class EmailService:
                 - Return confirmation with send status
                 - NO markdown code fences in output"""),
             inputs=[Input("events"), Input("config")]))
-        return builder
+        plan =  builder.build() 
+        return plan
 
-    def run(self):
+    def run(self, event_details):
         plan = self.send_event_email()
-        plan_run = self.portia.run_plan(plan, plan_run_inputs={"events": self.event_details, "config": self.config})
+        plan_run = self.portia.run_plan(plan, plan_run_inputs={"events": event_details, "config": self.config})
         return plan_run
 
