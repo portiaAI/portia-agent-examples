@@ -6,7 +6,9 @@ This agent analyzes a mock email `inbox.txt` sent by a customer against a mock r
 
 This example demonstrates how to integrate tools from a Model Context Protocol (MCP) server into the Portia SDK using the Portia Tool Registry. Here we create an Agent that can handle customer service refund requests using a Stripe integration via their [MCP server](https://docs.stripe.com/building-with-llms#mcp-remote). The MCP server for the default example can be set up in 3-clicks on your personalized [Portia tool registry](https://app.portialabs.ai/dashboard/tool-registry).
 
-There is also an example under `refund_agent_with_local_mcp.py` that works similarly but uses the [local variety of Stripe MCP server](https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol) through `npx`. There are instructions at the end for how to run this particular variant of the agent.
+There are also two alternative versions of this example in this directory:
+1. Under `refund_agent_with_local_mcp.py`, the agent works similarly but uses the [local variety of Stripe MCP server](https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol) through `npx`. There are instructions at the end for how to run this particular variant of the agent.
+2. Under `refund_agent_plan_builder.py`, we demonstrate how you can rely on the declarative `PlanBuilderV2` interface to define the plan that you want the refund agent to pursue. More on this approach to planning can be found in our docs [here](https://docs.portialabs.ai/build-plan).
 
 Alongside MCP integrations, this example also demonstrates how [Clarifications](https://docs.portialabs.ai/understand-clarifications) can be used to keep humans in the loop, protecting against unwanted agent actions such as refunding customers payments incorrectly.
 

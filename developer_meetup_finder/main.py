@@ -37,4 +37,3 @@ def main():
 if __name__ == "__main__":
     main()
     
-    # /Users/hemhemoh/Desktop/portia-agent-examples/developer_meetup_finder/main.py
