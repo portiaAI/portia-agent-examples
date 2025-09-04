@@ -89,3 +89,14 @@ McpToolRegistry.from_stdio_connection(
 ```
 
 This spins up the MCP server using the [MCP python SDK](https://github.com/modelcontextprotocol/python-sdk), extracts the tools and automatically converts them to [Portia `Tool` objects](https://docs.portialabs.ai/intro-to-tools).
+
+
+## Evals
+
+The refund agent ships with a builtin set of Evals using SteelThread - our evals product.
+
+You can run these with 
+
+```
+uv run evals/evals.py
+```
