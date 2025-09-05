@@ -11,6 +11,7 @@ dependencies = [
     "audioop-lts>=0.2.1,<0.3",
     "tornado>=6.5.0",
     "py-cord>=2.6.1",
+    "ruff>=0.12.12",
 ]
 
 [tool.uv]
