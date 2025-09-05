@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from portia.cli import CLIExecutionHooks
 from custom_tools import EventsSchema
 from portia.open_source_tools.browser_tool import BrowserTool, BrowserInfrastructureOption
-from portia import Portia, Config, DefaultToolRegistry, ToolRegistry, default_config, PlanBuilderV2, StepOutput, Input
+from portia import Portia, Config, DefaultToolRegistry, ToolRegistry, default_config, PlanBuilderV2, Input
 
 load_dotenv(override=True)
 
@@ -44,7 +44,7 @@ class EventRegistrationAgent:
             .input(name="config",description="Personal details (name, email, phone, etc.) for filling forms.",default_value=self.config)
             .single_tool_agent_step(tool="browser_tool",task=("For each event in {events}, open the event page and attempt registration.\n"
                 "Rules:\n"
-                "- Loop over {events} and attempt to register for each event only 2ce"
+                "- Loop over events and attempt to register for each event only 2ce"
                 "- Prefer 'In person'. Skip events that require payment.\n"
                 "- If asked to join a group: click Join/Request to join; if asked 'why', say you’re interested in learning and meeting people in the same field as you.\n"
                 "- If a form appears, fill it using {config} (name/email/etc.).\n"

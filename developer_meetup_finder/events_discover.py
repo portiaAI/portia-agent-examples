@@ -132,7 +132,7 @@ class EventDiscoveryAgent:
             .single_tool_agent_step(tool="create_typeform",
                 task=("Create a Typeform that lists the curated events and captures RSVP/interest. "
                     "Use recipient_name to personalise where possible. "
-                    "Return ONLY the public form URL as plain text."),
+                    "Return ONLY the public form URL as form_url in FinalOutput."),
                 inputs=[StepOutput(2), Input("recipient_name")],
             ).endif())
 

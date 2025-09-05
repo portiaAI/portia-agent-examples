@@ -21,13 +21,13 @@ def main():
         recipient_location=config['recipient_location'],
         no_of_events=config['no_of_events'],
         recipient_name=config['recipient_name'],
-        has_form = True if config['automatic_registration'] == "Yes" else False)
-    # Register for events
-    event_registration = EventRegistrationAgent(config)
+        has_form = True if config['automatic_registration'] == "No" else False)
+    # emailservice agent
     email_sent = EmailService(config)
     
     if config['automatic_registration'] == "Yes":
         events = discovery_agent.run()
+        event_registration = EventRegistrationAgent(config)
         events_attendance = event_registration.run(events)
         email_sent.run(events_attendance)
     else:
@@ -36,4 +36,3 @@ def main():
         
 if __name__ == "__main__":
     main()
-    

@@ -1,10 +1,10 @@
-import os
+import os, requests
+import pandas as pd
 from portia import tool
 from typeform import Typeform
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 from firecrawl import Firecrawl
-from datetime import date, time
 from typing import List, Dict, Any, Optional
 
 load_dotenv()
@@ -118,3 +118,54 @@ def create_typeform(title: str, form_description: str, events: List[Dict[str, An
     response = tf.forms.create(form_data)
     
     return response["_links"]["display"]
+
+
+def download_typeform_as_csv(form_id: str, api_token: str, filename: str = "responses.csv") -> str:
+    """Download Typeform responses as CSV file."""
+    
+    # Get responses from Typeform API
+    response = requests.get(
+        f"https://api.typeform.com/forms/{form_id}/responses",
+        headers={"Authorization": f"Bearer {api_token}"},
+        params={"page_size": 1000}
+    )
+    response.raise_for_status()
+    
+    data = response.json()["items"]
+    if not data:
+        return None
+    
+    # Flatten responses to DataFrame
+    rows = []
+    for item in data:
+        row = {
+            "response_id": item["response_id"],
+            "submitted_at": item["submitted_at"],
+        }
+        
+        # Add answer data
+        for answer in item.get("answers", []):
+            field_title = answer["field"]["ref"] or answer["field"]["id"]
+            
+            if "text" in answer:
+                row[field_title] = answer["text"]
+            elif "choice" in answer:
+                row[field_title] = answer["choice"]["label"]
+            elif "choices" in answer:
+                row[field_title] = "; ".join([c["label"] for c in answer["choices"]])
+            elif "boolean" in answer:
+                row[field_title] = answer["boolean"]
+            elif "number" in answer:
+                row[field_title] = answer["number"]
+            elif "email" in answer:
+                row[field_title] = answer["email"]
+            elif "date" in answer:
+                row[field_title] = answer["date"]
+            elif "file_url" in answer:
+                row[field_title] = answer["file_url"]
+        
+        rows.append(row)
+    
+    # Save as CSV
+    pd.DataFrame(rows).to_csv(filename, index=False)
+    return filename

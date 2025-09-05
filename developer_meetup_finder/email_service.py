@@ -1,11 +1,10 @@
 from dotenv import load_dotenv
 from portia.cli import CLIExecutionHooks
-from portia import Portia, Config, DefaultToolRegistry, default_config, PlanBuilderV2, StepOutput, Input
+from portia import Portia, Config, DefaultToolRegistry, default_config, PlanBuilderV2, Input
 
 
 class EmailService:
     """Service responsible for sending event-related emails with intelligent content adaptation."""
-    
     def __init__(self, config):
         load_dotenv(override=True)
         self.config = config
@@ -22,17 +21,17 @@ class EmailService:
             .input(name="events", description="List of events and their registration details to send email about.")
             .input(name="config",description="Personal details (name, email, phone, etc.) for filling forms.",default_value=self.config)
             .single_tool_agent_step(tool="portia:google:gmail:send_email", task=("""INTELLIGENT EVENT EMAIL TASK
-                Analyze the context and send an appropriate email to {recipient_email}:
+                Analyze the context and send an appropriate email to the recipient:
 
                 CONTEXT ANALYSIS:
-                - Recipient: {config.recipient_name}
-                - Interests: {config.recipient_interest}
-                - Location: {config.recipient_location}
-                - Number of events: len({self.event_details.events})
-                - Has form URL: Check if {self.event_details} has a form_url key in it
+                - Recipient: {recipient_name}
+                - Interests: {recipient_interest}
+                - Location: {recipient_location}
+                - Number of events: len({events.events})
+                - Has form URL: Check if {self.events} has a form_url key in it
 
                 EVENTS DATA:
-                {self.event_details}
+                {events}
 
                 EMAIL STRATEGY (choose based on context):
 
@@ -42,7 +41,7 @@ class EmailService:
                 Include Event URL
                 - Include registration status for each event
 
-                2. IF {self.event_details} has a form_url key:
+                2. IF {events} has a form_url key:
                 - Subject: "{num_events} curated {recipient_interest} events in {recipient_location} - Interest form included"
                 - Focus: Event showcase + form for preferences
                 - Include Event URL

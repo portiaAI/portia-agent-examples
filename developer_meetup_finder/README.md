@@ -41,17 +41,17 @@ Before running this agent, you'll need the following:
    ```
 4. Configure your `data.json` file with your event discovery preferences:
    ```json
-{
-  "recipient_interest": [],
-  "recipient_location": "",
-  "recipient_email": "",
-  "recipient_name": "",
-  "no_of_events": 0,
-  "Job Title":"",
-  "Company":"",
-  "Linkedin":"",
-  "Automatic_registration": "Yes"
-}
+   {
+   "recipient_interest": [],
+   "recipient_location": "",
+   "recipient_email": "",
+   "recipient_name": "",
+   "no_of_events": 0,
+   "Job Title":"",
+   "Company":"",
+   "Linkedin":"",
+   "Automatic_registration": "Yes"
+   }
    ```
 
 ## Usage
@@ -162,3 +162,47 @@ The system uses local browser infrastructure by default. Registration behavior:
 - **Group membership**: Automatically joins when required
 - **Form fields**: Uses configuration data with reasonable fallbacks
 - **Retry logic**: Attempts registration twice per event before marking as failed
+
+## Send Emails Monthly (cron)
+
+You can schedule this example to **send emails once a month** on your machine using **cron** (macOS/Linux). This keeps everything local—no GitHub Actions required.
+
+> Cron runs in your machine’s **local time**.
+
+### 1) Find your Python interpreter (absolute path)
+
+Use a full path to avoid cron PATH issues.
+
+```bash
+
+python -c 'import sys; print(sys.executable)'
+
+```
+
+Copy the printed path.
+
+### 2) Choose a log location
+
+Avoid Desktop/Documents because macOS privacy can block cron. Use:
+
+```bash
+
+mkdir -p log_location
+
+```
+
+### 3) Setup Cron for your usecase
+
+Edit your crontab:
+
+```bash 
+crontab -e
+```
+
+Paste this in the cron tab, runs on a monthly schedule (09:00 on 1st of every month):
+
+```
+
+0 9 1 * * cd /absolute/path/to/your/project && /absolute/path/to/python main.py >> log_location/monthly.log 2>&1
+
+```
