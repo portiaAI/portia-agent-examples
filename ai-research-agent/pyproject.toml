@@ -5,16 +5,21 @@ description = "A toy agent to receive and summarise AI news emails"
 authors = [{ name = "Portia AI", email = "hello@portialabs.ai" }]
 requires-python = "~=3.13"
 dependencies = [
-    "portia-sdk-python>=0.6.2,<0.7",
+    "portia-sdk-python[ollama] (>=0.7.3,<0.8.0)",
     "python-dotenv>=1.0.1,<2",
-    "podcastfy>=0.4.1,<0.5",
+    # "podcastfy>=0.4.1,<0.5",
     "audioop-lts>=0.2.1,<0.3",
     "tornado>=6.5.0",
     "py-cord>=2.6.1",
+    "networkx>=3.4.2",
+    "matplotlib>=3.10.1",
 ]
 
 [tool.uv]
 package = false
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.12"
 
 [build-system]
 requires = ["hatchling"]
