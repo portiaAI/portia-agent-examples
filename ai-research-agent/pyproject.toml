@@ -5,7 +5,7 @@ description = "A toy agent to receive and summarise AI news emails"
 authors = [{ name = "Portia AI", email = "hello@portialabs.ai" }]
 requires-python = "~=3.13"
 dependencies = [
-    "portia-sdk-python>=0.7.0",
+    "portia-sdk-python>=0.6.2,<0.7",
     "python-dotenv>=1.0.1,<2",
     "podcastfy>=0.4.1,<0.5",
     "audioop-lts>=0.2.1,<0.3",
