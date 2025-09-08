@@ -79,9 +79,10 @@ def create_planning_poker_plan(project: str = "Async Portia") -> Plan:
             default_value=project
         )
         
-        .llm_step(
+        .single_tool_agent_step(
             step_name="get_linear_tickets",
-            task="Get the tickets I'm working on from Linear with a limit of 3. Use any available tools to access Linear and retrieve my current tickets."
+            task="Get the tickets I'm working on from Linear with a limit of 3",
+            tool="llm_tool"
         )
         
         .llm_step(
@@ -91,28 +92,42 @@ def create_planning_poker_plan(project: str = "Async Portia") -> Plan:
             output_schema=LinearTickets
         )
         
+        .loop(
+            over=StepOutput("filter_project_tickets"),
+            step_name="ticket_loop"
+        )
+        
         .llm_step(
-            step_name="generate_persona_estimates",
-            task=f"""For each ticket and each of the following personas, estimate the size of the ticket:
+            step_name="generate_persona_estimates_for_ticket",
+            task=f"""For this specific ticket and each of the following personas, estimate the size of the ticket:
             
             Personas:
             {chr(10).join(f'- {persona}' for persona in PERSONAS)}
             
-            For each combination of ticket and persona, provide an estimate using the ticket_estimator_tool.
-            Return all estimates with ticket information and persona details.""",
-            inputs=[StepOutput("filter_project_tickets")],
+            For each persona, provide an estimate using the ticket_estimator_tool.
+            Return estimates with ticket information and persona details for this single ticket.""",
+            inputs=[StepOutput("ticket_loop")],
             output_schema=PersonaEstimates
         )
         
         .llm_step(
-            step_name="aggregate_estimates",
-            task="""Take the estimates from all personas for each ticket and calculate the average estimate size for each ticket.
+            step_name="aggregate_ticket_estimate",
+            task="""Take the estimates from all personas for this ticket and calculate the average estimate size.
             
             For sizing, use these values in order: 1D, 3D, 5D, 7D, 10D, TLTE
             When averaging, round up to the nearest sizing value.
             
-            Return a list of PlanningPokerEstimate objects with the averaged estimates for each ticket.""",
-            inputs=[StepOutput("generate_persona_estimates"), StepOutput("filter_project_tickets")],
+            Return a single PlanningPokerEstimate object with the averaged estimate for this ticket.""",
+            inputs=[StepOutput("generate_persona_estimates_for_ticket"), StepOutput("ticket_loop")],
+            output_schema=PlanningPokerEstimate
+        )
+        
+        .end_loop(step_name="end_ticket_loop")
+        
+        .llm_step(
+            step_name="collect_all_estimates",
+            task="Collect all the individual ticket estimates from the loop into a final list.",
+            inputs=[StepOutput("aggregate_ticket_estimate")],
             output_schema=PlanningPokerEstimateList
         )
         
