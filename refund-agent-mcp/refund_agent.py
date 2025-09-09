@@ -58,7 +58,7 @@ class RefundReviewerTool(Tool[str]):
         context: ToolRunContext,
         refund_request: str,
         refund_policy: str,
-    ) -> bool:
+    ) -> str:
         llm = context.config.get_default_model()
         messages = [
             Message(
@@ -84,10 +84,7 @@ class RefundReviewerTool(Tool[str]):
             raise ToolHardError("Invalid LLM decision: " + llm_decision)
 
 
-def main(customer_email: str):
-    with open("inbox.txt", "w") as f:
-        f.write(customer_email)
-
+def get_portia() -> Portia:
     config = Config.from_default(default_log_level="INFO")
 
     tools = DefaultToolRegistry(
@@ -122,6 +119,14 @@ def main(customer_email: str):
             )
         ),
     )
+    return portia
+
+
+def main(customer_email: str):
+    with open("inbox.txt", "w") as f:
+        f.write(customer_email)
+
+    portia = get_portia()
     plan = portia.plan(
         """
 Read the customer's refund request email from the file "inbox.txt" and decide if it should be
