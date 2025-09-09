@@ -1,6 +1,6 @@
 # SQL Agent Example
 
-This example demonstrates how to create AI agents that can query and analyze SQL databases using Portia's new SQL tools. The example includes a complete setup with sample data and both simple and interactive agent implementations.
+This example demonstrates how to create AI agents that can query and analyze SQL databases using Portia's new SQL tools. The example includes a complete setup with sample data and  simple agent implementations.
 
 ## 🚀 What This Example Demonstrates
 
@@ -11,7 +11,6 @@ This example demonstrates how to create AI agents that can query and analyze SQL
   - `GetTableSchemasTool`: Explore table structures
   - `CheckSQLTool`: Validate queries before execution
 - **Agent Creation**: Build AI agents that can understand natural language queries about your data
-- **Interactive Experience**: Create conversational interfaces for database exploration
 
 ## 📋 Prerequisites
 
