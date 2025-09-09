@@ -50,7 +50,4 @@ portia = Portia(
 # Repeated runs of this script won't require re-authentication,
 # unless the `end_user_id` is changed to a different value.
 # Change `task2` to `task3` to fetch a weather report:
-plan = portia.plan(task2)
-print(plan.pretty_print())
-
-plan_run = portia.run_plan(plan, end_user="its me, mario")
+plan_run = portia.run(task2, end_user="its me, mario")
