@@ -50,7 +50,7 @@ def create_plan_local(portia: Portia, note_name: str):
         )
         .input(
             name="note_name",
-            description="The name of the Obsidian note to visualize",
+            description="The name of the Obsidian note to visualize"
         )
         .single_tool_agent_step(
             step_name="List all available vaults",
@@ -62,7 +62,7 @@ def create_plan_local(portia: Portia, note_name: str):
             step_name="Fetch the note",
             tool="mcp:obsidian:read_note",
             task=f"Fetch the note named '{note_name}' from the obsidian vaults",
-            inputs=[Input("note_name"), StepOutput("List vaults")],
+            inputs=[Input("note_name"), StepOutput("List all available vaults")],
         )
         .single_tool_agent_step(
             step_name="Create concept map",
@@ -73,7 +73,6 @@ def create_plan_local(portia: Portia, note_name: str):
         .build()
     )
     # Note: PlanV2 objects don't support save_plan() in the current version
-    portia.storage.save_plan(plan)
     return plan
 
 
@@ -126,12 +125,17 @@ def main(argv=sys.argv[1:]):
         "note_name",
         help="The name of the note to be visualised.",
     )
+    argument_parser.add_argument(
+        "--remote",
+        action="store_true",
+        help="Use remote plan generation instead of predefined local plan",
+    )
 
     args = argument_parser.parse_args(argv)
 
     config = Config.from_default(
         default_log_level="DEBUG",
-        default_model="ollama/qwen3:4b",
+        default_model="openai/gpt-4o-mini",
         execution_agent_type=ExecutionAgentType.ONE_SHOT,
     )
     # Make sure OBSIDIAN_VAULT_PATH is set in your environment variables
@@ -140,7 +144,7 @@ def main(argv=sys.argv[1:]):
         command="npx",
         args=["-y", "obsidian-mcp", os.getenv("OBSIDIAN_VAULT_PATH")],
     )
-
+    
     # Add all tools to the registry
     tools = obsidian_mcp + ToolRegistry([VisualizationTool()])
 
@@ -149,10 +153,15 @@ def main(argv=sys.argv[1:]):
         tools=tools,
     )
 
-    plan = create_plan_local(portia, args.note_name)
-    print(plan.pretty_print())
-    portia.run_plan(plan)
+    if args.remote:
+        plan = create_plan_remote(portia, args.note_name)
+    else:
+        plan = create_plan_local(portia, args.note_name)
 
+    print(plan.pretty_print())
+
+    # Pass note_name in plan_run_inputs (important fix!)
+    portia.run_plan(plan, plan_run_inputs={"note_name": args.note_name})
 
 if __name__ == "__main__":
     main()
