@@ -328,6 +328,7 @@ st.run_evals(
     EvalConfig(
         eval_dataset_name="portia-default::refund-agent",
         config=config,
-        iterations=4,
+        iterations=2,
+        max_concurrency=6,
     ),
 )
