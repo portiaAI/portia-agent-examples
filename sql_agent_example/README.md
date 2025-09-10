@@ -98,27 +98,4 @@ The SQL tools include built-in security features:
 - **Query Validation**: Validates queries before execution
 - **Safe PRAGMA Commands**: Only allows read-only PRAGMA operations
 
-### Using Different Database Types
-While this example uses SQLite, the SQL tools support a pluggable adapter architecture. You can create custom adapters for other databases:
-
-```python
-from portia.open_source_tools.sql_tool import SQLAdapter, RunSQLTool
-
-class MyDatabaseAdapter(SQLAdapter):
-    # Implement required methods for your database
-    pass
-
-# Use with any SQL tool
-custom_tool = RunSQLTool(adapter=MyDatabaseAdapter())
-```
-
-## ⚠️ Important Notes
-
-- The SQL tools are **read-only** by design for security
-- All queries are validated before execution
-- The agent automatically chooses the appropriate SQL tool based on your question
-- Database connections are properly managed and closed
-
----
-
 **Happy querying! 🎉**
