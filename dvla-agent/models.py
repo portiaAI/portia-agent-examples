@@ -23,9 +23,6 @@ class DrivingLicenseApplication(BaseModel):
     address: str = Field(description="Full current address")
     phone_number: str = Field(description="Contact phone number")
     email: str = Field(description="Email address")
-    license_type: str = Field(
-        description="Type of license (e.g., full car, motorcycle, provisional)"
-    )
     previous_license_number: Optional[str] = Field(
         default=None, description="Previous license number if replacing"
     )
@@ -36,14 +33,6 @@ class CarTaxPayment(BaseModel):
 
     vehicle_registration: str = Field(description="Vehicle registration number")
     make_model: str = Field(description="Vehicle make and model")
-    vehicle_type: str = Field(
-        description="Type of vehicle (car, van, motorcycle, etc.)"
-    )
-    engine_size: Optional[str] = Field(
-        default=None, description="Engine size or power rating"
-    )
-    fuel_type: str = Field(description="Fuel type (petrol, diesel, electric, hybrid)")
-    tax_period: str = Field(description="Tax period (6 months, 12 months)")
     owner_name: str = Field(description="Vehicle owner's name")
 
 
