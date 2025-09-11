@@ -2,7 +2,7 @@ import asyncio
 import os
 
 import discord
-from agent_with_plan_builder import run_agent
+from agent_with_plan_builder_research import run_agent
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
