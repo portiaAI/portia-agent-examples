@@ -3,18 +3,21 @@ name = "ai_research_agent"
 version = "0.1.0"
 description = "A toy agent to receive and summarise AI news emails"
 authors = [{ name = "Portia AI", email = "hello@portialabs.ai" }]
-requires-python = "~=3.13"
+requires-python = "~=3.13.0"
 dependencies = [
-    "portia-sdk-python>=0.6.2,<0.7",
+    "portia-sdk-python>=0.7.3",
     "python-dotenv>=1.0.1,<2",
     "podcastfy>=0.4.1,<0.5",
     "audioop-lts>=0.2.1,<0.3",
     "tornado>=6.5.0",
     "py-cord>=2.6.1",
+    "ruff>=0.12.12",
 ]
 
 [tool.uv]
 package = false
+
+
 
 [build-system]
 requires = ["hatchling"]

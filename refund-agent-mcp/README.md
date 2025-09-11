@@ -89,3 +89,16 @@ McpToolRegistry.from_stdio_connection(
 ```
 
 This spins up the MCP server using the [MCP python SDK](https://github.com/modelcontextprotocol/python-sdk), extracts the tools and automatically converts them to [Portia `Tool` objects](https://docs.portialabs.ai/intro-to-tools).
+
+
+## Evals
+
+The refund agent ships with a builtin set of Evals using SteelThread - our evals product. As long as you have an `OPENAI_API_KEY` and `PORTIA_API_KEY` set up you can run the evals. This will download test cases from Portia, run them against the agent and report the results back to Portia. You will be able to see the results [in the dashboard](https://app.portialabs.ai/dashboard/evals).
+
+**Warning**: Given the time the agent takes to run it can take up to ~10 minutes to run the evals. You may wish to edit the `iterations` and `max_concurrency` config in `evals/evals.py` to speed this up. 
+
+You can run these with 
+
+```
+uv run evals/evals.py
+```
