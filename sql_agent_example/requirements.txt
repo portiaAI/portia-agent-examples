@@ -1,2 +1,0 @@
-portia-sdk-python[all] == 0.8.0
-
