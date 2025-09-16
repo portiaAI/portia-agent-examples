@@ -1,18 +1,20 @@
+from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel, Field
 
 
+class QueryType(str, Enum):
+    """Enum for DVLA query types"""
+
+    INSTRUCTIONS = "question_for_instructions"
+    DRIVING_LICENSE = "process_driving_licence_application"
+    VEHICLE_TAX = "pay_vehicle_tax"
+    OTHER = "other"
+
+
 class DVLAQueryType(BaseModel):
-    query_type: str = Field(
-        description="The type of DVLA query",
-        enum=[
-            "question_for_instructions",
-            "process_driving_licence_application",
-            "pay_vehicle_tax",
-            "other",
-        ],
-    )
+    query_type: QueryType = Field(description="The type of DVLA query")
 
 
 class DrivingLicenseApplication(BaseModel):

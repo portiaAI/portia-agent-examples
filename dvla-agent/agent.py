@@ -1,13 +1,24 @@
+from typing import Callable
+
 import streamlit as st
-from clarification import UserMessageClarificationHandler
 from dotenv import load_dotenv
 from models import (
     CarTaxPayment,
     DrivingLicenseApplication,
     DVLAQueryType,
     InstructionResponse,
+    QueryType,
 )
-from portia import Config, ExecutionHooks, LogLevel, StepOutput, logger
+from portia import (
+    Clarification,
+    ClarificationHandler,
+    Config,
+    ExecutionHooks,
+    InputClarification,
+    LogLevel,
+    StepOutput,
+    logger,
+)
 from portia.builder.plan_builder_v2 import PlanBuilderV2
 from portia.builder.reference import Input
 from portia.portia import Portia
@@ -19,13 +30,29 @@ from processing import (
 load_dotenv()
 
 
+class UserMessageClarificationHandler(ClarificationHandler):
+    """Handle user clarifications by sending a message to the user"""
+
+    def handle_input_clarification(
+        self,
+        clarification: InputClarification,
+        on_resolution: Callable[[Clarification, object], None],
+        on_error: Callable[[Clarification, object], None],
+    ) -> None:
+        """Handle a user input clarification."""
+        clarification_msg = f"{clarification.user_guidance or 'I need some additional information from you.'}"
+        st.session_state.messages.append(
+            {"role": "assistant", "content": clarification_msg}
+        )
+
+        # Force UI update to show message immediately
+        st.rerun()
+
+
 @st.cache_resource
 def get_portia():
     config = Config.from_default(
-        planning_model="openai/gpt-4o",
-        execution_model="openai/gpt-4o",
         default_model="openai/gpt-4o",
-        summarizer_model="openai/gpt-4o",
         default_log_level=LogLevel.DEBUG,
     )
 
@@ -69,7 +96,7 @@ def create_dvla_plan():
         )
         .if_(
             condition=lambda classification: classification.query_type
-            == "question_for_instructions",
+            == QueryType.INSTRUCTIONS,
             args={"classification": StepOutput("classify_conversation")},
         )
         .react_agent_step(
@@ -87,7 +114,7 @@ def create_dvla_plan():
         )
         .else_if_(
             condition=lambda classification: classification.query_type
-            == "process_driving_licence_application",
+            == QueryType.DRIVING_LICENSE,
             args={"classification": StepOutput("classify_conversation")},
         )
         .react_agent_step(
@@ -109,7 +136,7 @@ def create_dvla_plan():
         )
         .else_if_(
             condition=lambda classification: classification.query_type
-            == "pay_vehicle_tax",
+            == QueryType.VEHICLE_TAX,
             args={"classification": StepOutput("classify_conversation")},
         )
         .react_agent_step(
