@@ -72,7 +72,6 @@ def create_planning_poker_plan(project: str = "Async Portia") -> Plan:
     """
     plan = (
         PlanBuilderV2("Planning Poker Estimation")
-        
         .input(
             name="project",
             description="The project name to filter Linear tickets for",
