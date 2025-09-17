@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 from models import (
     CarTaxPayment,
     DrivingLicenseApplication,
-    DVLAQueryType,
     InstructionResponse,
     QueryType,
+    VehicleAssistanceQueryType,
 )
 from portia import (
     Clarification,
@@ -28,6 +28,24 @@ from processing import (
 )
 
 load_dotenv()
+
+# Common guidelines for agent interactions
+BASE_INTERACTION_GUIDELINES = """
+IMPORTANT:
+- Respond conversationally and naturally
+- When using the clarification tool, remember that your user_guidance text is sent directly to the user as-is"""
+
+FORM_COLLECTION_GUIDELINES = (
+    BASE_INTERACTION_GUIDELINES
+    + """
+- Be patient and encouraging as you collect the information"""
+)
+
+INSTRUCTION_GUIDELINES = (
+    BASE_INTERACTION_GUIDELINES
+    + """
+- Focus on being helpful and clear in your explanations"""
+)
 
 
 class UserMessageClarificationHandler(ClarificationHandler):
@@ -65,19 +83,19 @@ def get_portia():
 
 
 @st.cache_resource
-def create_dvla_plan():
+def create_vehicle_assistance_plan():
     return (
-        PlanBuilderV2("DVLA Agent specialized in 3 key services")
+        PlanBuilderV2("Vehicle Assistance Agent specialized in 3 key services")
         .input(
             name="previous_conversation",
             description="The previous conversation with the user",
         )
         .react_agent_step(
             step_name="classify_conversation",
-            task="""Analyze the conversation and classify it into one of these 3 categories by setting query_type to the appropriate value:
+            task=f"""Analyze the conversation and classify it into one of these 3 categories by setting query_type to the appropriate value:
             
-            1. "question_for_instructions": User is asking for instructions on how they can do something related to DVLA (e.g., "How do I renew my license?", "How do I book a driving test?", "What documents do I need?", "How to register a vehicle?" etc.)
-            Choose this for any question that can be answered with a search of the DVLA website / documentation.
+            1. "question_for_instructions": User is asking for instructions on how they can do something related to vehicle services (e.g., "How do I renew my license?", "How do I book a driving test?", "What documents do I need?", "How to register a vehicle?" etc.)
+            Choose this for any question that can be answered with a search of vehicle assistance documentation.
             
             2. "process_driving_licence_application": User wants to apply for a new driving license (e.g., "I want to apply for a driving license", "Help me get a new license", "Process my license application")
             
@@ -87,12 +105,10 @@ def create_dvla_plan():
             
             If it's "other", use the clarification tool to politely explain that you can only help with those 3 specific services and ask them to rephrase their request.
             
-            IMPORTANT: 
-            - Respond conversationally and naturally
-            - When using the clarification tool, remember that your user_guidance text is sent directly to the user as-is""",
+            {BASE_INTERACTION_GUIDELINES}""",
             inputs=[Input("previous_conversation")],
             allow_agent_clarifications=True,
-            output_schema=DVLAQueryType,
+            output_schema=VehicleAssistanceQueryType,
         )
         .if_(
             condition=lambda classification: classification.query_type
@@ -101,12 +117,9 @@ def create_dvla_plan():
         )
         .react_agent_step(
             step_name="answer_instruction_question",
-            task="""Use the search tool to find relevant DVLA information and answer the user's question about DVLA instructions, procedures, or requirements. Search for official UK DVLA information related to their query. Provide a comprehensive, helpful answer with specific steps, requirements, and any important details.
+            task=f"""Use the search tool to find relevant vehicle assistance information and answer the user's question about vehicle service instructions, procedures, or requirements. Search for official UK vehicle assistance information related to their query. Provide a comprehensive, helpful answer with specific steps, requirements, and any important details.
 
-            IMPORTANT:
-            - Respond conversationally and naturally as if helping a friend
-            - When using the clarification tool, remember that your user_guidance text is sent directly to the user as-is
-            - Focus on being helpful and clear in your explanations""",
+            {INSTRUCTION_GUIDELINES}""",
             tools=["search_tool"],
             inputs=[Input("previous_conversation")],
             allow_agent_clarifications=True,
@@ -119,12 +132,9 @@ def create_dvla_plan():
         )
         .react_agent_step(
             step_name="collect_driving_license_information",
-            task="""Collect all necessary information for a driving license application. Ask the user for their full name, date of birth, current address, phone number, email and if they're replacing an existing license (and its number). Make sure you get all required information before proceeding.
+            task=f"""Collect all necessary information for a driving license application. Ask the user for their full name, date of birth, current address, phone number, email and if they're replacing an existing license (and its number). Make sure you get all required information before proceeding.
 
-            IMPORTANT:
-            - Respond conversationally and naturally, like you're helping someone through a form
-            - When using the clarification tool, remember that your user_guidance text is sent directly to the user as-is
-            - Be patient and encouraging as you collect the information""",
+            {FORM_COLLECTION_GUIDELINES}""",
             inputs=[Input("previous_conversation")],
             allow_agent_clarifications=True,
             output_schema=DrivingLicenseApplication,
@@ -141,12 +151,9 @@ def create_dvla_plan():
         )
         .react_agent_step(
             step_name="collect_car_tax_information",
-            task="""Collect all necessary information for vehicle tax payment. Ask the user for their vehicle registration number, make and model, and the vehicle owner's name. Make sure you get all required information before proceeding.
+            task=f"""Collect all necessary information for vehicle tax payment. Ask the user for their vehicle registration number, make and model, and the vehicle owner's name. Make sure you get all required information before proceeding.
 
-            IMPORTANT:
-            - Respond conversationally and naturally, like you're helping someone through a form
-            - When using the clarification tool, remember that your user_guidance text is sent directly to the user as-is
-            - Be patient and encouraging as you collect the information""",
+            {FORM_COLLECTION_GUIDELINES}""",
             inputs=[Input("previous_conversation")],
             allow_agent_clarifications=True,
             output_schema=CarTaxPayment,
@@ -159,17 +166,17 @@ def create_dvla_plan():
         .else_()
         # We shouldn't enter this case
         .function_step(
-            function=lambda: "I'm sorry, I can only help with DVLA instructions, driving license applications, or vehicle tax payments. Please let me know which of these I can help you with!",
+            function=lambda: "I'm sorry, I can only help with vehicle assistance instructions, driving license applications, or vehicle tax payments. Please let me know which of these I can help you with!",
         )
         .endif()
         .build()
     )
 
 
-async def run_dvla_agent(conversation_history):
-    """Run the DVLA agent with the conversation history"""
+async def run_vehicle_assistance_agent(conversation_history):
+    """Run the Vehicle Assistance agent with the conversation history"""
     portia = get_portia()
-    plan = create_dvla_plan()
+    plan = create_vehicle_assistance_plan()
 
     conversation_text = "\n".join(
         [

@@ -1,7 +1,7 @@
 import asyncio
 
 import streamlit as st
-from agent import run_dvla_agent
+from agent import run_vehicle_assistance_agent
 from dotenv import load_dotenv
 
 # Load environment variables at app startup
@@ -9,10 +9,10 @@ load_dotenv()
 
 
 def send_message(message, conversation_history):
-    """Send a message and get response from the DVLA agent"""
+    """Send a message and get response from the Vehicle Assistance agent"""
     conversation_history.append({"role": "user", "content": message})
 
-    response = asyncio.run(run_dvla_agent(conversation_history))
+    response = asyncio.run(run_vehicle_assistance_agent(conversation_history))
 
     st.session_state.messages.append({"role": "assistant", "content": response})
 
@@ -20,14 +20,14 @@ def send_message(message, conversation_history):
 
 
 def main():
-    st.title("🚗 DVLA Specialized Assistant")
-    st.write("I can help you with these 3 specific DVLA services:")
+    st.title("🚗 Vehicle Assistance Specialized Assistant")
+    st.write("I can help you with these 3 specific vehicle assistance services:")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.info(
-            "📋 **Instructions & How-To**\n\nAsk me how to do something DVLA-related"
+            "📋 **Instructions & How-To**\n\nAsk me how to do something vehicle assistance-related"
         )
 
     with col2:

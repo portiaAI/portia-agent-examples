@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class QueryType(str, Enum):
-    """Enum for DVLA query types"""
+    """Enum for vehicle assistance query types"""
 
     INSTRUCTIONS = "question_for_instructions"
     DRIVING_LICENSE = "process_driving_licence_application"
@@ -13,8 +13,8 @@ class QueryType(str, Enum):
     OTHER = "other"
 
 
-class DVLAQueryType(BaseModel):
-    query_type: QueryType = Field(description="The type of DVLA query")
+class VehicleAssistanceQueryType(BaseModel):
+    query_type: QueryType = Field(description="The type of vehicle assistance query")
 
 
 class DrivingLicenseApplication(BaseModel):

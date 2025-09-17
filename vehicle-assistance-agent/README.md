@@ -1,8 +1,8 @@
-# DVLA Chat Agent
+# Vehicle Assistance Chat Agent
 
 ## Introduction
 
-This example demonstrates how to create a specialized chat interface for a DVLA (Driver and Vehicle Licensing Agency) agent using Portia AI and Streamlit. The agent focuses on three specific DVLA services: instructions and how-to queries, driving license applications, and vehicle tax payments. It demonstrates key features of the [Portia SDK](https://github.com/portiaAI/portia-sdk-python) including intelligent query classification, structured data collection, and interactive clarifications.
+This example demonstrates how to create a specialized chat interface for a Vehicle Assistance agent using Portia AI and Streamlit. The agent focuses on three specific vehicle assistance services: instructions and how-to queries, driving license applications, and vehicle tax payments. It demonstrates key features of the [Portia SDK](https://github.com/portiaAI/portia-sdk-python) including intelligent query classification, structured data collection, and interactive clarifications.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This example demonstrates how to create a specialized chat interface for a DVLA 
 
 ## Setup
 
-1. Clone the repository and navigate to the `dvla-agent` folder.
+1. Clone the repository and navigate to the `vehicle-assisstance-agent` folder.
 2. Copy the `.env.example` file to `.env` and add your API keys to it.
 3. Install dependencies: `uv sync`
 
