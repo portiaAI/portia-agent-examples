@@ -1,0 +1,11 @@
+[project]
+name = "developer-meetup-finder"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.12.5"
+dependencies = [
+    "firecrawl-py>=4.3.1",
+    "portia-sdk-python[tools-browser-browserbase,tools-browser-local]>=0.7.3",
+    "typeform>=1.1.0",
+]
