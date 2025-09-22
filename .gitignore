@@ -177,3 +177,4 @@ ai-research-agent/data/
 .DS_Store
 
 *.portia
+.venv
